@@ -88,7 +88,7 @@ const I = [
   "https://i.ibb.co/hRPJCxqw/mixboard-image-104.png", // 69
   "https://i.ibb.co/x8PG0pCC/mixboard-image-105.png", // 70
   "https://i.ibb.co/8nXQ0BTn/mixboard-image-106.png", // 71
-  "https://i.ibb.co/gLL0YQzX/mixboard-image-107.png"’ // 72
+  "https://i.ibb.co/gLL0YQzX/mixboard-image-107.png", // 72
   "https://i.ibb.co/sJWxDqQY/mixboard-image-108.png", // 73
   "https://i.ibb.co/SFL1ZqZ/mixboard-image-109.png",  // 74
   "https://i.ibb.co/bR158Cs6/mixboard-image-110.png", // 75
