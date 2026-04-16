@@ -364,22 +364,16 @@ const IconTikTok = () => (
   </svg>
 );
 
-// Logo SVG
-const LogoSVG = ({ size = 90 }) => (
-  <img 
-    src="https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png" 
-    alt="Al-Nile Gourmet Logo" 
-    width={size} 
-    height={size} 
-    style={{ 
-      width: `${size}px`, 
-      height: `${size}px`, 
-      objectFit: 'contain' // يحافظ على أبعاد الصورة داخل الحجم المحدد
-    }} 
+// ─── LOGO ─────────────────────────────────────────────────────────────
+const LogoSVG = ({ size = 90 }: { size?: number }) => (
+  <img
+    src="https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png"
+    alt="Al-Nile Gourmet Logo"
+    width={size}
+    height={size}
+    style={{ width: `${size}px`, height: `${size}px`, objectFit: "contain" }}
   />
 );
-
-export default LogoSVG;
 
 // ─── HOOK ─────────────────────────────────────────────────────────────
 function useToast() {
