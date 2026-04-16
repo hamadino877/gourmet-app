@@ -75,6 +75,11 @@ const I = [
   "https://i.ibb.co/hR7pGkTj/mixboard-image-91.png",  // 56
   "https://i.ibb.co/C5MxJ9cT/mixboard-image-92.png",  // 57
   "https://i.ibb.co/k249Wq6B/mixboard-image-93.png",  // 58
+  "https://i.ibb.co/VcZCHRHY/mixboard-image-94.png",  // 59
+  "https://i.ibb.co/4r1yF1Q/mixboard-image-95.png",   // 60
+  "https://i.ibb.co/HTJhFt3B/mixboard-image-96.png",  // 61
+  "https://i.ibb.co/s9qHyG7Q/mixboard-image-97.png",  // 62
+  "https://i.ibb.co/LznHXLNB/mixboard-image-98.png",  // 63
 ];
 
 // ─── IMAGE POOLS ─────────────────────────────────────────────────────
@@ -98,7 +103,7 @@ const P = {
   nile:       [I[17], I[18], I[19], I[20], I[21], I[22], I[23], I[24], I[25], I[26], I[27], I[28], I[29], I[30], I[31]],
   grills:     [I[32], I[33], I[34], I[35], I[36], I[37], I[38], I[39], I[40], I[41], I[42], I[43]],
   tageen:     [I[44], I[45], I[46], I[47], I[48], I[49], I[50], I[51], I[52], I[53], I[54], I[55], I[56], I[57], I[58]],
-  feteer:     I.slice(17, 22),
+  feteer:     [I[59], I[60], I[61], I[62], I[63]],
   sides:      I.slice(56, 59),
 };
 
@@ -366,29 +371,17 @@ const IconTikTok = () => (
 
 // Logo SVG
 const LogoSVG = ({ size = 90 }) => (
-  <svg width={size} height={size} viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="60" cy="60" r="56" fill="none" stroke="#C9A227" strokeWidth="2.5"/>
-    <circle cx="60" cy="60" r="50" fill="none" stroke="#C9A227" strokeWidth="0.7"/>
-    <ellipse cx="60" cy="52" rx="19" ry="11" fill="#C9A227" opacity="0.9"/>
-    <rect x="41" y="63" width="38" height="3.5" rx="1.8" fill="#C9A227"/>
-    <line x1="51" y1="66" x2="47" y2="80" stroke="#C9A227" strokeWidth="2.8" strokeLinecap="round"/>
-    <line x1="69" y1="66" x2="73" y2="80" stroke="#C9A227" strokeWidth="2.8" strokeLinecap="round"/>
-    <line x1="60" y1="66" x2="60" y2="80" stroke="#C9A227" strokeWidth="2.2" strokeLinecap="round"/>
-    <path d="M46 52 Q43 44 47 41 Q45 47 49 46 Q46 43 50 39 Q49 46 53 45 Q50 42 53 38 Q54 46 51 49" fill="#E88C15" opacity="0.9"/>
-    <path d="M74 52 Q71 44 75 41 Q73 47 77 46 Q74 43 78 39 Q77 46 81 45 Q78 42 81 38 Q82 46 79 49" fill="#E88C15" opacity="0.9"/>
-    <line x1="34" y1="29" x2="34" y2="60" stroke="#C9A227" strokeWidth="2.2" strokeLinecap="round"/>
-    <line x1="31" y1="33" x2="34" y2="38" stroke="#C9A227" strokeWidth="1.6" strokeLinecap="round"/>
-    <line x1="34" y1="33" x2="34" y2="38" stroke="#C9A227" strokeWidth="1.6" strokeLinecap="round"/>
-    <line x1="37" y1="33" x2="34" y2="38" stroke="#C9A227" strokeWidth="1.6" strokeLinecap="round"/>
-    <line x1="86" y1="29" x2="86" y2="60" stroke="#C9A227" strokeWidth="2.2" strokeLinecap="round"/>
-    <rect x="80" y="27" width="12" height="7" rx="1.8" fill="#C9A227"/>
-    <text x="12" y="62" fontSize="8" fill="#C9A227">★</text>
-    <text x="100" y="62" fontSize="8" fill="#C9A227">★</text>
-    <path id="topArc" d="M 14,60 A 46,46 0 1,1 106,60" fill="none"/>
-    <text fontSize="8" fill="#C9A227" fontFamily="serif" letterSpacing="2.5" fontWeight="600">
-      <textPath href="#topArc" startOffset="10%">AL-NILE GOURMET</textPath>
-    </text>
-  </svg>
+  <img 
+    src="https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png" 
+    alt="Al Nile Gourmet Logo" 
+    style={{ 
+      width: size, 
+      height: size, 
+      objectFit: "contain",
+      borderRadius: "50%",
+      display: "block"
+    }} 
+  />
 );
 
 // ─── HOOK ─────────────────────────────────────────────────────────────
