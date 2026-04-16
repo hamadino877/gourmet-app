@@ -83,19 +83,35 @@ const I = [
   "https://i.ibb.co/JRYNLDn0/mixboard-image-99.png",  // 64
   "https://i.ibb.co/kVqQw7Vp/mixboard-image-100.png", // 65
   "https://i.ibb.co/LdyMzGdB/mixboard-image-101.png", // 66
-
-  
+  "https://i.ibb.co/XZXvxHQG/mixboard-image-102.png", // 67
+  "https://i.ibb.co/4wgYYMzJ/mixboard-image-103.png", // 68
+  "https://i.ibb.co/hRPJCxqw/mixboard-image-104.png", // 69
+  "https://i.ibb.co/x8PG0pCC/mixboard-image-105.png", // 70
+  "https://i.ibb.co/8nXQ0BTn/mixboard-image-106.png", // 71
+  "https://i.ibb.co/gLL0YQzX/mixboard-image-107.png"’ // 72
+  "https://i.ibb.co/sJWxDqQY/mixboard-image-108.png", // 73
+  "https://i.ibb.co/SFL1ZqZ/mixboard-image-109.png",  // 74
+  "https://i.ibb.co/bR158Cs6/mixboard-image-110.png", // 75
+  "https://i.ibb.co/jPKqFVPF/mixboard-image-111.png", // 76
+  "https://i.ibb.co/jmLYHQH/mixboard-image-112.png",  // 77
+  "https://i.ibb.co/CsH8gG6T/mixboard-image-113.png", // 78
+  "https://i.ibb.co/Swk7mnjG/mixboard-image-114.png", // 79
+  "https://i.ibb.co/s9YRBvL5/mixboard-image-115.jpg", // 80
+  "https://i.ibb.co/jPKqFVPF/mixboard-image-111.png", // 81
+  "https://i.ibb.co/TMc8w1b9/mixboard-image-117.png", // 82
+  "https://i.ibb.co/dwc9cH0T/mixboard-image-118.png", // 83
+  "https://i.ibb.co/1G0nQH1K/mixboard-image-119.png", // 84  
 ];
 
 // ─── IMAGE POOLS ─────────────────────────────────────────────────────
-// beef:       indices 32-49  → 18 images for 18 beef items
+// beef:       indices 67-84  → 18 images for 18 beef items
 // naimi:      indices 32-37  → 6  images for 6  naimi items
 // aus:        indices 32-37  → 6  images for 6  aus items
 // chicken:    indices 36-46  → 11 images for 11 poultry items
 // grillReady: indices 32-39  → 8  images cycling for 16 items
 // fryReady:   indices 32-44  → 13 images for 13 items
 const P = {
-  beef:       I.slice(32, 50),
+  beef:       [I[67], I[68], I[68], I[70], I[71], I[72], I[73], I[74], I[75], I[76], I[77], I[78], I[79], I[80], I[81], I[82], I[83], I[84]],
   naimi:      I.slice(32, 38),
   aus:        I.slice(32, 38),
   chicken:    I.slice(36, 47),
