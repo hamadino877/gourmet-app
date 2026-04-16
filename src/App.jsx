@@ -51,7 +51,7 @@ const I = [
   "https://i.ibb.co/23vry85M/mixboard-image-74.png",  // 32
   "https://i.ibb.co/6RTCnfPH/mixboard-image-68.png",  // 33
   "https://i.ibb.co/WWGL1QcG/mixboard-image-79.png",  // 34
-  "https://i.ibb.co/J9kxNLn/mixboard-image-67.png",  // 35
+  "https://i.ibb.co/J9kxNLn/mixboard-image-67.png",   // 35
   "https://i.ibb.co/0pHGfmdS/mixboard-image-78.png",  // 36
   "https://i.ibb.co/WWGL1QcG/mixboard-image-79.png",  // 37
   "https://i.ibb.co/hFsQZPTb/mixboard-image-76.png",  // 38
@@ -101,6 +101,7 @@ const I = [
   "https://i.ibb.co/TMc8w1b9/mixboard-image-117.png", // 82
   "https://i.ibb.co/dwc9cH0T/mixboard-image-118.png", // 83
   "https://i.ibb.co/1G0nQH1K/mixboard-image-119.png", // 84  
+    
 ];
 
 // ─── IMAGE POOLS ─────────────────────────────────────────────────────
