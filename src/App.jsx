@@ -364,15 +364,31 @@ const IconTikTok = () => (
   </svg>
 );
 
-// ─── LOGO ─────────────────────────────────────────────────────────────
-const LogoSVG = ({ size = 90 }: { size?: number }) => (
-  <img
-    src="https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png"
-    alt="Al-Nile Gourmet Logo"
-    width={size}
-    height={size}
-    style={{ width: `${size}px`, height: `${size}px`, objectFit: "contain" }}
-  />
+// Logo SVG
+const LogoSVG = ({ size = 90 }) => (
+  <svg width={size} height={size} viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="none" stroke="#C9A227" strokeWidth="2.5"/>
+    <circle cx="60" cy="60" r="50" fill="none" stroke="#C9A227" strokeWidth="0.7"/>
+    <ellipse cx="60" cy="52" rx="19" ry="11" fill="#C9A227" opacity="0.9"/>
+    <rect x="41" y="63" width="38" height="3.5" rx="1.8" fill="#C9A227"/>
+    <line x1="51" y1="66" x2="47" y2="80" stroke="#C9A227" strokeWidth="2.8" strokeLinecap="round"/>
+    <line x1="69" y1="66" x2="73" y2="80" stroke="#C9A227" strokeWidth="2.8" strokeLinecap="round"/>
+    <line x1="60" y1="66" x2="60" y2="80" stroke="#C9A227" strokeWidth="2.2" strokeLinecap="round"/>
+    <path d="M46 52 Q43 44 47 41 Q45 47 49 46 Q46 43 50 39 Q49 46 53 45 Q50 42 53 38 Q54 46 51 49" fill="#E88C15" opacity="0.9"/>
+    <path d="M74 52 Q71 44 75 41 Q73 47 77 46 Q74 43 78 39 Q77 46 81 45 Q78 42 81 38 Q82 46 79 49" fill="#E88C15" opacity="0.9"/>
+    <line x1="34" y1="29" x2="34" y2="60" stroke="#C9A227" strokeWidth="2.2" strokeLinecap="round"/>
+    <line x1="31" y1="33" x2="34" y2="38" stroke="#C9A227" strokeWidth="1.6" strokeLinecap="round"/>
+    <line x1="34" y1="33" x2="34" y2="38" stroke="#C9A227" strokeWidth="1.6" strokeLinecap="round"/>
+    <line x1="37" y1="33" x2="34" y2="38" stroke="#C9A227" strokeWidth="1.6" strokeLinecap="round"/>
+    <line x1="86" y1="29" x2="86" y2="60" stroke="#C9A227" strokeWidth="2.2" strokeLinecap="round"/>
+    <rect x="80" y="27" width="12" height="7" rx="1.8" fill="#C9A227"/>
+    <text x="12" y="62" fontSize="8" fill="#C9A227">★</text>
+    <text x="100" y="62" fontSize="8" fill="#C9A227">★</text>
+    <path id="topArc" d="M 14,60 A 46,46 0 1,1 106,60" fill="none"/>
+    <text fontSize="8" fill="#C9A227" fontFamily="serif" letterSpacing="2.5" fontWeight="600">
+      <textPath href="#topArc" startOffset="10%">AL-NILE GOURMET</textPath>
+    </text>
+  </svg>
 );
 
 // ─── HOOK ─────────────────────────────────────────────────────────────
