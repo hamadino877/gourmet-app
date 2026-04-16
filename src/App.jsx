@@ -80,6 +80,11 @@ const I = [
   "https://i.ibb.co/HTJhFt3B/mixboard-image-96.png",  // 61
   "https://i.ibb.co/s9qHyG7Q/mixboard-image-97.png",  // 62
   "https://i.ibb.co/LznHXLNB/mixboard-image-98.png",  // 63
+  "https://i.ibb.co/JRYNLDn0/mixboard-image-99.png",  // 64
+  "https://i.ibb.co/kVqQw7Vp/mixboard-image-100.png", // 65
+  "https://i.ibb.co/LdyMzGdB/mixboard-image-101.png", // 66
+
+  
 ];
 
 // ─── IMAGE POOLS ─────────────────────────────────────────────────────
@@ -104,7 +109,7 @@ const P = {
   grills:     [I[32], I[33], I[34], I[35], I[36], I[37], I[38], I[39], I[40], I[41], I[42], I[43]],
   tageen:     [I[44], I[45], I[46], I[47], I[48], I[49], I[50], I[51], I[52], I[53], I[54], I[55], I[56], I[57], I[58]],
   feteer:     [I[59], I[60], I[61], I[62], I[63]],
-  sides:      I.slice(56, 59),
+  sides:      [I[64],  I[65],  I[66]],
 };
 
 const pi = (pool, idx) => pool[idx % pool.length];
