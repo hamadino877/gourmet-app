@@ -6,16 +6,15 @@ const PHONE_NUMBER   = "0554099255";
 const ADMIN_PASSWORD = "0123456";
 const ADDRESS        = "دبي، البرشاء جنوب الثالثة، أرجان، بناية روز بالاس، محل رقم 15";
 const SOCIAL = {
-facebook:  "[https://www.facebook.com/alnilegourmet/](https://www.facebook.com/alnilegourmet/)",
-instagram: "[https://www.instagram.com/al_nile_gourmet](https://www.instagram.com/al_nile_gourmet)",
-tiktok:    "[https://www.tiktok.com/@nile.gourmet](https://www.tiktok.com/@nile.gourmet)",
-talabat:   "[https://www.talabat.com/uae/restaurant/731697/alnil-gourmet-al-barsha-south?aid=6822](https://www.talabat.com/uae/restaurant/731697/alnil-gourmet-al-barsha-south?aid=6822)",
-deliveroo: "[https://deliveroo.ae/menu/dubai/south-barsha-arjan/al-nile-gourmet](https://deliveroo.ae/menu/dubai/south-barsha-arjan/al-nile-gourmet)",
-noon:      "[https://food.noon.com/uae-ar/outlet/LNLGRMZMHT/](https://food.noon.com/uae-ar/outlet/LNLGRMZMHT/)",
+facebook:  "https://www.facebook.com/alnilegourmet/",
+instagram: "https://www.instagram.com/al_nile_gourmet",
+tiktok:    "https://www.tiktok.com/@nile.gourmet",
+talabat:   "https://www.talabat.com/uae/restaurant/731697/alnil-gourmet-al-barsha-south?aid=6822",
+deliveroo: "https://deliveroo.ae/menu/dubai/south-barsha-arjan/al-nile-gourmet",
+noon:      "https://food.noon.com/uae-ar/outlet/LNLGRMZMHT/",
 };
 
 // ─── WORKING HOURS ────────────────────────────────────────────────────
-// FIX: ساعات العمل ديناميكية بدل "مفتوح الآن" الثابتة
 function getShopStatus() {
 const now = new Date();
 const hour = now.getHours();
@@ -40,16 +39,13 @@ return { open: false, label: `🔴 مغلق - يفتح ${hoursLeft}:${String(min
 }
 
 // ─── PHONE VALIDATION ─────────────────────────────────────────────────
-// FIX: التحقق من رقم الهاتف
 function validatePhone(phone) {
 if (!phone) return true; // اختياري
-const cleaned = phone.replace(/[\s-()]/g, "");
-// يقبل: +971XXXXXXXXX أو 05XXXXXXXX أو 971XXXXXXXXX
+const cleaned = phone.replace(/[\s\-()]/g, "");
 return /^(?:\+971|971|0)[0-9]{8,9}$/.test(cleaned);
 }
 
 // ─── LOCAL STORAGE ────────────────────────────────────────────────────
-// FIX: حفظ البيانات في localStorage
 function loadFromStorage(key, fallback) {
 try {
 const stored = localStorage.getItem(key);
@@ -62,91 +58,91 @@ try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
 
 // ─── IMAGES ──────────────────────────────────────────────────────────
 const I = [
-"[https://i.ibb.co/6c69xgdQ/mixboard-image-1.png](https://i.ibb.co/6c69xgdQ/mixboard-image-1.png)",   // 0
-"[https://i.ibb.co/b5PrSg0G/mixboard-image-2.png](https://i.ibb.co/b5PrSg0G/mixboard-image-2.png)",   // 1
-"[https://i.ibb.co/mrLK9s3Z/mixboard-image-3.png](https://i.ibb.co/mrLK9s3Z/mixboard-image-3.png)",   // 2
-"[https://i.ibb.co/DPdZzLSk/mixboard-image-4.png](https://i.ibb.co/DPdZzLSk/mixboard-image-4.png)",   // 3
-"[https://i.ibb.co/0yvCbC4T/mixboard-image-5.png](https://i.ibb.co/0yvCbC4T/mixboard-image-5.png)",   // 4
-"[https://i.ibb.co/mCc7Lyv2/mixboard-image-6.png](https://i.ibb.co/mCc7Lyv2/mixboard-image-6.png)",   // 5
-"[https://i.ibb.co/W4XwXYwV/mixboard-image-7.png](https://i.ibb.co/W4XwXYwV/mixboard-image-7.png)",   // 6
-"[https://i.ibb.co/DP0VByDC/mixboard-image-8.png](https://i.ibb.co/DP0VByDC/mixboard-image-8.png)",   // 7
-"[https://i.ibb.co/zVP05rC9/mixboard-image-9.png](https://i.ibb.co/zVP05rC9/mixboard-image-9.png)",   // 8
-"[https://i.ibb.co/5X9JDQ50/mixboard-image-10.png](https://i.ibb.co/5X9JDQ50/mixboard-image-10.png)",  // 9
-"[https://i.ibb.co/pv5YPdGZ/mixboard-image-11.png](https://i.ibb.co/pv5YPdGZ/mixboard-image-11.png)",  // 10
-"[https://i.ibb.co/tMH1pHyZ/mixboard-image-12.png](https://i.ibb.co/tMH1pHyZ/mixboard-image-12.png)",  // 11
-"[https://i.ibb.co/0ygXDzM7/mixboard-image-13.png](https://i.ibb.co/0ygXDzM7/mixboard-image-13.png)",  // 12
-"[https://i.ibb.co/ZzQ9VQhc/mixboard-image-14.png](https://i.ibb.co/ZzQ9VQhc/mixboard-image-14.png)",  // 13
-"[https://i.ibb.co/TBMnT6w1/mixboard-image-15.png](https://i.ibb.co/TBMnT6w1/mixboard-image-15.png)",  // 14
-"[https://i.ibb.co/CKyN6K2L/mixboard-image-16.png](https://i.ibb.co/CKyN6K2L/mixboard-image-16.png)",  // 15
-"[https://i.ibb.co/CKyN6K2L/mixboard-image-16.png](https://i.ibb.co/CKyN6K2L/mixboard-image-16.png)",  // 16
-"[https://i.ibb.co/qLJFq3gc/mixboard-image-18.png](https://i.ibb.co/qLJFq3gc/mixboard-image-18.png)",  // 17
-"[https://i.ibb.co/LzvBZmGb/mixboard-image-19.png](https://i.ibb.co/LzvBZmGb/mixboard-image-19.png)",  // 18
-"[https://i.ibb.co/60f1mcZP/mixboard-image-20.png](https://i.ibb.co/60f1mcZP/mixboard-image-20.png)",  // 19
-"[https://i.ibb.co/7JjFww6Y/mixboard-image-21.png](https://i.ibb.co/7JjFww6Y/mixboard-image-21.png)",  // 20
-"[https://i.ibb.co/XH7xgCQ/mixboard-image-22.png](https://i.ibb.co/XH7xgCQ/mixboard-image-22.png)",   // 21
-"[https://i.ibb.co/kg9h3YcC/mixboard-image-23.png](https://i.ibb.co/kg9h3YcC/mixboard-image-23.png)",  // 22
-"[https://i.ibb.co/V0vHTzfD/mixboard-image-24.png](https://i.ibb.co/V0vHTzfD/mixboard-image-24.png)",  // 23
-"[https://i.ibb.co/tw7RZS8c/mixboard-image-25.png](https://i.ibb.co/tw7RZS8c/mixboard-image-25.png)",  // 24
-"[https://i.ibb.co/XxmbSrmn/mixboard-image-26.png](https://i.ibb.co/XxmbSrmn/mixboard-image-26.png)",  // 25
-"[https://i.ibb.co/XxmbSrmn/mixboard-image-26.png](https://i.ibb.co/XxmbSrmn/mixboard-image-26.png)",  // 26
-"[https://i.ibb.co/XxmbSrmn/mixboard-image-26.png](https://i.ibb.co/XxmbSrmn/mixboard-image-26.png)",  // 27
-"[https://i.ibb.co/XxmbSrmn/mixboard-image-26.png](https://i.ibb.co/XxmbSrmn/mixboard-image-26.png)",  // 28
-"[https://i.ibb.co/gF3kfqdL/mixboard-image-30.png](https://i.ibb.co/gF3kfqdL/mixboard-image-30.png)",  // 29
-"[https://i.ibb.co/wNPjkhKd/mixboard-image-31.png](https://i.ibb.co/wNPjkhKd/mixboard-image-31.png)",  // 30
-"[https://i.ibb.co/ym5t3ffr/mixboard-image-32.png](https://i.ibb.co/ym5t3ffr/mixboard-image-32.png)",  // 31
-"[https://i.ibb.co/23vry85M/mixboard-image-74.png](https://i.ibb.co/23vry85M/mixboard-image-74.png)",  // 32
-"[https://i.ibb.co/6RTCnfPH/mixboard-image-68.png](https://i.ibb.co/6RTCnfPH/mixboard-image-68.png)",  // 33
-"[https://i.ibb.co/WWGL1QcG/mixboard-image-79.png](https://i.ibb.co/WWGL1QcG/mixboard-image-79.png)",  // 34
-"[https://i.ibb.co/J9kxNLn/mixboard-image-67.png](https://i.ibb.co/J9kxNLn/mixboard-image-67.png)",   // 35
-"[https://i.ibb.co/0pHGfmdS/mixboard-image-78.png](https://i.ibb.co/0pHGfmdS/mixboard-image-78.png)",  // 36
-"[https://i.ibb.co/WWGL1QcG/mixboard-image-79.png](https://i.ibb.co/WWGL1QcG/mixboard-image-79.png)",  // 37
-"[https://i.ibb.co/hFsQZPTb/mixboard-image-76.png](https://i.ibb.co/hFsQZPTb/mixboard-image-76.png)",  // 38
-"[https://i.ibb.co/SXKfdWsx/mixboard-image-77.png](https://i.ibb.co/SXKfdWsx/mixboard-image-77.png)",  // 39
-"[https://i.ibb.co/GQKt9G9m/mixboard-image-71.png](https://i.ibb.co/GQKt9G9m/mixboard-image-71.png)",  // 40
-"[https://i.ibb.co/TDfh2Vc2/mixboard-image-75.png](https://i.ibb.co/TDfh2Vc2/mixboard-image-75.png)",  // 41
-"[https://i.ibb.co/ym2LDbWc/mixboard-image-72.png](https://i.ibb.co/ym2LDbWc/mixboard-image-72.png)",  // 42
-"[https://i.ibb.co/wFmcVXmf/mixboard-image-69.png](https://i.ibb.co/wFmcVXmf/mixboard-image-69.png)",  // 43
-"[https://i.ibb.co/Bk72PbY/mixboard-image-80.png](https://i.ibb.co/Bk72PbY/mixboard-image-80.png)",   // 44
-"[https://i.ibb.co/c90wmY1/mixboard-image-81.png](https://i.ibb.co/c90wmY1/mixboard-image-81.png)",   // 45
-"[https://i.ibb.co/dJxNXZdc/mixboard-image-82.png](https://i.ibb.co/dJxNXZdc/mixboard-image-82.png)",  // 46
-"[https://i.ibb.co/RpTfV6FZ/mixboard-image-83.png](https://i.ibb.co/RpTfV6FZ/mixboard-image-83.png)",  // 47
-"[https://i.ibb.co/RwN6byF/mixboard-image-84.png](https://i.ibb.co/RwN6byF/mixboard-image-84.png)",   // 48
-"[https://i.ibb.co/RwN6byF/mixboard-image-84.png](https://i.ibb.co/RwN6byF/mixboard-image-84.png)",   // 49
-"[https://i.ibb.co/4n3VqVpr/mixboard-image-86.png](https://i.ibb.co/4n3VqVpr/mixboard-image-86.png)",  // 50
-"[https://i.ibb.co/kY4CB3R/mixboard-image-87.png](https://i.ibb.co/kY4CB3R/mixboard-image-87.png)",   // 51
-"[https://i.ibb.co/1GJYqwjp/mixboard-image-89.png](https://i.ibb.co/1GJYqwjp/mixboard-image-89.png)",  // 52
-"[https://i.ibb.co/9mx7rGS2/mixboard-image-88.png](https://i.ibb.co/9mx7rGS2/mixboard-image-88.png)",  // 53
-"[https://i.ibb.co/sdnMTyBt/mixboard-image-90.png](https://i.ibb.co/sdnMTyBt/mixboard-image-90.png)",  // 54
-"[https://i.ibb.co/sdnMTyBt/mixboard-image-90.png](https://i.ibb.co/sdnMTyBt/mixboard-image-90.png)",  // 55
-"[https://i.ibb.co/hR7pGkTj/mixboard-image-91.png](https://i.ibb.co/hR7pGkTj/mixboard-image-91.png)",  // 56
-"[https://i.ibb.co/C5MxJ9cT/mixboard-image-92.png](https://i.ibb.co/C5MxJ9cT/mixboard-image-92.png)",  // 57
-"[https://i.ibb.co/k249Wq6B/mixboard-image-93.png](https://i.ibb.co/k249Wq6B/mixboard-image-93.png)",  // 58
-"[https://i.ibb.co/VcZCHRHY/mixboard-image-94.png](https://i.ibb.co/VcZCHRHY/mixboard-image-94.png)",  // 59
-"[https://i.ibb.co/4r1yF1Q/mixboard-image-95.png](https://i.ibb.co/4r1yF1Q/mixboard-image-95.png)",   // 60
-"[https://i.ibb.co/HTJhFt3B/mixboard-image-96.png](https://i.ibb.co/HTJhFt3B/mixboard-image-96.png)",  // 61
-"[https://i.ibb.co/s9qHyG7Q/mixboard-image-97.png](https://i.ibb.co/s9qHyG7Q/mixboard-image-97.png)",  // 62
-"[https://i.ibb.co/LznHXLNB/mixboard-image-98.png](https://i.ibb.co/LznHXLNB/mixboard-image-98.png)",  // 63
-"[https://i.ibb.co/JRYNLDn0/mixboard-image-99.png](https://i.ibb.co/JRYNLDn0/mixboard-image-99.png)",  // 64
-"[https://i.ibb.co/kVqQw7Vp/mixboard-image-100.png](https://i.ibb.co/kVqQw7Vp/mixboard-image-100.png)", // 65
-"[https://i.ibb.co/LdyMzGdB/mixboard-image-101.png](https://i.ibb.co/LdyMzGdB/mixboard-image-101.png)", // 66
-"[https://i.ibb.co/XZXvxHQG/mixboard-image-102.png](https://i.ibb.co/XZXvxHQG/mixboard-image-102.png)", // 67
-"[https://i.ibb.co/4wgYYMzJ/mixboard-image-103.png](https://i.ibb.co/4wgYYMzJ/mixboard-image-103.png)", // 68
-"[https://i.ibb.co/hRPJCxqw/mixboard-image-104.png](https://i.ibb.co/hRPJCxqw/mixboard-image-104.png)", // 69
-"[https://i.ibb.co/x8PG0pCC/mixboard-image-105.png](https://i.ibb.co/x8PG0pCC/mixboard-image-105.png)", // 70
-"[https://i.ibb.co/8nXQ0BTn/mixboard-image-106.png](https://i.ibb.co/8nXQ0BTn/mixboard-image-106.png)", // 71
-"[https://i.ibb.co/gLL0YQzX/mixboard-image-107.png](https://i.ibb.co/gLL0YQzX/mixboard-image-107.png)", // 72
-"[https://i.ibb.co/sJWxDqQY/mixboard-image-108.png](https://i.ibb.co/sJWxDqQY/mixboard-image-108.png)", // 73
-"[https://i.ibb.co/SFL1ZqZ/mixboard-image-109.png](https://i.ibb.co/SFL1ZqZ/mixboard-image-109.png)",  // 74
-"[https://i.ibb.co/bR158Cs6/mixboard-image-110.png](https://i.ibb.co/bR158Cs6/mixboard-image-110.png)", // 75
-"[https://i.ibb.co/jPKqFVPF/mixboard-image-111.png](https://i.ibb.co/jPKqFVPF/mixboard-image-111.png)", // 76
-"[https://i.ibb.co/jmLYHQH/mixboard-image-112.png](https://i.ibb.co/jmLYHQH/mixboard-image-112.png)",  // 77
-"[https://i.ibb.co/CsH8gG6T/mixboard-image-113.png](https://i.ibb.co/CsH8gG6T/mixboard-image-113.png)", // 78
-"[https://i.ibb.co/Swk7mnjG/mixboard-image-114.png](https://i.ibb.co/Swk7mnjG/mixboard-image-114.png)", // 79
-"[https://i.ibb.co/s9YRBvL5/mixboard-image-115.jpg](https://i.ibb.co/s9YRBvL5/mixboard-image-115.jpg)", // 80
-"[https://i.ibb.co/jPKqFVPF/mixboard-image-111.png](https://i.ibb.co/jPKqFVPF/mixboard-image-111.png)", // 81
-"[https://i.ibb.co/TMc8w1b9/mixboard-image-117.png](https://i.ibb.co/TMc8w1b9/mixboard-image-117.png)", // 82
-"[https://i.ibb.co/dwc9cH0T/mixboard-image-118.png](https://i.ibb.co/dwc9cH0T/mixboard-image-118.png)", // 83
-"[https://i.ibb.co/1G0nQH1K/mixboard-image-119.png](https://i.ibb.co/1G0nQH1K/mixboard-image-119.png)", // 84
+"https://i.ibb.co/6c69xgdQ/mixboard-image-1.png",   // 0
+"https://i.ibb.co/b5PrSg0G/mixboard-image-2.png",   // 1
+"https://i.ibb.co/mrLK9s3Z/mixboard-image-3.png",   // 2
+"https://i.ibb.co/DPdZzLSk/mixboard-image-4.png",   // 3
+"https://i.ibb.co/0yvCbC4T/mixboard-image-5.png",   // 4
+"https://i.ibb.co/mCc7Lyv2/mixboard-image-6.png",   // 5
+"https://i.ibb.co/W4XwXYwV/mixboard-image-7.png",   // 6
+"https://i.ibb.co/DP0VByDC/mixboard-image-8.png",   // 7
+"https://i.ibb.co/zVP05rC9/mixboard-image-9.png",   // 8
+"https://i.ibb.co/5X9JDQ50/mixboard-image-10.png",  // 9
+"https://i.ibb.co/pv5YPdGZ/mixboard-image-11.png",  // 10
+"https://i.ibb.co/tMH1pHyZ/mixboard-image-12.png",  // 11
+"https://i.ibb.co/0ygXDzM7/mixboard-image-13.png",  // 12
+"https://i.ibb.co/ZzQ9VQhc/mixboard-image-14.png",  // 13
+"https://i.ibb.co/TBMnT6w1/mixboard-image-15.png",  // 14
+"https://i.ibb.co/CKyN6K2L/mixboard-image-16.png",  // 15
+"https://i.ibb.co/CKyN6K2L/mixboard-image-16.png",  // 16
+"https://i.ibb.co/qLJFq3gc/mixboard-image-18.png",  // 17
+"https://i.ibb.co/LzvBZmGb/mixboard-image-19.png",  // 18
+"https://i.ibb.co/60f1mcZP/mixboard-image-20.png",  // 19
+"https://i.ibb.co/7JjFww6Y/mixboard-image-21.png",  // 20
+"https://i.ibb.co/XH7xgCQ/mixboard-image-22.png",   // 21
+"https://i.ibb.co/kg9h3YcC/mixboard-image-23.png",  // 22
+"https://i.ibb.co/V0vHTzfD/mixboard-image-24.png",  // 23
+"https://i.ibb.co/tw7RZS8c/mixboard-image-25.png",  // 24
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 25
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 26
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 27
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 28
+"https://i.ibb.co/gF3kfqdL/mixboard-image-30.png",  // 29
+"https://i.ibb.co/wNPjkhKd/mixboard-image-31.png",  // 30
+"https://i.ibb.co/ym5t3ffr/mixboard-image-32.png",  // 31
+"https://i.ibb.co/23vry85M/mixboard-image-74.png",  // 32
+"https://i.ibb.co/6RTCnfPH/mixboard-image-68.png",  // 33
+"https://i.ibb.co/WWGL1QcG/mixboard-image-79.png",  // 34
+"https://i.ibb.co/J9kxNLn/mixboard-image-67.png",   // 35
+"https://i.ibb.co/0pHGfmdS/mixboard-image-78.png",  // 36
+"https://i.ibb.co/WWGL1QcG/mixboard-image-79.png",  // 37
+"https://i.ibb.co/hFsQZPTb/mixboard-image-76.png",  // 38
+"https://i.ibb.co/SXKfdWsx/mixboard-image-77.png",  // 39
+"https://i.ibb.co/GQKt9G9m/mixboard-image-71.png",  // 40
+"https://i.ibb.co/TDfh2Vc2/mixboard-image-75.png",  // 41
+"https://i.ibb.co/ym2LDbWc/mixboard-image-72.png",  // 42
+"https://i.ibb.co/wFmcVXmf/mixboard-image-69.png",  // 43
+"https://i.ibb.co/Bk72PbY/mixboard-image-80.png",   // 44
+"https://i.ibb.co/c90wmY1/mixboard-image-81.png",   // 45
+"https://i.ibb.co/dJxNXZdc/mixboard-image-82.png",  // 46
+"https://i.ibb.co/RpTfV6FZ/mixboard-image-83.png",  // 47
+"https://i.ibb.co/RwN6byF/mixboard-image-84.png",   // 48
+"https://i.ibb.co/RwN6byF/mixboard-image-84.png",   // 49
+"https://i.ibb.co/4n3VqVpr/mixboard-image-86.png",  // 50
+"https://i.ibb.co/kY4CB3R/mixboard-image-87.png",   // 51
+"https://i.ibb.co/1GJYqwjp/mixboard-image-89.png",  // 52
+"https://i.ibb.co/9mx7rGS2/mixboard-image-88.png",  // 53
+"https://i.ibb.co/sdnMTyBt/mixboard-image-90.png",  // 54
+"https://i.ibb.co/sdnMTyBt/mixboard-image-90.png",  // 55
+"https://i.ibb.co/hR7pGkTj/mixboard-image-91.png",  // 56
+"https://i.ibb.co/C5MxJ9cT/mixboard-image-92.png",  // 57
+"https://i.ibb.co/k249Wq6B/mixboard-image-93.png",  // 58
+"https://i.ibb.co/VcZCHRHY/mixboard-image-94.png",  // 59
+"https://i.ibb.co/4r1yF1Q/mixboard-image-95.png",   // 60
+"https://i.ibb.co/HTJhFt3B/mixboard-image-96.png",  // 61
+"https://i.ibb.co/s9qHyG7Q/mixboard-image-97.png",  // 62
+"https://i.ibb.co/LznHXLNB/mixboard-image-98.png",  // 63
+"https://i.ibb.co/JRYNLDn0/mixboard-image-99.png",  // 64
+"https://i.ibb.co/kVqQw7Vp/mixboard-image-100.png", // 65
+"https://i.ibb.co/LdyMzGdB/mixboard-image-101.png", // 66
+"https://i.ibb.co/XZXvxHQG/mixboard-image-102.png", // 67
+"https://i.ibb.co/4wgYYMzJ/mixboard-image-103.png", // 68
+"https://i.ibb.co/hRPJCxqw/mixboard-image-104.png", // 69
+"https://i.ibb.co/x8PG0pCC/mixboard-image-105.png", // 70
+"https://i.ibb.co/8nXQ0BTn/mixboard-image-106.png", // 71
+"https://i.ibb.co/gLL0YQzX/mixboard-image-107.png", // 72
+"https://i.ibb.co/sJWxDqQY/mixboard-image-108.png", // 73
+"https://i.ibb.co/SFL1ZqZ/mixboard-image-109.png",  // 74
+"https://i.ibb.co/bR158Cs6/mixboard-image-110.png", // 75
+"https://i.ibb.co/jPKqFVPF/mixboard-image-111.png", // 76
+"https://i.ibb.co/jmLYHQH/mixboard-image-112.png",  // 77
+"https://i.ibb.co/CsH8gG6T/mixboard-image-113.png", // 78
+"https://i.ibb.co/Swk7mnjG/mixboard-image-114.png", // 79
+"https://i.ibb.co/s9YRBvL5/mixboard-image-115.jpg", // 80
+"https://i.ibb.co/jPKqFVPF/mixboard-image-111.png", // 81
+"https://i.ibb.co/TMc8w1b9/mixboard-image-117.png", // 82
+"https://i.ibb.co/dwc9cH0T/mixboard-image-118.png", // 83
+"https://i.ibb.co/1G0nQH1K/mixboard-image-119.png", // 84
 ];
 
 const P = {
@@ -169,7 +165,7 @@ sides:      [I[64],  I[65],  I[66]],
 
 const pi = (pool, idx) => pool[idx % pool.length];
 
-const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%231E1E1E'/%3E%3Ctext x='100' y='110' font-size='50' text-anchor='middle' fill='%23C9A227'%3E%F0%9F%8D%96%3C/text%3E%3C/svg%3E";
+const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%231E1E1E'/%3E%3Ctext x='100' y='110' font-size='50' text-anchor='middle' fill='%23C9A227'%3E%F0%9F%8D%96%3C/text%3E%3C/svg%3E";
 
 const parsePrice = (s) => parseFloat(String(s).replace(/[^\d.]/g, "")) || 0;
 
@@ -406,12 +402,12 @@ const IconEdit   = ({ size = 16 }) => <svg width={size} height={size} viewBox="0
 
 // ─── BRAND ICONS ──────────────────────────────────────────────────────
 const IconFacebook = () => (
-<svg width="22" height="22" viewBox="0 0 24 24" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+<svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
 </svg>
 );
 const IconInstagram = () => (
-<svg width="22" height="22" viewBox="0 0 24 24" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+<svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <defs>
 <linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%">
 <stop offset="0%" stopColor="#FED373"/>
@@ -424,14 +420,14 @@ const IconInstagram = () => (
 </svg>
 );
 const IconTikTok = () => (
-<svg width="22" height="22" viewBox="0 0 24 24" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)">
+<svg width="22" height="22" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
 </svg>
 );
 
 const LogoSVG = ({ size = 90 }) => (
 <img
-src="[https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png](https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png)"
+src="https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png"
 alt="Al Nile Gourmet Logo"
 style={{
 width: size,
@@ -556,14 +552,12 @@ return (
 
 // ─── SCREEN COMPONENTS ────────────────────────────────────────────────
 function HomeScreen({ allItems, cats, reviews, go, addToCart, openDetail, handleSecretTap, shopType, switchShopType, activeCat, setActiveCat, search, setSearch }) {
-// FIX: shopStatus ديناميكي يتحدث كل دقيقة
 const [shopStatus, setShopStatus] = useState(getShopStatus());
 useEffect(() => {
 const timer = setInterval(() => setShopStatus(getShopStatus()), 60000);
 return () => clearInterval(timer);
 }, []);
 
-// FIX: الصفحة تبدأ بالمطعم وليس الملحمة للزوار الجدد
 const popular = allItems.filter(it => it.type === shopType && it.available).slice(0, 6);
 
 return (
@@ -581,7 +575,6 @@ return (
 <span className="hpill">📍 دبي - أرجان</span>
 <span className="hpill">⏱ ٣٠-٤٥ دقيقة</span>
 <span className="hpill">⭐ ٤.٩</span>
-{/* FIX: حالة المحل ديناميكية */}
 <span className={`hpill ${shopStatus.open ? "hpill-open" : "hpill-closed"}`}>
 {shopStatus.label}
 </span>
@@ -1131,7 +1124,6 @@ function CheckoutSheet({ cartTotal, onClose, onConfirm, showToast }) {
 const [addr,  setAddr]  = useState("دبي - أرجان");
 const [name,  setName]  = useState("");
 const [phone, setPhone] = useState("");
-// FIX: خطأ التحقق من رقم الهاتف
 const [phoneErr, setPhoneErr] = useState("");
 const del   = cartTotal >= 150 ? 0 : 15;
 const grand = cartTotal + del;
@@ -1169,7 +1161,6 @@ type="tel"
 autoComplete="tel"
 inputMode="tel"
 />
-{/* FIX: رسالة خطأ رقم الهاتف */}
 {phoneErr && <p className="field-err">{phoneErr}</p>}
 <p className="flbl">📍 عنوان التوصيل <span style={{ color: "var(-red)" }}>*</span></p>
 <textarea className="fta" rows={3} value={addr} onChange={e => setAddr(e.target.value)} placeholder="المنطقة، الشارع، رقم المبنى..." />
@@ -1226,7 +1217,6 @@ return (
 function AdminLoginModal({ onSuccess, onClose }) {
 const [pw,  setPw]  = useState("");
 const [err, setErr] = useState(false);
-// FIX: إضافة حماية بسيطة ضد brute force - قفل بعد 5 محاولات خاطئة
 const [attempts, setAttempts] = useState(0);
 const [locked,   setLocked]   = useState(false);
 const [lockTimer, setLockTimer] = useState(0);
@@ -1255,7 +1245,7 @@ setErr(true);
 setPw("");
 if (newAttempts >= 5) {
 setLocked(true);
-setLockTimer(30); // قفل 30 ثانية
+setLockTimer(30);
 }
 }
 };
@@ -1289,12 +1279,10 @@ export default function App() {
 const [page,           setPage]           = useState("home");
 const [prevPage,       setPrevPage]       = useState("home");
 
-// FIX: الموقع يبدأ بالمطعم وليس الملحمة
 const [shopType,       setShopType]       = useState("restaurant");
 const [activeCat,      setActiveCat]      = useState("all");
 const [search,         setSearch]         = useState("");
 
-// FIX: السلة والطلبات محفوظة في localStorage
 const [cart,           setCart]           = useState(() => loadFromStorage("nile_cart", []));
 const [orders,         setOrders]         = useState(() => loadFromStorage("nile_orders", []));
 
@@ -1304,13 +1292,11 @@ const [trackId,        setTrackId]        = useState(null);
 const [checkoutOpen,   setCheckoutOpen]   = useState(false);
 const [toast,          showToast]         = useToast();
 
-// FIX: تعديلات الأدمن محفوظة في localStorage
 const [adminItems,     setAdminItems]     = useState(() => loadFromStorage("nile_admin", INIT_ADMIN));
 const [editingItem,    setEditingItem]    = useState(null);
 const [isAdmin,        setIsAdmin]        = useState(false);
 const [showAdminLogin, setShowAdminLogin] = useState(false);
 
-// FIX: التقييمات محفوظة في localStorage
 const [reviews,        setReviews]        = useState(() => loadFromStorage("nile_reviews", INIT_REVIEWS));
 const [showReviewForm, setShowReviewForm] = useState(false);
 const [newReview,      setNewReview]      = useState({ name: "", text: "", rating: 5 });
@@ -1319,16 +1305,9 @@ const scrollRef     = useRef(null);
 const adminTapRef   = useRef(0);
 const adminTapTimer = useRef(null);
 
-// FIX: حفظ السلة تلقائياً عند التغيير
 useEffect(() => { saveToStorage("nile_cart", cart); }, [cart]);
-
-// FIX: حفظ الطلبات تلقائياً عند التغيير
 useEffect(() => { saveToStorage("nile_orders", orders); }, [orders]);
-
-// FIX: حفظ تعديلات الأدمن تلقائياً
 useEffect(() => { saveToStorage("nile_admin", adminItems); }, [adminItems]);
-
-// FIX: حفظ التقييمات تلقائياً
 useEffect(() => { saveToStorage("nile_reviews", reviews); }, [reviews]);
 
 const handleSecretTap = useCallback(() => {
@@ -1348,10 +1327,21 @@ const switchShopType = useCallback((t) => {
 setShopType(t); setActiveCat("all"); setSearch("");
 }, []);
 
+// FIX: حماية آلية لاختفاء الصور بسبب الذاكرة المؤقتة (LocalStorage)
 const ALL_ITEMS = useMemo(() =>
 BASE_ITEMS.map(it => {
 const ov = adminItems[it.id];
-return ov ? { ...it, price: ov.price, priceStr: ov.priceStr, img: ov.img, available: ov.available } : { ...it, available: true };
+// إذا كان هناك تعديل محفوظ، نتأكد أن الصورة ليست فارغة وأنها رابط صحيح
+const hasValidSavedImg = ov && ov.img && typeof ov.img === 'string' && ov.img.trim() !== "";
+const finalImg = hasValidSavedImg ? ov.img : it.img;
+
+return ov ? {
+...it,
+price: ov.price ?? it.price,
+priceStr: ov.priceStr ?? it.priceStr,
+img: finalImg,
+available: ov.available ?? true
+} : { ...it, available: true };
 }),
 [adminItems]);
 
