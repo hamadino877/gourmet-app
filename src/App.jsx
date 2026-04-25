@@ -380,8 +380,8 @@ return { cats, items };
 
 const butcherBase    = buildData(rawButcher,    "butcher");
 const restaurantBase = buildData(rawRestaurant, "restaurant");
-const BASE_ITEMS = [...butcherBase.items, ...restaurantBase.items];
-const ALL_CATS   = [...butcherBase.cats,  ...restaurantBase.cats];
+const BASE_ITEMS = […butcherBase.items, …restaurantBase.items];
+const ALL_CATS   = […butcherBase.cats,  …restaurantBase.cats];
 
 const INIT_ADMIN = BASE_ITEMS.reduce((acc, it) => {
 acc[it.id] = { available: true, price: it.price, priceStr: it.priceStr, img: it.img };
@@ -659,7 +659,7 @@ return (
 <div>
 <div className="sth">
 <h1 className="sth-title">القائمة</h1>
-<span style={{ fontSize: 12, color: "var(--g)", fontWeight: 800, background: "var(--sf1)", padding: "4px 10px", borderRadius: 20, border: "1px solid var(--bd)" }}>
+<span style={{ fontSize: 12, color: "var(–g)", fontWeight: 800, background: "var(–sf1)", padding: "4px 10px", borderRadius: 20, border: "1px solid var(–bd)" }}>
 {items.length} عنصر
 </span>
 </div>
@@ -696,10 +696,10 @@ item.variants
 : <FoodCard key={item.id} item={item} onAdd={() => addToCart(item)} onView={() => openDetail(item)} idx={i} />
 )}
 {items.length === 0 && (
-<div style={{ gridColumn: "span 2", textAlign: "center", padding: "40px 0", color: "var(--t3)" }}>
+<div style={{ gridColumn: "span 2", textAlign: "center", padding: "40px 0", color: "var(–t3)" }}>
 <div style={{ fontSize: 42, marginBottom: 12 }}>🔍</div>
 <p>لا توجد نتائج مطابقة</p>
-{search && <button onClick={() => setSearch("")} style={{ marginTop: 12, color: "var(--g)", fontWeight: 800, fontSize: 13 }}>مسح البحث</button>}
+{search && <button onClick={() => setSearch("")} style={{ marginTop: 12, color: "var(–g)", fontWeight: 800, fontSize: 13 }}>مسح البحث</button>}
 </div>
 )}
 </div>
@@ -797,7 +797,7 @@ return (
 <div>
 <div className="sth">
 <h1 className="sth-title">سلة الطلبات</h1>
-<span style={{ background: "var(--sf1)", border: "1px solid var(--bd)", borderRadius: 20, padding: "4px 10px", fontSize: 12, fontWeight: 800, color: "var(--g)" }}>
+<span style={{ background: "var(–sf1)", border: "1px solid var(–bd)", borderRadius: 20, padding: "4px 10px", fontSize: 12, fontWeight: 800, color: "var(–g)" }}>
 {cart.length} عنصر
 </span>
 </div>
@@ -878,7 +878,7 @@ return (
 </div>
 <div className="thumbrow">
 {o.items.slice(0, 3).map((c, i) => (
-<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
+<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(–bdl)" }} />
 ))}
 {o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
 </div>
@@ -916,23 +916,23 @@ const si = STEPS.findIndex(s => s.k === order.status);
 return (
 <div>
 <div className="sth">
-<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
+<button style={{ display: "flex", alignItems: "center", color: "var(–t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
 <h1 className="sth-title">تتبع الطلب</h1>
 <div style={{ width: 28 }} />
 </div>
 <div className="mapph">
 <div style={{ textAlign: "center", zIndex: 1 }}>
 <div className="mappin">📍</div>
-<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
+<p style={{ fontSize: 12.5, color: "var(–t3)", marginTop: 7 }}>دبي - أرجان</p>
 </div>
 </div>
 <div className="tcard">
 <div className="thd">
 <div>
 <p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
-<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
+<p style={{ fontSize: 11.5, color: "var(–t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
 </div>
-<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
+<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(–g)" }}>{order.total} د.إ</p>
 </div>
 <div className="steps">
 {STEPS.map((s, i) => {
@@ -954,7 +954,7 @@ return (
 <div key={i} className="titem">
 <SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
 <span>{c.item.name}</span>
-<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
+<span style={{ marginRight: "auto", color: "var(–t3)" }}>×{c.qty}</span>
 </div>
 ))}
 </div>
@@ -977,13 +977,13 @@ return (
 <div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
 <div className="info-ico">📞</div>
 <div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--g)" }}>›</span>
+<span style={{ color: "var(–g)" }}>›</span>
 </div>
 <div className="info-row clickable" style={{ cursor: "pointer" }}
 onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
 <div className="info-ico"><IconWa size={20} /></div>
 <div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--wa)" }}>›</span>
+<span style={{ color: "var(–wa)" }}>›</span>
 </div>
 <div className="info-row">
 <div className="info-ico">🕐</div>
@@ -991,8 +991,8 @@ onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent
 </div>
 </div>
 <div className="info-section" style={{ margin: "10px 15px 14px" }}>
-<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
-<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
+<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(–bdl)" }}>
+<p style={{ fontSize: 13, fontWeight: 800, color: "var(–t2)" }}>تابعنا على السوشيال ميديا</p>
 </div>
 <div className="social-row">
 <a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
@@ -1012,190 +1012,7 @@ onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent
 <h2 className="sec-title">⭐ آراء العملاء</h2>
 <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
 {[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
-<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
-</div>
-</div>
-{reviews.map((r, i)<div className="chk-bar">
-<button className="btn-chk" onClick={() => setCheckoutOpen(true)}>
-🛍 إتمام الطلب — {grand.toFixed(0)} د.إ
-</button>
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function OrdersScreen({ orders, go, setTrackId }) {
-const statMap = {
-confirmed: { l: "تم التأكيد",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
-preparing: { l: "قيد التحضير",   bg: "rgba(99,102,241,.12)", c: "#818CF8" },
-ready:     { l: "جاهز للتوصيل", bg: "rgba(14,165,233,.12)", c: "#38BDF8" },
-delivered: { l: "تم التوصيل",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
-};
-if (orders.length === 0) return (
-<div>
-<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
-<div className="empty-pg">
-<div className="empty-ico">📋</div>
-<h2>لا توجد طلبات</h2>
-<p>ابدأ طلبك الأول الآن</p>
-<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
-</div>
-</div>
-);
-return (
-<div>
-<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
-<div className="olist">
-{orders.map(o => {
-const st = statMap[o.status] || statMap.confirmed;
-const d  = new Date(o.date);
-return (
-<div key={o.id} className="ocard" onClick={() => { setTrackId(o.id); go("track"); }}>
-<div className="ocard-top">
-<div>
-<p className="oid">{o.id}</p>
-<p className="odate">{d.toLocaleDateString("ar-AE")} — {d.toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}</p>
-</div>
-<div className="ostatus" style={{ background: st.bg, color: st.c }}>{st.l}</div>
-</div>
-<div className="thumbrow">
-{o.items.slice(0, 3).map((c, i) => (
-<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
-))}
-{o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
-</div>
-<div className="ofoot">
-<span>{o.items.length} عنصر</span>
-<span className="ototl">{o.total} د.إ</span>
-<span>›</span>
-</div>
-</div>
-);
-})}
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function TrackScreen({ orders, trackId, go }) {
-const order = orders.find(o => o.id === trackId);
-if (!order) return (
-<div className="empty-pg">
-<div className="empty-ico">🔍</div>
-<h2>الطلب غير موجود</h2>
-<button className="btn-pri" onClick={() => go("orders")}>طلباتي</button>
-</div>
-);
-const STEPS = [
-{ k: "pending",   l: "تم استلام الطلب", ic: "📱" },
-{ k: "confirmed", l: "تم تأكيد الطلب",  ic: "✅" },
-{ k: "preparing", l: "قيد التحضير",      ic: "👨‍🍳" },
-{ k: "ready",     l: "خرج للتوصيل",      ic: "🛵" },
-{ k: "delivered", l: "تم التوصيل",        ic: "🎉" },
-];
-const si = STEPS.findIndex(s => s.k === order.status);
-return (
-<div>
-<div className="sth">
-<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
-<h1 className="sth-title">تتبع الطلب</h1>
-<div style={{ width: 28 }} />
-</div>
-<div className="mapph">
-<div style={{ textAlign: "center", zIndex: 1 }}>
-<div className="mappin">📍</div>
-<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
-</div>
-</div>
-<div className="tcard">
-<div className="thd">
-<div>
-<p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
-<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
-</div>
-<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
-</div>
-<div className="steps">
-{STEPS.map((s, i) => {
-const done = i <= si, curr = i === si;
-return (
-<div key={s.k} className={`step ${done?"done":""} ${curr?"curr":""}`}>
-<div className="step-ic">
-<div className="sdot">{done ? s.ic : "○"}</div>
-{i < STEPS.length - 1 && <div className={`sline ${i < si ? "done" : ""}`} />}
-</div>
-<p className="slbl">{s.l}</p>
-</div>
-);
-})}
-</div>
-<div className="taddr">📍 <span>{order.addr}</span></div>
-<div className="titems">
-{order.items.map((c, i) => (
-<div key={i} className="titem">
-<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
-<span>{c.item.name}</span>
-<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
-</div>
-))}
-</div>
-<a href={`tel:+${WA_NUMBER}`} className="btn-call">📞 اتصل بالمطعم</a>
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function AboutScreen({ reviews, setReviews, showReviewForm, setShowReviewForm, newReview, setNewReview, showToast, isAdmin, setShowAdminLogin, go }) {
-return (
-<div>
-<div className="sth"><h1 className="sth-title">عن المطعم</h1></div>
-<div className="info-section">
-<div className="info-row">
-<div className="info-ico">📍</div>
-<div className="info-text"><div className="info-label">العنوان</div><div className="info-val" style={{ fontSize: 12 }}>{ADDRESS}</div></div>
-</div>
-<div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
-<div className="info-ico">📞</div>
-<div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--g)" }}>›</span>
-</div>
-<div className="info-row clickable" style={{ cursor: "pointer" }}
-onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
-<div className="info-ico"><IconWa size={20} /></div>
-<div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--wa)" }}>›</span>
-</div>
-<div className="info-row">
-<div className="info-ico">🕐</div>
-<div className="info-text"><div className="info-label">ساعات العمل</div><div className="info-val">يومياً ١١ ص – ١١ م</div></div>
-</div>
-</div>
-<div className="info-section" style={{ margin: "10px 15px 14px" }}>
-<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
-<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
-</div>
-<div className="social-row">
-<a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
-<a className="soc-btn" href={SOCIAL.instagram} target="_blank" rel="noreferrer"><IconInstagram />انستاجرام</a>
-<a className="soc-btn" href={SOCIAL.tiktok}    target="_blank" rel="noreferrer"><IconTikTok />تيك توك</a>
-</div>
-</div>
-<div className="platforms">
-<p className="plat-title">اطلب عبر تطبيقات التوصيل</p>
-<div className="plat-row">
-<a className="plat-btn" href={SOCIAL.talabat}   target="_blank" rel="noreferrer">🛵 طلبات</a>
-<a className="plat-btn" href={SOCIAL.deliveroo} target="_blank" rel="noreferrer">🚲 ديليفرو</a>
-<a className="plat-btn" href={SOCIAL.noon}      target="_blank" rel="noreferrer">🟡 نون فود</a>
-</div>
-</div>
-<div className="sec-hd">
-<h2 className="sec-title">⭐ آراء العملاء</h2>
-<div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-{[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
-<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
+<span style={{ fontSize: 12, fontWeight: 800, color: "var(–g)", marginRight: 4 }}>4.9</span>
 </div>
 </div>
 {reviews.map((r, i) => <ReviewCard key={i} review={r} />)}
@@ -1206,20 +1023,20 @@ onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent
 <p style={{ fontSize: 14, fontWeight: 900, marginBottom: 12 }}>أضف تقييمك 🌟</p>
 <div className="star-select">
 {[1,2,3,4,5].map(s => (
-<button key={s} className="star-btn" onClick={() => setNewReview(r => ({ ...r, rating: s }))}>
+<button key={s} className="star-btn" onClick={() => setNewReview(r => ({ …r, rating: s }))}>
 {s <= newReview.rating ? "⭐" : "☆"}
 </button>
 ))}
 </div>
 <input className="form-input" placeholder="اسمك" value={newReview.name}
-onChange={e => setNewReview(r => ({ ...r, name: e.target.value }))}
+onChange={e => setNewReview(r => ({ …r, name: e.target.value }))}
 style={{ marginBottom: 10, display: "block", width: "100%" }} />
 <textarea className="form-input" style={{ resize: "none", height: 80, display: "block", marginBottom: 12, width: "100%" }}
 placeholder="شاركنا تجربتك…" value={newReview.text}
-onChange={e => setNewReview(r => ({ ...r, text: e.target.value }))} />
+onChange={e => setNewReview(r => ({ …r, text: e.target.value }))} />
 <button className="btn-save" onClick={() => {
 if (!newReview.name.trim() || !newReview.text.trim()) { showToast("أكمل البيانات", "err"); return; }
-setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: "الآن", avatar: newReview.name[0] }, ...prev]);
+setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: "الآن", avatar: newReview.name[0] }, …prev]);
 setNewReview({ name: "", text: "", rating: 5 });
 setShowReviewForm(false);
 showToast("✓ شكراً على تقييمك!");
@@ -1231,14 +1048,14 @@ showToast("✓ شكراً على تقييمك!");
 <button className="admin-access-btn" onClick={() => setShowAdminLogin(true)}>
 <span style={{ fontSize: 18 }}>⚙️</span>
 <div>
-<div style={{ fontSize: 13, fontWeight: 900, color: "var(--t2)" }}>لوحة تحكم المطعم</div>
-<div style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>للمسؤولين فقط</div>
+<div style={{ fontSize: 13, fontWeight: 900, color: "var(–t2)" }}>لوحة تحكم المطعم</div>
+<div style={{ fontSize: 11, color: "var(–t3)", marginTop: 2 }}>للمسؤولين فقط</div>
 </div>
-<span style={{ marginRight: "auto", color: "var(--t3)" }}>›</span>
+<span style={{ marginRight: "auto", color: "var(–t3)" }}>›</span>
 </button>
 )}
 {isAdmin && (
-<button className="admin-access-btn" onClick={() => go("admin")} style={{ borderColor: "rgba(201,162,39,.4)", color: "var(--g)" }}>
+<button className="admin-access-btn" onClick={() => go("admin")} style={{ borderColor: "rgba(201,162,39,.4)", color: "var(–g)" }}>
 <span style={{ fontSize: 18 }}>⚙️</span>
 <div style={{ fontSize: 13, fontWeight: 900 }}>فتح لوحة التحكم</div>
 <span style={{ marginRight: "auto" }}>›</span>
@@ -1264,257 +1081,8 @@ return (
 </div>
 <div className="admin-stats">
 <div className="astat"><div className="astat-val">{allItems.length}</div><div className="astat-label">منتج</div></div>
-<div className="astat"><div className="astat-val" style={{ color: "var(--grn)" }}>{availCount}</div><div className="astat-label<div className="chk-bar">
-<button className="btn-chk" onClick={() => setCheckoutOpen(true)}>
-🛍 إتمام الطلب — {grand.toFixed(0)} د.إ
-</button>
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function OrdersScreen({ orders, go, setTrackId }) {
-const statMap = {
-confirmed: { l: "تم التأكيد",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
-preparing: { l: "قيد التحضير",   bg: "rgba(99,102,241,.12)", c: "#818CF8" },
-ready:     { l: "جاهز للتوصيل", bg: "rgba(14,165,233,.12)", c: "#38BDF8" },
-delivered: { l: "تم التوصيل",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
-};
-if (orders.length === 0) return (
-<div>
-<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
-<div className="empty-pg">
-<div className="empty-ico">📋</div>
-<h2>لا توجد طلبات</h2>
-<p>ابدأ طلبك الأول الآن</p>
-<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
-</div>
-</div>
-);
-return (
-<div>
-<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
-<div className="olist">
-{orders.map(o => {
-const st = statMap[o.status] || statMap.confirmed;
-const d  = new Date(o.date);
-return (
-<div key={o.id} className="ocard" onClick={() => { setTrackId(o.id); go("track"); }}>
-<div className="ocard-top">
-<div>
-<p className="oid">{o.id}</p>
-<p className="odate">{d.toLocaleDateString("ar-AE")} — {d.toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}</p>
-</div>
-<div className="ostatus" style={{ background: st.bg, color: st.c }}>{st.l}</div>
-</div>
-<div className="thumbrow">
-{o.items.slice(0, 3).map((c, i) => (
-<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
-))}
-{o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
-</div>
-<div className="ofoot">
-<span>{o.items.length} عنصر</span>
-<span className="ototl">{o.total} د.إ</span>
-<span>›</span>
-</div>
-</div>
-);
-})}
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function TrackScreen({ orders, trackId, go }) {
-const order = orders.find(o => o.id === trackId);
-if (!order) return (
-<div className="empty-pg">
-<div className="empty-ico">🔍</div>
-<h2>الطلب غير موجود</h2>
-<button className="btn-pri" onClick={() => go("orders")}>طلباتي</button>
-</div>
-);
-const STEPS = [
-{ k: "pending",   l: "تم استلام الطلب", ic: "📱" },
-{ k: "confirmed", l: "تم تأكيد الطلب",  ic: "✅" },
-{ k: "preparing", l: "قيد التحضير",      ic: "👨‍🍳" },
-{ k: "ready",     l: "خرج للتوصيل",      ic: "🛵" },
-{ k: "delivered", l: "تم التوصيل",        ic: "🎉" },
-];
-const si = STEPS.findIndex(s => s.k === order.status);
-return (
-<div>
-<div className="sth">
-<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
-<h1 className="sth-title">تتبع الطلب</h1>
-<div style={{ width: 28 }} />
-</div>
-<div className="mapph">
-<div style={{ textAlign: "center", zIndex: 1 }}>
-<div className="mappin">📍</div>
-<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
-</div>
-</div>
-<div className="tcard">
-<div className="thd">
-<div>
-<p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
-<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
-</div>
-<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
-</div>
-<div className="steps">
-{STEPS.map((s, i) => {
-const done = i <= si, curr = i === si;
-return (
-<div key={s.k} className={`step ${done?"done":""} ${curr?"curr":""}`}>
-<div className="step-ic">
-<div className="sdot">{done ? s.ic : "○"}</div>
-{i < STEPS.length - 1 && <div className={`sline ${i < si ? "done" : ""}`} />}
-</div>
-<p className="slbl">{s.l}</p>
-</div>
-);
-})}
-</div>
-<div className="taddr">📍 <span>{order.addr}</span></div>
-<div className="titems">
-{order.items.map((c, i) => (
-<div key={i} className="titem">
-<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
-<span>{c.item.name}</span>
-<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
-</div>
-))}
-</div>
-<a href={`tel:+${WA_NUMBER}`} className="btn-call">📞 اتصل بالمطعم</a>
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function AboutScreen({ reviews, setReviews, showReviewForm, setShowReviewForm, newReview, setNewReview, showToast, isAdmin, setShowAdminLogin, go }) {
-return (
-<div>
-<div className="sth"><h1 className="sth-title">عن المطعم</h1></div>
-<div className="info-section">
-<div className="info-row">
-<div className="info-ico">📍</div>
-<div className="info-text"><div className="info-label">العنوان</div><div className="info-val" style={{ fontSize: 12 }}>{ADDRESS}</div></div>
-</div>
-<div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
-<div className="info-ico">📞</div>
-<div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--g)" }}>›</span>
-</div>
-<div className="info-row clickable" style={{ cursor: "pointer" }}
-onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
-<div className="info-ico"><IconWa size={20} /></div>
-<div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--wa)" }}>›</span>
-</div>
-<div className="info-row">
-<div className="info-ico">🕐</div>
-<div className="info-text"><div className="info-label">ساعات العمل</div><div className="info-val">يومياً ١١ ص – ١١ م</div></div>
-</div>
-</div>
-<div className="info-section" style={{ margin: "10px 15px 14px" }}>
-<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
-<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
-</div>
-<div className="social-row">
-<a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
-<a className="soc-btn" href={SOCIAL.instagram} target="_blank" rel="noreferrer"><IconInstagram />انستاجرام</a>
-<a className="soc-btn" href={SOCIAL.tiktok}    target="_blank" rel="noreferrer"><IconTikTok />تيك توك</a>
-</div>
-</div>
-<div className="platforms">
-<p className="plat-title">اطلب عبر تطبيقات التوصيل</p>
-<div className="plat-row">
-<a className="plat-btn" href={SOCIAL.talabat}   target="_blank" rel="noreferrer">🛵 طلبات</a>
-<a className="plat-btn" href={SOCIAL.deliveroo} target="_blank" rel="noreferrer">🚲 ديليفرو</a>
-<a className="plat-btn" href={SOCIAL.noon}      target="_blank" rel="noreferrer">🟡 نون فود</a>
-</div>
-</div>
-<div className="sec-hd">
-<h2 className="sec-title">⭐ آراء العملاء</h2>
-<div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-{[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
-<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
-</div>
-</div>
-{reviews.map((r, i) => <ReviewCard key={i} review={r} />)}
-{!showReviewForm ? (
-<button className="add-review-btn" onClick={() => setShowReviewForm(true)}>+ أضف تقييمك</button>
-) : (
-<div className="review-form">
-<p style={{ fontSize: 14, fontWeight: 900, marginBottom: 12 }}>أضف تقييمك 🌟</p>
-<div className="star-select">
-{[1,2,3,4,5].map(s => (
-<button key={s} className="star-btn" onClick={() => setNewReview(r => ({ ...r, rating: s }))}>
-{s <= newReview.rating ? "⭐" : "☆"}
-</button>
-))}
-</div>
-<input className="form-input" placeholder="اسمك" value={newReview.name}
-onChange={e => setNewReview(r => ({ ...r, name: e.target.value }))}
-style={{ marginBottom: 10, display: "block", width: "100%" }} />
-<textarea className="form-input" style={{ resize: "none", height: 80, display: "block", marginBottom: 12, width: "100%" }}
-placeholder="شاركنا تجربتك…" value={newReview.text}
-onChange={e => setNewReview(r => ({ ...r, text: e.target.value }))} />
-<button className="btn-save" onClick={() => {
-if (!newReview.name.trim() || !newReview.text.trim()) { showToast("أكمل البيانات", "err"); return; }
-setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: "الآن", avatar: newReview.name[0] }, ...prev]);
-setNewReview({ name: "", text: "", rating: 5 });
-setShowReviewForm(false);
-showToast("✓ شكراً على تقييمك!");
-}}>إرسال التقييم</button>
-<button className="btn-cancel" onClick={() => setShowReviewForm(false)}>إلغاء</button>
-</div>
-)}
-{!isAdmin && (
-<button className="admin-access-btn" onClick={() => setShowAdminLogin(true)}>
-<span style={{ fontSize: 18 }}>⚙️</span>
-<div>
-<div style={{ fontSize: 13, fontWeight: 900, color: "var(--t2)" }}>لوحة تحكم المطعم</div>
-<div style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>للمسؤولين فقط</div>
-</div>
-<span style={{ marginRight: "auto", color: "var(--t3)" }}>›</span>
-</button>
-)}
-{isAdmin && (
-<button className="admin-access-btn" onClick={() => go("admin")} style={{ borderColor: "rgba(201,162,39,.4)", color: "var(--g)" }}>
-<span style={{ fontSize: 18 }}>⚙️</span>
-<div style={{ fontSize: 13, fontWeight: 900 }}>فتح لوحة التحكم</div>
-<span style={{ marginRight: "auto" }}>›</span>
-</button>
-)}
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function AdminScreen({ allItems, allCats, adminItems, toggleAvailable, setEditingItem, go, setIsAdmin }) {
-const availCount   = Object.values(adminItems).filter(v => v.available).length;
-const unavailCount = Object.values(adminItems).length - availCount;
-const grouped = allCats.map(cat => ({ cat, items: allItems.filter(it => it.cid === cat.id) })).filter(g => g.items.length > 0);
-return (
-<div>
-<div className="admin-header">
-<div>
-<p className="admin-title">⚙️ لوحة التحكم</p>
-<p className="admin-subtitle">إدارة المنتجات والأسعار والصور</p>
-</div>
-<button className="admin-logout-btn" onClick={() => { setIsAdmin(false); go("home"); }}>خروج 🔓</button>
-</div>
-<div className="admin-stats">
-<div className="astat"><div className="astat-val">{allItems.length}</div><div className="astat-label">منتج</div></div>
-<div className="astat"><div className="astat-val" style={{ color: "var(--grn)" }}>{availCount}</div><div className="astat-label">متاح</div></div>
-<div className="astat"><div className="astat-val" style={{ color: "var(--red)" }}>{unavailCount}</div><div className="astat-label">غير متاح</div></div>
+<div className="astat"><div className="astat-val" style={{ color: "var(–grn)" }}>{availCount}</div><div className="astat-label">متاح</div></div>
+<div className="astat"><div className="astat-val" style={{ color: "var(–red)" }}>{unavailCount}</div><div className="astat-label">غير متاح</div></div>
 </div>
 {grouped.map(({ cat, items }) => (
 <div key={cat.id} className="admin-card">
@@ -1526,7 +1094,7 @@ return (
 <div key={item.id} className="admin-item">
 <SafeImg src={item.img} alt={item.name} style={{ width: 52, height: 52, borderRadius: 10, objectFit: "cover", flexShrink: 0, opacity: isAvail ? 1 : .45 }} />
 <div className="admin-item-info">
-<div className="admin-item-name" style={{ color: isAvail ? "var(--t1)" : "var(--t3)" }}>{item.name}</div>
+<div className="admin-item-name" style={{ color: isAvail ? "var(–t1)" : "var(–t3)" }}>{item.name}</div>
 <div className="admin-item-price">{item.priceStr}</div>
 </div>
 <div className="admin-item-actions">
@@ -1553,7 +1121,7 @@ return (
 <h2>تم إرسال طلبك! 🎉</h2>
 <p>تم إرسال طلبك على واتساب النيل جورمية وسيتم التواصل معك قريباً</p>
 <button className="btn-pri" onClick={() => go("orders")}>عرض طلباتي</button>
-<button onClick={() => go("home")} style={{ color: "var(--g)", fontWeight: 800, fontSize: 14, marginTop: 4 }}>العودة للرئيسية</button>
+<button onClick={() => go("home")} style={{ color: "var(–g)", fontWeight: 800, fontSize: 14, marginTop: 4 }}>العودة للرئيسية</button>
 </div>
 );
 }
@@ -1603,352 +1171,7 @@ inputMode="tel"
 />
 {/* FIX: رسالة خطأ رقم الهاتف */}
 {phoneErr && <p className="field-err">{phoneErr}</p>}
-<p className="flbl">📍 عنوان التوصيل <span style={{ color: "var(--red)" }}>*</span></p>
-<textarea className="fta" rows={3} value={addr} onChange={e => setAddr(e.target.value)} placeholder="المنطقة، الشارع، رقم المبنى…" />
-<div className="chk-sm">
-<div className="srow"><span>المجموع</span><span>{cartTotal.toFixed(0)} د.إ</span></div>
-<div className="srow"><span>التوصيل</span><span className={del===0?"free":""}>{del===0?"مجاناً 🎉":`${del} د.إ`}</span></div>
-<div className="sdiv" />
-<div className="srow stotal"><span>الإجمالي</span><span>{grand.toFixed(0)}<div className="chk-bar">
-<button className="btn-chk" onClick={() => setCheckoutOpen(true)}>
-🛍 إتمام الطلب — {grand.toFixed(0)} د.إ
-</button>
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function OrdersScreen({ orders, go, setTrackId }) {
-const statMap = {
-confirmed: { l: "تم التأكيد",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
-preparing: { l: "قيد التحضير",   bg: "rgba(99,102,241,.12)", c: "#818CF8" },
-ready:     { l: "جاهز للتوصيل", bg: "rgba(14,165,233,.12)", c: "#38BDF8" },
-delivered: { l: "تم التوصيل",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
-};
-if (orders.length === 0) return (
-<div>
-<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
-<div className="empty-pg">
-<div className="empty-ico">📋</div>
-<h2>لا توجد طلبات</h2>
-<p>ابدأ طلبك الأول الآن</p>
-<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
-</div>
-</div>
-);
-return (
-<div>
-<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
-<div className="olist">
-{orders.map(o => {
-const st = statMap[o.status] || statMap.confirmed;
-const d  = new Date(o.date);
-return (
-<div key={o.id} className="ocard" onClick={() => { setTrackId(o.id); go("track"); }}>
-<div className="ocard-top">
-<div>
-<p className="oid">{o.id}</p>
-<p className="odate">{d.toLocaleDateString("ar-AE")} — {d.toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}</p>
-</div>
-<div className="ostatus" style={{ background: st.bg, color: st.c }}>{st.l}</div>
-</div>
-<div className="thumbrow">
-{o.items.slice(0, 3).map((c, i) => (
-<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
-))}
-{o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
-</div>
-<div className="ofoot">
-<span>{o.items.length} عنصر</span>
-<span className="ototl">{o.total} د.إ</span>
-<span>›</span>
-</div>
-</div>
-);
-})}
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function TrackScreen({ orders, trackId, go }) {
-const order = orders.find(o => o.id === trackId);
-if (!order) return (
-<div className="empty-pg">
-<div className="empty-ico">🔍</div>
-<h2>الطلب غير موجود</h2>
-<button className="btn-pri" onClick={() => go("orders")}>طلباتي</button>
-</div>
-);
-const STEPS = [
-{ k: "pending",   l: "تم استلام الطلب", ic: "📱" },
-{ k: "confirmed", l: "تم تأكيد الطلب",  ic: "✅" },
-{ k: "preparing", l: "قيد التحضير",      ic: "👨‍🍳" },
-{ k: "ready",     l: "خرج للتوصيل",      ic: "🛵" },
-{ k: "delivered", l: "تم التوصيل",        ic: "🎉" },
-];
-const si = STEPS.findIndex(s => s.k === order.status);
-return (
-<div>
-<div className="sth">
-<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
-<h1 className="sth-title">تتبع الطلب</h1>
-<div style={{ width: 28 }} />
-</div>
-<div className="mapph">
-<div style={{ textAlign: "center", zIndex: 1 }}>
-<div className="mappin">📍</div>
-<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
-</div>
-</div>
-<div className="tcard">
-<div className="thd">
-<div>
-<p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
-<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
-</div>
-<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
-</div>
-<div className="steps">
-{STEPS.map((s, i) => {
-const done = i <= si, curr = i === si;
-return (
-<div key={s.k} className={`step ${done?"done":""} ${curr?"curr":""}`}>
-<div className="step-ic">
-<div className="sdot">{done ? s.ic : "○"}</div>
-{i < STEPS.length - 1 && <div className={`sline ${i < si ? "done" : ""}`} />}
-</div>
-<p className="slbl">{s.l}</p>
-</div>
-);
-})}
-</div>
-<div className="taddr">📍 <span>{order.addr}</span></div>
-<div className="titems">
-{order.items.map((c, i) => (
-<div key={i} className="titem">
-<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
-<span>{c.item.name}</span>
-<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
-</div>
-))}
-</div>
-<a href={`tel:+${WA_NUMBER}`} className="btn-call">📞 اتصل بالمطعم</a>
-</div>
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function AboutScreen({ reviews, setReviews, showReviewForm, setShowReviewForm, newReview, setNewReview, showToast, isAdmin, setShowAdminLogin, go }) {
-return (
-<div>
-<div className="sth"><h1 className="sth-title">عن المطعم</h1></div>
-<div className="info-section">
-<div className="info-row">
-<div className="info-ico">📍</div>
-<div className="info-text"><div className="info-label">العنوان</div><div className="info-val" style={{ fontSize: 12 }}>{ADDRESS}</div></div>
-</div>
-<div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
-<div className="info-ico">📞</div>
-<div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--g)" }}>›</span>
-</div>
-<div className="info-row clickable" style={{ cursor: "pointer" }}
-onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
-<div className="info-ico"><IconWa size={20} /></div>
-<div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: "var(--wa)" }}>›</span>
-</div>
-<div className="info-row">
-<div className="info-ico">🕐</div>
-<div className="info-text"><div className="info-label">ساعات العمل</div><div className="info-val">يومياً ١١ ص – ١١ م</div></div>
-</div>
-</div>
-<div className="info-section" style={{ margin: "10px 15px 14px" }}>
-<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
-<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
-</div>
-<div className="social-row">
-<a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
-<a className="soc-btn" href={SOCIAL.instagram} target="_blank" rel="noreferrer"><IconInstagram />انستاجرام</a>
-<a className="soc-btn" href={SOCIAL.tiktok}    target="_blank" rel="noreferrer"><IconTikTok />تيك توك</a>
-</div>
-</div>
-<div className="platforms">
-<p className="plat-title">اطلب عبر تطبيقات التوصيل</p>
-<div className="plat-row">
-<a className="plat-btn" href={SOCIAL.talabat}   target="_blank" rel="noreferrer">🛵 طلبات</a>
-<a className="plat-btn" href={SOCIAL.deliveroo} target="_blank" rel="noreferrer">🚲 ديليفرو</a>
-<a className="plat-btn" href={SOCIAL.noon}      target="_blank" rel="noreferrer">🟡 نون فود</a>
-</div>
-</div>
-<div className="sec-hd">
-<h2 className="sec-title">⭐ آراء العملاء</h2>
-<div style={{ display: "flex", alignItems: "center", gap: 4 }}>
-{[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
-<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
-</div>
-</div>
-{reviews.map((r, i) => <ReviewCard key={i} review={r} />)}
-{!showReviewForm ? (
-<button className="add-review-btn" onClick={() => setShowReviewForm(true)}>+ أضف تقييمك</button>
-) : (
-<div className="review-form">
-<p style={{ fontSize: 14, fontWeight: 900, marginBottom: 12 }}>أضف تقييمك 🌟</p>
-<div className="star-select">
-{[1,2,3,4,5].map(s => (
-<button key={s} className="star-btn" onClick={() => setNewReview(r => ({ ...r, rating: s }))}>
-{s <= newReview.rating ? "⭐" : "☆"}
-</button>
-))}
-</div>
-<input className="form-input" placeholder="اسمك" value={newReview.name}
-onChange={e => setNewReview(r => ({ ...r, name: e.target.value }))}
-style={{ marginBottom: 10, display: "block", width: "100%" }} />
-<textarea className="form-input" style={{ resize: "none", height: 80, display: "block", marginBottom: 12, width: "100%" }}
-placeholder="شاركنا تجربتك…" value={newReview.text}
-onChange={e => setNewReview(r => ({ ...r, text: e.target.value }))} />
-<button className="btn-save" onClick={() => {
-if (!newReview.name.trim() || !newReview.text.trim()) { showToast("أكمل البيانات", "err"); return; }
-setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: "الآن", avatar: newReview.name[0] }, ...prev]);
-setNewReview({ name: "", text: "", rating: 5 });
-setShowReviewForm(false);
-showToast("✓ شكراً على تقييمك!");
-}}>إرسال التقييم</button>
-<button className="btn-cancel" onClick={() => setShowReviewForm(false)}>إلغاء</button>
-</div>
-)}
-{!isAdmin && (
-<button className="admin-access-btn" onClick={() => setShowAdminLogin(true)}>
-<span style={{ fontSize: 18 }}>⚙️</span>
-<div>
-<div style={{ fontSize: 13, fontWeight: 900, color: "var(--t2)" }}>لوحة تحكم المطعم</div>
-<div style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>للمسؤولين فقط</div>
-</div>
-<span style={{ marginRight: "auto", color: "var(--t3)" }}>›</span>
-</button>
-)}
-{isAdmin && (
-<button className="admin-access-btn" onClick={() => go("admin")} style={{ borderColor: "rgba(201,162,39,.4)", color: "var(--g)" }}>
-<span style={{ fontSize: 18 }}>⚙️</span>
-<div style={{ fontSize: 13, fontWeight: 900 }}>فتح لوحة التحكم</div>
-<span style={{ marginRight: "auto" }}>›</span>
-</button>
-)}
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function AdminScreen({ allItems, allCats, adminItems, toggleAvailable, setEditingItem, go, setIsAdmin }) {
-const availCount   = Object.values(adminItems).filter(v => v.available).length;
-const unavailCount = Object.values(adminItems).length - availCount;
-const grouped = allCats.map(cat => ({ cat, items: allItems.filter(it => it.cid === cat.id) })).filter(g => g.items.length > 0);
-return (
-<div>
-<div className="admin-header">
-<div>
-<p className="admin-title">⚙️ لوحة التحكم</p>
-<p className="admin-subtitle">إدارة المنتجات والأسعار والصور</p>
-</div>
-<button className="admin-logout-btn" onClick={() => { setIsAdmin(false); go("home"); }}>خروج 🔓</button>
-</div>
-<div className="admin-stats">
-<div className="astat"><div className="astat-val">{allItems.length}</div><div className="astat-label">منتج</div></div>
-<div className="astat"><div className="astat-val" style={{ color: "var(--grn)" }}>{availCount}</div><div className="astat-label">متاح</div></div>
-<div className="astat"><div className="astat-val" style={{ color: "var(--red)" }}>{unavailCount}</div><div className="astat-label">غير متاح</div></div>
-</div>
-{grouped.map(({ cat, items }) => (
-<div key={cat.id} className="admin-card">
-<div className="admin-cat-header"><span className="admin-cat-name">{cat.name} · {cat.nameEn}</span></div>
-{items.map(item => {
-const ov      = adminItems[item.id];
-const isAvail = ov?.available ?? true;
-return (
-<div key={item.id} className="admin-item">
-<SafeImg src={item.img} alt={item.name} style={{ width: 52, height: 52, borderRadius: 10, objectFit: "cover", flexShrink: 0, opacity: isAvail ? 1 : .45 }} />
-<div className="admin-item-info">
-<div className="admin-item-name" style={{ color: isAvail ? "var(--t1)" : "var(--t3)" }}>{item.name}</div>
-<div className="admin-item-price">{item.priceStr}</div>
-</div>
-<div className="admin-item-actions">
-<button className="edit-btn" onClick={() => setEditingItem(item)} aria-label="تعديل"><IconEdit size={14} /></button>
-<button className={`tgl ${isAvail?"on":""}`} onClick={() => toggleAvailable(item.id)}
-role="switch" aria-checked={isAvail} aria-label={isAvail?"إخفاء":"إظهار"}>
-<span className="tglth" />
-</button>
-</div>
-</div>
-);
-})}
-</div>
-))}
-<div style={{ height: 20 }} />
-</div>
-);
-}
-
-function SuccessScreen({ go }) {
-return (
-<div className="succ-pg">
-<div className="succ-ring"><IconCheck /></div>
-<h2>تم إرسال طلبك! 🎉</h2>
-<p>تم إرسال طلبك على واتساب النيل جورمية وسيتم التواصل معك قريباً</p>
-<button className="btn-pri" onClick={() => go("orders")}>عرض طلباتي</button>
-<button onClick={() => go("home")} style={{ color: "var(--g)", fontWeight: 800, fontSize: 14, marginTop: 4 }}>العودة للرئيسية</button>
-</div>
-);
-}
-
-// ─── CHECKOUT SHEET ────────────────────────────────────────────────────
-function CheckoutSheet({ cartTotal, onClose, onConfirm, showToast }) {
-const [addr,  setAddr]  = useState("دبي - أرجان");
-const [name,  setName]  = useState("");
-const [phone, setPhone] = useState("");
-// FIX: خطأ التحقق من رقم الهاتف
-const [phoneErr, setPhoneErr] = useState("");
-const del   = cartTotal >= 150 ? 0 : 15;
-const grand = cartTotal + del;
-
-const handlePhoneChange = (e) => {
-const val = e.target.value;
-setPhone(val);
-if (val && !validatePhone(val)) {
-setPhoneErr("رقم الهاتف غير صحيح (مثال: 0501234567)");
-} else {
-setPhoneErr("");
-}
-};
-
-const handleConfirm = () => {
-if (!addr.trim()) { showToast("أدخل عنوان التوصيل", "err"); return; }
-if (phone && !validatePhone(phone)) { showToast("رقم الهاتف غير صحيح", "err"); return; }
-onConfirm(addr, name, phone);
-};
-
-return (
-<div className="shov" onClick={onClose} role="dialog" aria-modal="true">
-<div className="sh" onClick={e => e.stopPropagation()}>
-<div className="shndl" />
-<h3 className="shtitle">تفاصيل الطلب</h3>
-<p className="flbl">👤 اسمك</p>
-<input className="finp" value={name} onChange={e => setName(e.target.value)} placeholder="اسمك الكريم…" autoComplete="name" />
-<p className="flbl">📱 رقم الموبايل</p>
-<input
-className={`finp ${phoneErr ? "finp-err" : ""}`}
-value={phone}
-onChange={handlePhoneChange}
-placeholder="+971501234567"
-type="tel"
-autoComplete="tel"
-inputMode="tel"
-/>
-{/* FIX: رسالة خطأ رقم الهاتف */}
-{phoneErr && <p className="field-err">{phoneErr}</p>}
-<p className="flbl">📍 عنوان التوصيل <span style={{ color: "var(--red)" }}>*</span></p>
+<p className="flbl">📍 عنوان التوصيل <span style={{ color: "var(–red)" }}>*</span></p>
 <textarea className="fta" rows={3} value={addr} onChange={e => setAddr(e.target.value)} placeholder="المنطقة، الشارع، رقم المبنى…" />
 <div className="chk-sm">
 <div className="srow"><span>المجموع</span><span>{cartTotal.toFixed(0)} د.إ</span></div>
@@ -1972,10 +1195,10 @@ return (
 <div className="edit-modal-ov" onClick={onClose} role="dialog" aria-modal="true">
 <div className="edit-modal" onClick={e => e.stopPropagation()}>
 <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
-<SafeImg src={imgUrl} alt={item.name} style={{ width: 56, height: 56, borderRadius: 11, objectFit: "cover", border: "1px solid var(--bdl)", flexShrink: 0 }} />
+<SafeImg src={imgUrl} alt={item.name} style={{ width: 56, height: 56, borderRadius: 11, objectFit: "cover", border: "1px solid var(–bdl)", flexShrink: 0 }} />
 <div>
 <h3 style={{ fontSize: 15, fontWeight: 900, margin: 0 }}>{item.name}</h3>
-<p style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>{item.nameEn}</p>
+<p style={{ fontSize: 11, color: "var(–t3)", marginTop: 2 }}>{item.nameEn}</p>
 </div>
 </div>
 <div className="form-group">
@@ -1989,7 +1212,7 @@ return (
 {imgUrl && (
 <div style={{ marginBottom: 14 }}>
 <label className="form-label">معاينة الصورة</label>
-<SafeImg src={imgUrl} alt="preview" style={{ height: 100, borderRadius: 10, objectFit: "cover", border: "1px solid var(--bdl)" }} />
+<SafeImg src={imgUrl} alt="preview" style={{ height: 100, borderRadius: 10, objectFit: "cover", border: "1px solid var(–bdl)" }} />
 </div>
 )}
 <button className="btn-save" onClick={() => onSave(item.id, { priceStr, img: imgUrl })}>حفظ التغييرات</button>
@@ -2128,7 +1351,7 @@ setShopType(t); setActiveCat("all"); setSearch("");
 const ALL_ITEMS = useMemo(() =>
 BASE_ITEMS.map(it => {
 const ov = adminItems[it.id];
-return ov ? { ...it, price: ov.price, priceStr: ov.priceStr, img: ov.img, available: ov.available } : { ...it, available: true };
+return ov ? { …it, price: ov.price, priceStr: ov.priceStr, img: ov.img, available: ov.available } : { …it, available: true };
 }),
 [adminItems]);
 
@@ -2152,14 +1375,14 @@ const p   = price ?? item.price;
 const cid = varLabel ? `${item.id}_${varLabel}` : item.id;
 setCart(prev => {
 const ex = prev.find(c => c.id === cid);
-if (ex) return prev.map(c => c.id === cid ? { ...c, qty: c.qty + 1 } : c);
-return [...prev, { id: cid, item, qty: 1, price: p, varLabel: varLabel ?? null }];
+if (ex) return prev.map(c => c.id === cid ? { …c, qty: c.qty + 1 } : c);
+return […prev, { id: cid, item, qty: 1, price: p, varLabel: varLabel ?? null }];
 });
 showToast("✓ أضيف للسلة");
 }, [showToast]);
 
 const updateQty = useCallback((cid, delta) => {
-setCart(prev => prev.map(c => c.id === cid ? { ...c, qty: Math.max(0, c.qty + delta) } : c).filter(c => c.qty > 0));
+setCart(prev => prev.map(c => c.id === cid ? { …c, qty: Math.max(0, c.qty + delta) } : c).filter(c => c.qty > 0));
 }, []);
 
 const cartTotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
@@ -2178,7 +1401,7 @@ msg += `━━━━━━━━━━━━━━━━━\n💰 المجموع
 msg += `🚚 التوصيل: *${del === 0 ? "مجاني 🎉" : del + " د.إ"}*\n✅ الإجمالي: *${grand.toFixed(0)} د.إ*\n`;
 msg += `━━━━━━━━━━━━━━━━━\n⏰ وقت الطلب: ${new Date().toLocaleString("ar-AE")}\n`;
 window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
-setOrders(prev => [{ id: orderId, items: [...cart], total: grand, status: "confirmed", date: new Date().toISOString(), addr }, ...prev]);
+setOrders(prev => [{ id: orderId, items: […cart], total: grand, status: "confirmed", date: new Date().toISOString(), addr }, …prev]);
 setCart([]);
 setCheckoutOpen(false);
 go("success");
@@ -2190,15 +1413,15 @@ setDetailItem(item); setDetailQty(1); go("detail");
 
 const toggleAvailable = useCallback((id) => {
 setAdminItems(prev => ({
-...prev,
-[id]: { ...prev[id], available: !prev[id].available }
+…prev,
+[id]: { …prev[id], available: !prev[id].available }
 }));
 }, []);
 
 const saveItemEdit = useCallback((id, updates) => {
 setAdminItems(prev => ({
-...prev,
-[id]: { ...prev[id], priceStr: updates.priceStr, price: parsePrice(updates.priceStr), img: updates.img }
+…prev,
+[id]: { …prev[id], priceStr: updates.priceStr, price: parsePrice(updates.priceStr), img: updates.img }
 }));
 setEditingItem(null);
 showToast("✓ تم الحفظ بنجاح");
@@ -2213,8 +1436,8 @@ const actionProps = { addToCart, openDetail, go };
 return (
 <div className="shell" dir="rtl">
 <div className="scr" ref={scrollRef} key={page}>
-{page === "home"    && <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {...shopProps} {...actionProps} />}
-{page === "menu"    && <MenuScreen items={items} cats={cats} {...shopProps} {...actionProps} />}
+{page === "home"    && <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {…shopProps} {…actionProps} />}
+{page === "menu"    && <MenuScreen items={items} cats={cats} {…shopProps} {…actionProps} />}
 {page === "detail"  && <DetailScreen detailItem={detailItem} detailQty={detailQty} setDetailQty={setDetailQty} prevPage={prevPage} allItems={ALL_ITEMS} allCats={ALL_CATS} addToCart={addToCart} go={go} setDetailItem={setDetailItem} scrollRef={scrollRef} />}
 {page === "cart"    && <CartScreen cart={cart} cartTotal={cartTotal} updateQty={updateQty} setCart={setCart} setCheckoutOpen={setCheckoutOpen} go={go} />}
 {page === "orders"  && <OrdersScreen orders={orders} go={go} setTrackId={setTrackId} />}
@@ -2222,11 +1445,12 @@ return (
 {page === "about"   && <AboutScreen reviews={reviews} setReviews={setReviews} showReviewForm={showReviewForm} setShowReviewForm={setShowReviewForm} newReview={newReview} setNewReview={setNewReview} showToast={showToast} go={go} isAdmin={isAdmin} setShowAdminLogin={setShowAdminLogin} />}
 {page === "admin"   && (isAdmin
 ? <AdminScreen allItems={ALL_ITEMS} allCats={ALL_CATS} adminItems={adminItems} toggleAvailable={toggleAvailable} setEditingItem={setEditingItem} go={go} setIsAdmin={setIsAdmin} />
-: <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {...shopProps} {...actionProps} />
+: <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {…shopProps} {…actionProps} />
 )}
 {page === "success" && <SuccessScreen go={go} />}
 </div>
 
+```
   <nav className="bnav" aria-label="التنقل الرئيسي">
     {[
       { id: "home",   label: "الرئيسية", Icon: IconHome },
@@ -2258,5 +1482,7 @@ return (
 
   {toast && <div key={toast.key} className={`toast ${toast.type}`} role="alert" aria-live="polite">{toast.msg}</div>}
 </div>
+```
+
 );
 }
