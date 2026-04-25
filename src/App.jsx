@@ -1,21 +1,21 @@
-import { useState, useMemo, useCallback, useRef, useEffect } from “react”;
+import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 
 // ─── CONFIG ──────────────────────────────────────────────────────────
-const WA_NUMBER      = “971554099255”;
-const PHONE_NUMBER   = “0554099255”;
-const ADMIN_PASSWORD = “0123456”;
-const ADDRESS        = “دبي، البرشاء جنوب الثالثة، أرجان، بناية روز بالاس، محل رقم 15”;
+const WA_NUMBER      = "971554099255";
+const PHONE_NUMBER   = "0554099255";
+const ADMIN_PASSWORD = "0123456";
+const ADDRESS        = "دبي، البرشاء جنوب الثالثة، أرجان، بناية روز بالاس، محل رقم 15";
 const SOCIAL = {
-facebook:  “https://www.facebook.com/alnilegourmet/”,
-instagram: “https://www.instagram.com/al_nile_gourmet”,
-tiktok:    “https://www.tiktok.com/@nile.gourmet”,
-talabat:   “https://www.talabat.com/uae/restaurant/731697/alnil-gourmet-al-barsha-south?aid=6822”,
-deliveroo: “https://deliveroo.ae/menu/dubai/south-barsha-arjan/al-nile-gourmet”,
-noon:      “https://food.noon.com/uae-ar/outlet/LNLGRMZMHT/”,
+facebook:  "https://www.facebook.com/alnilegourmet/",
+instagram: "https://www.instagram.com/al_nile_gourmet",
+tiktok:    "https://www.tiktok.com/@nile.gourmet",
+talabat:   "https://www.talabat.com/uae/restaurant/731697/alnil-gourmet-al-barsha-south?aid=6822",
+deliveroo: "https://deliveroo.ae/menu/dubai/south-barsha-arjan/al-nile-gourmet",
+noon:      "https://food.noon.com/uae-ar/outlet/LNLGRMZMHT/",
 };
 
 // ─── WORKING HOURS ────────────────────────────────────────────────────
-// FIX: ساعات العمل ديناميكية بدل “مفتوح الآن” الثابتة
+// FIX: ساعات العمل ديناميكية بدل "مفتوح الآن" الثابتة
 function getShopStatus() {
 const now = new Date();
 const hour = now.getHours();
@@ -27,7 +27,7 @@ const isOpen = totalMins >= openMins && totalMins < closeMins;
 if (isOpen) {
 const remaining = closeMins - totalMins;
 if (remaining <= 60) return { open: true, label: `🟡 يغلق خلال ${remaining} دقيقة` };
-return { open: true, label: “🟢 مفتوح الآن” };
+return { open: true, label: "🟢 مفتوح الآن" };
 } else {
 const minsUntilOpen = totalMins < openMins
 ? openMins - totalMins
@@ -43,7 +43,7 @@ return { open: false, label: `🔴 مغلق — يفتح ${hoursLeft}:${String(m
 // FIX: التحقق من رقم الهاتف
 function validatePhone(phone) {
 if (!phone) return true; // اختياري
-const cleaned = phone.replace(/[\s-()]/g, “”);
+const cleaned = phone.replace(/[\s-()]/g, "");
 // يقبل: +971XXXXXXXXX أو 05XXXXXXXX أو 971XXXXXXXXX
 return /^(+971|971|0)[0-9]{8,9}$/.test(cleaned);
 }
@@ -62,91 +62,91 @@ try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
 
 // ─── IMAGES ──────────────────────────────────────────────────────────
 const I = [
-“https://i.ibb.co/6c69xgdQ/mixboard-image-1.png”,   // 0
-“https://i.ibb.co/b5PrSg0G/mixboard-image-2.png”,   // 1
-“https://i.ibb.co/mrLK9s3Z/mixboard-image-3.png”,   // 2
-“https://i.ibb.co/DPdZzLSk/mixboard-image-4.png”,   // 3
-“https://i.ibb.co/0yvCbC4T/mixboard-image-5.png”,   // 4
-“https://i.ibb.co/mCc7Lyv2/mixboard-image-6.png”,   // 5
-“https://i.ibb.co/W4XwXYwV/mixboard-image-7.png”,   // 6
-“https://i.ibb.co/DP0VByDC/mixboard-image-8.png”,   // 7
-“https://i.ibb.co/zVP05rC9/mixboard-image-9.png”,   // 8
-“https://i.ibb.co/5X9JDQ50/mixboard-image-10.png”,  // 9
-“https://i.ibb.co/pv5YPdGZ/mixboard-image-11.png”,  // 10
-“https://i.ibb.co/tMH1pHyZ/mixboard-image-12.png”,  // 11
-“https://i.ibb.co/0ygXDzM7/mixboard-image-13.png”,  // 12
-“https://i.ibb.co/ZzQ9VQhc/mixboard-image-14.png”,  // 13
-“https://i.ibb.co/TBMnT6w1/mixboard-image-15.png”,  // 14
-“https://i.ibb.co/CKyN6K2L/mixboard-image-16.png”,  // 15
-“https://i.ibb.co/CKyN6K2L/mixboard-image-16.png”,  // 16
-“https://i.ibb.co/qLJFq3gc/mixboard-image-18.png”,  // 17
-“https://i.ibb.co/LzvBZmGb/mixboard-image-19.png”,  // 18
-“https://i.ibb.co/60f1mcZP/mixboard-image-20.png”,  // 19
-“https://i.ibb.co/7JjFww6Y/mixboard-image-21.png”,  // 20
-“https://i.ibb.co/XH7xgCQ/mixboard-image-22.png”,   // 21
-“https://i.ibb.co/kg9h3YcC/mixboard-image-23.png”,  // 22
-“https://i.ibb.co/V0vHTzfD/mixboard-image-24.png”,  // 23
-“https://i.ibb.co/tw7RZS8c/mixboard-image-25.png”,  // 24
-“https://i.ibb.co/XxmbSrmn/mixboard-image-26.png”,  // 25
-“https://i.ibb.co/XxmbSrmn/mixboard-image-26.png”,  // 26
-“https://i.ibb.co/XxmbSrmn/mixboard-image-26.png”,  // 27
-“https://i.ibb.co/XxmbSrmn/mixboard-image-26.png”,  // 28
-“https://i.ibb.co/gF3kfqdL/mixboard-image-30.png”,  // 29
-“https://i.ibb.co/wNPjkhKd/mixboard-image-31.png”,  // 30
-“https://i.ibb.co/ym5t3ffr/mixboard-image-32.png”,  // 31
-“https://i.ibb.co/23vry85M/mixboard-image-74.png”,  // 32
-“https://i.ibb.co/6RTCnfPH/mixboard-image-68.png”,  // 33
-“https://i.ibb.co/WWGL1QcG/mixboard-image-79.png”,  // 34
-“https://i.ibb.co/J9kxNLn/mixboard-image-67.png”,   // 35
-“https://i.ibb.co/0pHGfmdS/mixboard-image-78.png”,  // 36
-“https://i.ibb.co/WWGL1QcG/mixboard-image-79.png”,  // 37
-“https://i.ibb.co/hFsQZPTb/mixboard-image-76.png”,  // 38
-“https://i.ibb.co/SXKfdWsx/mixboard-image-77.png”,  // 39
-“https://i.ibb.co/GQKt9G9m/mixboard-image-71.png”,  // 40
-“https://i.ibb.co/TDfh2Vc2/mixboard-image-75.png”,  // 41
-“https://i.ibb.co/ym2LDbWc/mixboard-image-72.png”,  // 42
-“https://i.ibb.co/wFmcVXmf/mixboard-image-69.png”,  // 43
-“https://i.ibb.co/Bk72PbY/mixboard-image-80.png”,   // 44
-“https://i.ibb.co/c90wmY1/mixboard-image-81.png”,   // 45
-“https://i.ibb.co/dJxNXZdc/mixboard-image-82.png”,  // 46
-“https://i.ibb.co/RpTfV6FZ/mixboard-image-83.png”,  // 47
-“https://i.ibb.co/RwN6byF/mixboard-image-84.png”,   // 48
-“https://i.ibb.co/RwN6byF/mixboard-image-84.png”,   // 49
-“https://i.ibb.co/4n3VqVpr/mixboard-image-86.png”,  // 50
-“https://i.ibb.co/kY4CB3R/mixboard-image-87.png”,   // 51
-“https://i.ibb.co/1GJYqwjp/mixboard-image-89.png”,  // 52
-“https://i.ibb.co/9mx7rGS2/mixboard-image-88.png”,  // 53
-“https://i.ibb.co/sdnMTyBt/mixboard-image-90.png”,  // 54
-“https://i.ibb.co/sdnMTyBt/mixboard-image-90.png”,  // 55
-“https://i.ibb.co/hR7pGkTj/mixboard-image-91.png”,  // 56
-“https://i.ibb.co/C5MxJ9cT/mixboard-image-92.png”,  // 57
-“https://i.ibb.co/k249Wq6B/mixboard-image-93.png”,  // 58
-“https://i.ibb.co/VcZCHRHY/mixboard-image-94.png”,  // 59
-“https://i.ibb.co/4r1yF1Q/mixboard-image-95.png”,   // 60
-“https://i.ibb.co/HTJhFt3B/mixboard-image-96.png”,  // 61
-“https://i.ibb.co/s9qHyG7Q/mixboard-image-97.png”,  // 62
-“https://i.ibb.co/LznHXLNB/mixboard-image-98.png”,  // 63
-“https://i.ibb.co/JRYNLDn0/mixboard-image-99.png”,  // 64
-“https://i.ibb.co/kVqQw7Vp/mixboard-image-100.png”, // 65
-“https://i.ibb.co/LdyMzGdB/mixboard-image-101.png”, // 66
-“https://i.ibb.co/XZXvxHQG/mixboard-image-102.png”, // 67
-“https://i.ibb.co/4wgYYMzJ/mixboard-image-103.png”, // 68
-“https://i.ibb.co/hRPJCxqw/mixboard-image-104.png”, // 69
-“https://i.ibb.co/x8PG0pCC/mixboard-image-105.png”, // 70
-“https://i.ibb.co/8nXQ0BTn/mixboard-image-106.png”, // 71
-“https://i.ibb.co/gLL0YQzX/mixboard-image-107.png”, // 72
-“https://i.ibb.co/sJWxDqQY/mixboard-image-108.png”, // 73
-“https://i.ibb.co/SFL1ZqZ/mixboard-image-109.png”,  // 74
-“https://i.ibb.co/bR158Cs6/mixboard-image-110.png”, // 75
-“https://i.ibb.co/jPKqFVPF/mixboard-image-111.png”, // 76
-“https://i.ibb.co/jmLYHQH/mixboard-image-112.png”,  // 77
-“https://i.ibb.co/CsH8gG6T/mixboard-image-113.png”, // 78
-“https://i.ibb.co/Swk7mnjG/mixboard-image-114.png”, // 79
-“https://i.ibb.co/s9YRBvL5/mixboard-image-115.jpg”, // 80
-“https://i.ibb.co/jPKqFVPF/mixboard-image-111.png”, // 81
-“https://i.ibb.co/TMc8w1b9/mixboard-image-117.png”, // 82
-“https://i.ibb.co/dwc9cH0T/mixboard-image-118.png”, // 83
-“https://i.ibb.co/1G0nQH1K/mixboard-image-119.png”, // 84
+"https://i.ibb.co/6c69xgdQ/mixboard-image-1.png",   // 0
+"https://i.ibb.co/b5PrSg0G/mixboard-image-2.png",   // 1
+"https://i.ibb.co/mrLK9s3Z/mixboard-image-3.png",   // 2
+"https://i.ibb.co/DPdZzLSk/mixboard-image-4.png",   // 3
+"https://i.ibb.co/0yvCbC4T/mixboard-image-5.png",   // 4
+"https://i.ibb.co/mCc7Lyv2/mixboard-image-6.png",   // 5
+"https://i.ibb.co/W4XwXYwV/mixboard-image-7.png",   // 6
+"https://i.ibb.co/DP0VByDC/mixboard-image-8.png",   // 7
+"https://i.ibb.co/zVP05rC9/mixboard-image-9.png",   // 8
+"https://i.ibb.co/5X9JDQ50/mixboard-image-10.png",  // 9
+"https://i.ibb.co/pv5YPdGZ/mixboard-image-11.png",  // 10
+"https://i.ibb.co/tMH1pHyZ/mixboard-image-12.png",  // 11
+"https://i.ibb.co/0ygXDzM7/mixboard-image-13.png",  // 12
+"https://i.ibb.co/ZzQ9VQhc/mixboard-image-14.png",  // 13
+"https://i.ibb.co/TBMnT6w1/mixboard-image-15.png",  // 14
+"https://i.ibb.co/CKyN6K2L/mixboard-image-16.png",  // 15
+"https://i.ibb.co/CKyN6K2L/mixboard-image-16.png",  // 16
+"https://i.ibb.co/qLJFq3gc/mixboard-image-18.png",  // 17
+"https://i.ibb.co/LzvBZmGb/mixboard-image-19.png",  // 18
+"https://i.ibb.co/60f1mcZP/mixboard-image-20.png",  // 19
+"https://i.ibb.co/7JjFww6Y/mixboard-image-21.png",  // 20
+"https://i.ibb.co/XH7xgCQ/mixboard-image-22.png",   // 21
+"https://i.ibb.co/kg9h3YcC/mixboard-image-23.png",  // 22
+"https://i.ibb.co/V0vHTzfD/mixboard-image-24.png",  // 23
+"https://i.ibb.co/tw7RZS8c/mixboard-image-25.png",  // 24
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 25
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 26
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 27
+"https://i.ibb.co/XxmbSrmn/mixboard-image-26.png",  // 28
+"https://i.ibb.co/gF3kfqdL/mixboard-image-30.png",  // 29
+"https://i.ibb.co/wNPjkhKd/mixboard-image-31.png",  // 30
+"https://i.ibb.co/ym5t3ffr/mixboard-image-32.png",  // 31
+"https://i.ibb.co/23vry85M/mixboard-image-74.png",  // 32
+"https://i.ibb.co/6RTCnfPH/mixboard-image-68.png",  // 33
+"https://i.ibb.co/WWGL1QcG/mixboard-image-79.png",  // 34
+"https://i.ibb.co/J9kxNLn/mixboard-image-67.png",   // 35
+"https://i.ibb.co/0pHGfmdS/mixboard-image-78.png",  // 36
+"https://i.ibb.co/WWGL1QcG/mixboard-image-79.png",  // 37
+"https://i.ibb.co/hFsQZPTb/mixboard-image-76.png",  // 38
+"https://i.ibb.co/SXKfdWsx/mixboard-image-77.png",  // 39
+"https://i.ibb.co/GQKt9G9m/mixboard-image-71.png",  // 40
+"https://i.ibb.co/TDfh2Vc2/mixboard-image-75.png",  // 41
+"https://i.ibb.co/ym2LDbWc/mixboard-image-72.png",  // 42
+"https://i.ibb.co/wFmcVXmf/mixboard-image-69.png",  // 43
+"https://i.ibb.co/Bk72PbY/mixboard-image-80.png",   // 44
+"https://i.ibb.co/c90wmY1/mixboard-image-81.png",   // 45
+"https://i.ibb.co/dJxNXZdc/mixboard-image-82.png",  // 46
+"https://i.ibb.co/RpTfV6FZ/mixboard-image-83.png",  // 47
+"https://i.ibb.co/RwN6byF/mixboard-image-84.png",   // 48
+"https://i.ibb.co/RwN6byF/mixboard-image-84.png",   // 49
+"https://i.ibb.co/4n3VqVpr/mixboard-image-86.png",  // 50
+"https://i.ibb.co/kY4CB3R/mixboard-image-87.png",   // 51
+"https://i.ibb.co/1GJYqwjp/mixboard-image-89.png",  // 52
+"https://i.ibb.co/9mx7rGS2/mixboard-image-88.png",  // 53
+"https://i.ibb.co/sdnMTyBt/mixboard-image-90.png",  // 54
+"https://i.ibb.co/sdnMTyBt/mixboard-image-90.png",  // 55
+"https://i.ibb.co/hR7pGkTj/mixboard-image-91.png",  // 56
+"https://i.ibb.co/C5MxJ9cT/mixboard-image-92.png",  // 57
+"https://i.ibb.co/k249Wq6B/mixboard-image-93.png",  // 58
+"https://i.ibb.co/VcZCHRHY/mixboard-image-94.png",  // 59
+"https://i.ibb.co/4r1yF1Q/mixboard-image-95.png",   // 60
+"https://i.ibb.co/HTJhFt3B/mixboard-image-96.png",  // 61
+"https://i.ibb.co/s9qHyG7Q/mixboard-image-97.png",  // 62
+"https://i.ibb.co/LznHXLNB/mixboard-image-98.png",  // 63
+"https://i.ibb.co/JRYNLDn0/mixboard-image-99.png",  // 64
+"https://i.ibb.co/kVqQw7Vp/mixboard-image-100.png", // 65
+"https://i.ibb.co/LdyMzGdB/mixboard-image-101.png", // 66
+"https://i.ibb.co/XZXvxHQG/mixboard-image-102.png", // 67
+"https://i.ibb.co/4wgYYMzJ/mixboard-image-103.png", // 68
+"https://i.ibb.co/hRPJCxqw/mixboard-image-104.png", // 69
+"https://i.ibb.co/x8PG0pCC/mixboard-image-105.png", // 70
+"https://i.ibb.co/8nXQ0BTn/mixboard-image-106.png", // 71
+"https://i.ibb.co/gLL0YQzX/mixboard-image-107.png", // 72
+"https://i.ibb.co/sJWxDqQY/mixboard-image-108.png", // 73
+"https://i.ibb.co/SFL1ZqZ/mixboard-image-109.png",  // 74
+"https://i.ibb.co/bR158Cs6/mixboard-image-110.png", // 75
+"https://i.ibb.co/jPKqFVPF/mixboard-image-111.png", // 76
+"https://i.ibb.co/jmLYHQH/mixboard-image-112.png",  // 77
+"https://i.ibb.co/CsH8gG6T/mixboard-image-113.png", // 78
+"https://i.ibb.co/Swk7mnjG/mixboard-image-114.png", // 79
+"https://i.ibb.co/s9YRBvL5/mixboard-image-115.jpg", // 80
+"https://i.ibb.co/jPKqFVPF/mixboard-image-111.png", // 81
+"https://i.ibb.co/TMc8w1b9/mixboard-image-117.png", // 82
+"https://i.ibb.co/dwc9cH0T/mixboard-image-118.png", // 83
+"https://i.ibb.co/1G0nQH1K/mixboard-image-119.png", // 84
 ];
 
 const P = {
@@ -169,191 +169,191 @@ sides:      [I[64],  I[65],  I[66]],
 
 const pi = (pool, idx) => pool[idx % pool.length];
 
-const FALLBACK_IMG = “data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘200’ height=‘200’ viewBox=‘0 0 200 200’%3E%3Crect width=‘200’ height=‘200’ fill=’%231E1E1E’/%3E%3Ctext x=‘100’ y=‘110’ font-size=‘50’ text-anchor=‘middle’ fill=’%23C9A227’%3E%F0%9F%8D%96%3C/text%3E%3C/svg%3E”;
+const FALLBACK_IMG = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' fill='%231E1E1E'/%3E%3Ctext x='100' y='110' font-size='50' text-anchor='middle' fill='%23C9A227'%3E%F0%9F%8D%96%3C/text%3E%3C/svg%3E";
 
-const parsePrice = (s) => parseFloat(String(s).replace(/[^\d.]/g, “”)) || 0;
+const parsePrice = (s) => parseFloat(String(s).replace(/[^\d.]/g, "")) || 0;
 
 // ─── RAW DATA ─────────────────────────────────────────────────────────
 const rawButcher = [
-{ section: “beef”, title: “اللحوم البقري”, titleEn: “Beef”, pool: “beef”, items: [
-{ ar: “انتركوت”,              en: “Entrecôte”,            price: “75 درهم”  },
-{ ar: “مكعبات لحم”,           en: “Beef Cubes”,            price: “60 درهم”  },
-{ ar: “لحم مفروم”,            en: “Minced Meat”,           price: “60 درهم”  },
-{ ar: “روستو”,                en: “Roast Beef”,             price: “60 درهم”  },
-{ ar: “بيكاتا”,               en: “Piccata”,                price: “60 درهم”  },
-{ ar: “بوفتيك”,               en: “Buftek”,                 price: “60 درهم”  },
-{ ar: “بيف استروجانوف”,        en: “Beef Stroganoff”,        price: “60 درهم”  },
-{ ar: “شاورما اللحم”,          en: “Meat Shawarma”,          price: “60 درهم”  },
-{ ar: “فيليه أستيك”,           en: “Steak Fillet”,           price: “115 درهم” },
-{ ar: “كبدة بقري”,             en: “Sliced Liver”,           price: “58 درهم”  },
-{ ar: “ريش بتلو”,              en: “Beef Chops”,             price: “80 درهم”  },
-{ ar: “ريب آي”,                en: “Ribeye”,                 price: “75 درهم”  },
-{ ar: “موزة بقري بدون عظم”,    en: “Beef Shank boneless”,    price: “60 درهم”  },
-{ ar: “موزة بقري بالعظم”,      en: “Beef Shank with bone”,   price: “58 درهم”  },
-{ ar: “كبدة إسكندراني”,        en: “Alexandrian Liver”,      price: “58 درهم”  },
-{ ar: “رقبة بتلو”,             en: “Neck Beef”,              price: “58 درهم”  },
-{ ar: “عكاوي”,                 en: “Oxtail”,                 price: “42 درهم”  },
-{ ar: “كوارع”,                 en: “Trotters”,               price: “35 درهم”  },
+{ section: "beef", title: "اللحوم البقري", titleEn: "Beef", pool: "beef", items: [
+{ ar: "انتركوت",              en: "Entrecôte",            price: "75 درهم"  },
+{ ar: "مكعبات لحم",           en: "Beef Cubes",            price: "60 درهم"  },
+{ ar: "لحم مفروم",            en: "Minced Meat",           price: "60 درهم"  },
+{ ar: "روستو",                en: "Roast Beef",             price: "60 درهم"  },
+{ ar: "بيكاتا",               en: "Piccata",                price: "60 درهم"  },
+{ ar: "بوفتيك",               en: "Buftek",                 price: "60 درهم"  },
+{ ar: "بيف استروجانوف",        en: "Beef Stroganoff",        price: "60 درهم"  },
+{ ar: "شاورما اللحم",          en: "Meat Shawarma",          price: "60 درهم"  },
+{ ar: "فيليه أستيك",           en: "Steak Fillet",           price: "115 درهم" },
+{ ar: "كبدة بقري",             en: "Sliced Liver",           price: "58 درهم"  },
+{ ar: "ريش بتلو",              en: "Beef Chops",             price: "80 درهم"  },
+{ ar: "ريب آي",                en: "Ribeye",                 price: "75 درهم"  },
+{ ar: "موزة بقري بدون عظم",    en: "Beef Shank boneless",    price: "60 درهم"  },
+{ ar: "موزة بقري بالعظم",      en: "Beef Shank with bone",   price: "58 درهم"  },
+{ ar: "كبدة إسكندراني",        en: "Alexandrian Liver",      price: "58 درهم"  },
+{ ar: "رقبة بتلو",             en: "Neck Beef",              price: "58 درهم"  },
+{ ar: "عكاوي",                 en: "Oxtail",                 price: "42 درهم"  },
+{ ar: "كوارع",                 en: "Trotters",               price: "35 درهم"  },
 ]},
-{ section: “naimi”, title: “لحوم ضاني نعيمي”, titleEn: “Naimi Lamb”, pool: “naimi”, items: [
-{ ar: “موزة ضاني نعيمي”,       en: “Naimi Lamb Shank”,       price: “69 درهم”  },
-{ ar: “كتف ضاني نعيمي”,        en: “Naimi Lamb Shoulder”,    price: “68 درهم”  },
-{ ar: “ريش ضاني نعيمي”,        en: “Naimi Lamb Chops”,       price: “115 درهم” },
-{ ar: “خروف نعيمي بدون عظم”,   en: “Naimi Lamb boneless”,    price: “79 درهم”  },
-{ ar: “فخذة ضاني نعيمي”,       en: “Naimi Lamb Leg”,         price: “68 درهم”  },
-{ ar: “رقبة ضاني نعيمي”,       en: “Naimi Lamb Neck”,        price: “68 درهم”  },
+{ section: "naimi", title: "لحوم ضاني نعيمي", titleEn: "Naimi Lamb", pool: "naimi", items: [
+{ ar: "موزة ضاني نعيمي",       en: "Naimi Lamb Shank",       price: "69 درهم"  },
+{ ar: "كتف ضاني نعيمي",        en: "Naimi Lamb Shoulder",    price: "68 درهم"  },
+{ ar: "ريش ضاني نعيمي",        en: "Naimi Lamb Chops",       price: "115 درهم" },
+{ ar: "خروف نعيمي بدون عظم",   en: "Naimi Lamb boneless",    price: "79 درهم"  },
+{ ar: "فخذة ضاني نعيمي",       en: "Naimi Lamb Leg",         price: "68 درهم"  },
+{ ar: "رقبة ضاني نعيمي",       en: "Naimi Lamb Neck",        price: "68 درهم"  },
 ]},
-{ section: “aus”, title: “لحوم ضاني أسترالي”, titleEn: “Australian Lamb”, pool: “aus”, items: [
-{ ar: “رقبة ضاني أسترالي”,     en: “Aus. Lamb Neck”,         price: “58 درهم”  },
-{ ar: “فخذة ضاني أسترالي”,     en: “Aus. Lamb Leg”,          price: “58 درهم”  },
-{ ar: “كتف ضاني أسترالي”,      en: “Aus. Lamb Shoulder”,     price: “58 درهم”  },
-{ ar: “لحم أسترالي بدون عظم”,  en: “Aus. Lamb boneless”,     price: “70 درهم”  },
-{ ar: “ريش ضاني أسترالي”,      en: “Aus. Lamb Chops”,        price: “115 درهم” },
-{ ar: “موزة ضاني أسترالي”,     en: “Aus. Lamb Shank”,        price: “60 درهم”  },
+{ section: "aus", title: "لحوم ضاني أسترالي", titleEn: "Australian Lamb", pool: "aus", items: [
+{ ar: "رقبة ضاني أسترالي",     en: "Aus. Lamb Neck",         price: "58 درهم"  },
+{ ar: "فخذة ضاني أسترالي",     en: "Aus. Lamb Leg",          price: "58 درهم"  },
+{ ar: "كتف ضاني أسترالي",      en: "Aus. Lamb Shoulder",     price: "58 درهم"  },
+{ ar: "لحم أسترالي بدون عظم",  en: "Aus. Lamb boneless",     price: "70 درهم"  },
+{ ar: "ريش ضاني أسترالي",      en: "Aus. Lamb Chops",        price: "115 درهم" },
+{ ar: "موزة ضاني أسترالي",     en: "Aus. Lamb Shank",        price: "60 درهم"  },
 ]},
-{ section: “chicken”, title: “دجاج وطيور”, titleEn: “Poultry”, pool: “chicken”, items: [
-{ ar: “أفخاذ بالعظم”,          en: “Chicken Thighs”,         price: “38 درهم” },
-{ ar: “دجاج مكعبات”,           en: “Chicken Cubes”,          price: “45 درهم” },
-{ ar: “صدور دجاج أستيك”,        en: “Chicken Steak”,          price: “45 درهم” },
-{ ar: “صدور دجاج مخلية”,        en: “Chicken Breast”,         price: “45 درهم” },
-{ ar: “دجاجة كاملة”,            en: “Full Chicken”,           price: “25 درهم” },
-{ ar: “جوز حمام مصري”,          en: “Egyptian Pigeons”,       price: “50 درهم” },
-{ ar: “دجاج بلدي مصري”,         en: “Egyptian Chicken”,       price: “45 درهم” },
-{ ar: “بط بلدي مصري”,           en: “Egyptian Duck”,          price: “45 درهم” },
-{ ar: “أرنب بلدي مصري”,         en: “Egyptian Rabbit”,        price: “46 درهم” },
-{ ar: “ديك رومي أمريكي”,        en: “American Turkey”,        price: “39 درهم” },
-{ ar: “ديك رومي مصري”,          en: “Egyptian Turkey”,        price: “47 درهم” },
+{ section: "chicken", title: "دجاج وطيور", titleEn: "Poultry", pool: "chicken", items: [
+{ ar: "أفخاذ بالعظم",          en: "Chicken Thighs",         price: "38 درهم" },
+{ ar: "دجاج مكعبات",           en: "Chicken Cubes",          price: "45 درهم" },
+{ ar: "صدور دجاج أستيك",        en: "Chicken Steak",          price: "45 درهم" },
+{ ar: "صدور دجاج مخلية",        en: "Chicken Breast",         price: "45 درهم" },
+{ ar: "دجاجة كاملة",            en: "Full Chicken",           price: "25 درهم" },
+{ ar: "جوز حمام مصري",          en: "Egyptian Pigeons",       price: "50 درهم" },
+{ ar: "دجاج بلدي مصري",         en: "Egyptian Chicken",       price: "45 درهم" },
+{ ar: "بط بلدي مصري",           en: "Egyptian Duck",          price: "45 درهم" },
+{ ar: "أرنب بلدي مصري",         en: "Egyptian Rabbit",        price: "46 درهم" },
+{ ar: "ديك رومي أمريكي",        en: "American Turkey",        price: "39 درهم" },
+{ ar: "ديك رومي مصري",          en: "Egyptian Turkey",        price: "47 درهم" },
 ]},
-{ section: “grill-ready”, title: “جاهز للشواء”, titleEn: “Ready-to-Grill”, pool: “grillReady”, items: [
-{ ar: “ستيك فيليه متبل”,        en: “Marinated Steak Fillet”,   price: “115 درهم” },
-{ ar: “سجق متبل”,               en: “Marinated Sausages”,       price: “58 درهم”  },
-{ ar: “كبدة شرايح متبلة”,        en: “Marinated Liver”,          price: “60 درهم”  },
-{ ar: “طرب متبل”,               en: “Marinated Tarb”,           price: “60 درهم”  },
-{ ar: “ريش متبلة”,              en: “Marinated Lamb Chops”,     price: “115 درهم” },
-{ ar: “كفتة متبلة”,             en: “Marinated Kofta”,          price: “58 درهم”  },
-{ ar: “كباب متبل”,              en: “Marinated Kabab”,          price: “100 درهم” },
-{ ar: “ريب آي متبل”,            en: “Marinated Ribeye”,         price: “78 درهم”  },
-{ ar: “شيش طاووق متبل”,         en: “Marinated Shish Taoug”,    price: “45 درهم”  },
-{ ar: “رغيف حواوشي بلدي”,       en: “Hawawshi Meat”,            price: “13 درهم”  },
-{ ar: “برجر فراخ”,              en: “Chicken Burger”,           price: “45 درهم”  },
-{ ar: “برجر واجيو”,             en: “Wagyu Burger”,             price: “80 درهم”  },
-{ ar: “دجاج كامل متبل”,         en: “Marinated Whole Chicken”,  price: “45 درهم”  },
-{ ar: “ستيك دجاج متبل”,         en: “Marinated Chicken Steak”,  price: “45 درهم”  },
-{ ar: “أفخاذ دجاج متبلة”,        en: “Marinated Chicken Thighs”, price: “50 درهم”  },
-{ ar: “شيش طاووق أفخاذ”,         en: “Shish Tawook Thighs”,      price: “50 درهم”  },
+{ section: "grill-ready", title: "جاهز للشواء", titleEn: "Ready-to-Grill", pool: "grillReady", items: [
+{ ar: "ستيك فيليه متبل",        en: "Marinated Steak Fillet",   price: "115 درهم" },
+{ ar: "سجق متبل",               en: "Marinated Sausages",       price: "58 درهم"  },
+{ ar: "كبدة شرايح متبلة",        en: "Marinated Liver",          price: "60 درهم"  },
+{ ar: "طرب متبل",               en: "Marinated Tarb",           price: "60 درهم"  },
+{ ar: "ريش متبلة",              en: "Marinated Lamb Chops",     price: "115 درهم" },
+{ ar: "كفتة متبلة",             en: "Marinated Kofta",          price: "58 درهم"  },
+{ ar: "كباب متبل",              en: "Marinated Kabab",          price: "100 درهم" },
+{ ar: "ريب آي متبل",            en: "Marinated Ribeye",         price: "78 درهم"  },
+{ ar: "شيش طاووق متبل",         en: "Marinated Shish Taoug",    price: "45 درهم"  },
+{ ar: "رغيف حواوشي بلدي",       en: "Hawawshi Meat",            price: "13 درهم"  },
+{ ar: "برجر فراخ",              en: "Chicken Burger",           price: "45 درهم"  },
+{ ar: "برجر واجيو",             en: "Wagyu Burger",             price: "80 درهم"  },
+{ ar: "دجاج كامل متبل",         en: "Marinated Whole Chicken",  price: "45 درهم"  },
+{ ar: "ستيك دجاج متبل",         en: "Marinated Chicken Steak",  price: "45 درهم"  },
+{ ar: "أفخاذ دجاج متبلة",        en: "Marinated Chicken Thighs", price: "50 درهم"  },
+{ ar: "شيش طاووق أفخاذ",         en: "Shish Tawook Thighs",      price: "50 درهم"  },
 ]},
-{ section: “fry-ready”, title: “جاهز على التحمير”, titleEn: “Ready-to-Fry”, pool: “fryReady”, items: [
-{ ar: “كفتة فراخ بانيه”,        en: “Chicken Kofta Pane”,     price: “50 درهم” },
-{ ar: “كفتة لحمة بانيه”,        en: “Meat Kofta Pane”,        price: “50 درهم” },
-{ ar: “اسكالوب فراخ”,           en: “Chicken Escalope”,       price: “45 درهم” },
-{ ar: “اسكالوب لحمة”,           en: “Meat Escalope”,          price: “60 درهم” },
-{ ar: “فرخة محشية رز”,          en: “Chicken Stuffed Rice”,   price: “35 درهم” },
-{ ar: “جوز حمام بالفريك”,        en: “Pigeon Freekeh”,         price: “75 درهم” },
-{ ar: “جوز حمام بالأرز”,         en: “Pigeon Rice”,            price: “73 درهم” },
-{ ar: “كفتة رز”,                en: “Rice Kofta”,             price: “48 درهم” },
-{ ar: “شاورما لحم”,             en: “Beef Shawarma”,          price: “62 درهم” },
-{ ar: “شاورما دجاج”,            en: “Chicken Shawarma”,       price: “45 درهم” },
-{ ar: “كبدة إسكندراني”,         en: “Alexandrian Liver”,      price: “60 درهم” },
-{ ar: “كبدة بالردة”,            en: “Breaded Liver”,          price: “60 درهم” },
-{ ar: “ممبار”,                  en: “Mumbar”,                 price: “60 درهم” },
+{ section: "fry-ready", title: "جاهز على التحمير", titleEn: "Ready-to-Fry", pool: "fryReady", items: [
+{ ar: "كفتة فراخ بانيه",        en: "Chicken Kofta Pane",     price: "50 درهم" },
+{ ar: "كفتة لحمة بانيه",        en: "Meat Kofta Pane",        price: "50 درهم" },
+{ ar: "اسكالوب فراخ",           en: "Chicken Escalope",       price: "45 درهم" },
+{ ar: "اسكالوب لحمة",           en: "Meat Escalope",          price: "60 درهم" },
+{ ar: "فرخة محشية رز",          en: "Chicken Stuffed Rice",   price: "35 درهم" },
+{ ar: "جوز حمام بالفريك",        en: "Pigeon Freekeh",         price: "75 درهم" },
+{ ar: "جوز حمام بالأرز",         en: "Pigeon Rice",            price: "73 درهم" },
+{ ar: "كفتة رز",                en: "Rice Kofta",             price: "48 درهم" },
+{ ar: "شاورما لحم",             en: "Beef Shawarma",          price: "62 درهم" },
+{ ar: "شاورما دجاج",            en: "Chicken Shawarma",       price: "45 درهم" },
+{ ar: "كبدة إسكندراني",         en: "Alexandrian Liver",      price: "60 درهم" },
+{ ar: "كبدة بالردة",            en: "Breaded Liver",          price: "60 درهم" },
+{ ar: "ممبار",                  en: "Mumbar",                 price: "60 درهم" },
 ]},
 ];
 
 const rawRestaurant = [
-{ section: “soups”,   title: “الشوربة”,            titleEn: “Soups”,            pool: “soups”,   items: [
-{ ar: “شوربة عدس”,            en: “Lentil Soup”,    price: “15 درهم” },
-{ ar: “شوربة لسان عصفور”,      en: “Orzo Soup”,      price: “15 درهم” },
-{ ar: “شوربة كوارع”,           en: “Trotters Soup”,  price: “25 درهم” },
+{ section: "soups",   title: "الشوربة",            titleEn: "Soups",            pool: "soups",   items: [
+{ ar: "شوربة عدس",            en: "Lentil Soup",    price: "15 درهم" },
+{ ar: "شوربة لسان عصفور",      en: "Orzo Soup",      price: "15 درهم" },
+{ ar: "شوربة كوارع",           en: "Trotters Soup",  price: "25 درهم" },
 ]},
-{ section: “salads”,  title: “السلطات والمقبلات”,  titleEn: “Salads”,           pool: “salads”,  items: [
-{ ar: “سلطة بلدي”,  en: “Baladi Salad”,   price: “15 درهم” },
-{ ar: “حمص”,        en: “Hummus”,          price: “20 درهم” },
-{ ar: “بابا غنوج”,  en: “Baba Ghanoush”,   price: “20 درهم” },
-{ ar: “طحينة”,      en: “Tahini”,          price: “18 درهم” },
-{ ar: “تومية”,      en: “Toum”,            price: “18 درهم” },
+{ section: "salads",  title: "السلطات والمقبلات",  titleEn: "Salads",           pool: "salads",  items: [
+{ ar: "سلطة بلدي",  en: "Baladi Salad",   price: "15 درهم" },
+{ ar: "حمص",        en: "Hummus",          price: "20 درهم" },
+{ ar: "بابا غنوج",  en: "Baba Ghanoush",   price: "20 درهم" },
+{ ar: "طحينة",      en: "Tahini",          price: "18 درهم" },
+{ ar: "تومية",      en: "Toum",            price: "18 درهم" },
 ]},
-{ section: “hot”,     title: “مقبلات ساخنة”,       titleEn: “Hot Appetizers”,   pool: “hot”,     items: [
-{ ar: “كبدة إسكندراني”,  en: “Alexandrian Liver”,   price: “31.99 درهم” },
-{ ar: “سجق إسكندراني”,   en: “Alexandrian Sausage”, price: “31.99 درهم” },
-{ ar: “فراخ محمرة ١/٤”,  en: “Fried Chicken 1/4”,   price: “15 درهم”    },
-{ ar: “بطاطس مقلية”,     en: “French Fries”,        price: “15 درهم”    },
+{ section: "hot",     title: "مقبلات ساخنة",       titleEn: "Hot Appetizers",   pool: "hot",     items: [
+{ ar: "كبدة إسكندراني",  en: "Alexandrian Liver",   price: "31.99 درهم" },
+{ ar: "سجق إسكندراني",   en: "Alexandrian Sausage", price: "31.99 درهم" },
+{ ar: "فراخ محمرة ١/٤",  en: "Fried Chicken 1/4",   price: "15 درهم"    },
+{ ar: "بطاطس مقلية",     en: "French Fries",        price: "15 درهم"    },
 ]},
-{ section: “mahashi”, title: “المحاشي”,             titleEn: “Mahashi”,          pool: “mahashi”, items: [
-{ ar: “ورق عنب”,            en: “Grape Leaves”,       price: “30 درهم” },
-{ ar: “ممبار”,              en: “Mombar”,             price: “40 درهم” },
-{ ar: “محشي كرنب”,          en: “Stuffed Cabbage”,    price: “30 درهم” },
-{ ar: “محاشي مشكلة”,        en: “Mixed Mahashi”,      price: “40 درهم” },
-{ ar: “محاشي مشكلة ١ كيلو”, en: “Mixed Mahashi 1KG”, price: “70 درهم” },
+{ section: "mahashi", title: "المحاشي",             titleEn: "Mahashi",          pool: "mahashi", items: [
+{ ar: "ورق عنب",            en: "Grape Leaves",       price: "30 درهم" },
+{ ar: "ممبار",              en: "Mombar",             price: "40 درهم" },
+{ ar: "محشي كرنب",          en: "Stuffed Cabbage",    price: "30 درهم" },
+{ ar: "محاشي مشكلة",        en: "Mixed Mahashi",      price: "40 درهم" },
+{ ar: "محاشي مشكلة ١ كيلو", en: "Mixed Mahashi 1KG", price: "70 درهم" },
 ]},
-{ section: “nile”,    title: “أطباق النيل المميزة”, titleEn: “Nile Specialties”, pool: “nile”,    items: [
-{ ar: “مكرونة بشاميل”,            en: “Béchamel Pasta”,            price: “35 درهم”  },
-{ ar: “معكرونة بالسجق الشرقي”,     en: “Pasta Oriental Sausage”,    price: “35 درهم”  },
-{ ar: “رقاق باللحم المفروم”,        en: “Minced Meat Ragaq”,         price: “30 درهم”  },
-{ ar: “إسكالوب دجاج”,             en: “Chicken Escalope”,          price: “35 درهم”  },
-{ ar: “فتة بمكعبات لحم بقري”,      en: “Fattah Beef Cubes”,         price: “55 درهم”  },
-{ ar: “فتة موزة ضاني”,            en: “Fattah Lamb Shank”,         price: “60 درهم”  },
-{ ar: “فتة مع كوارع”,             en: “Fattah Trotters”,           price: “55 درهم”  },
-{ ar: “دجاجة كاملة محشوة”,         en: “Whole Stuffed Chicken”,     price: “50 درهم”  },
-{ ar: “حمام محشو بالأرز (حبة)”,    en: “Stuffed Pigeon Rice (1pc)”, price: “55 درهم”  },
-{ ar: “حمام محشو بالأرز (حبتان)”,  en: “Stuffed Pigeon Rice (2pc)”, price: “105 درهم” },
-{ ar: “حمام محشو بالفريك (حبة)”,   en: “Pigeon Freek (1pc)”,        price: “55 درهم”  },
-{ ar: “حمام محشو بالفريك (حبتان)”, en: “Pigeon Freek (2pc)”,        price: “110 درهم” },
-{ ar: “نصف بطة مع محاشي”,         en: “Half Duck with Mahashi”,    price: “110 درهم” },
-{ ar: “نصف بطة مشوية بالفرن”,      en: “Half Roasted Duck”,         price: “100 درهم” },
-{ ar: “كتف ضأني بالفرن”,           en: “Baked Lamb Shoulder”,       price: “200 درهم” },
+{ section: "nile",    title: "أطباق النيل المميزة", titleEn: "Nile Specialties", pool: "nile",    items: [
+{ ar: "مكرونة بشاميل",            en: "Béchamel Pasta",            price: "35 درهم"  },
+{ ar: "معكرونة بالسجق الشرقي",     en: "Pasta Oriental Sausage",    price: "35 درهم"  },
+{ ar: "رقاق باللحم المفروم",        en: "Minced Meat Ragaq",         price: "30 درهم"  },
+{ ar: "إسكالوب دجاج",             en: "Chicken Escalope",          price: "35 درهم"  },
+{ ar: "فتة بمكعبات لحم بقري",      en: "Fattah Beef Cubes",         price: "55 درهم"  },
+{ ar: "فتة موزة ضاني",            en: "Fattah Lamb Shank",         price: "60 درهم"  },
+{ ar: "فتة مع كوارع",             en: "Fattah Trotters",           price: "55 درهم"  },
+{ ar: "دجاجة كاملة محشوة",         en: "Whole Stuffed Chicken",     price: "50 درهم"  },
+{ ar: "حمام محشو بالأرز (حبة)",    en: "Stuffed Pigeon Rice (1pc)", price: "55 درهم"  },
+{ ar: "حمام محشو بالأرز (حبتان)",  en: "Stuffed Pigeon Rice (2pc)", price: "105 درهم" },
+{ ar: "حمام محشو بالفريك (حبة)",   en: "Pigeon Freek (1pc)",        price: "55 درهم"  },
+{ ar: "حمام محشو بالفريك (حبتان)", en: "Pigeon Freek (2pc)",        price: "110 درهم" },
+{ ar: "نصف بطة مع محاشي",         en: "Half Duck with Mahashi",    price: "110 درهم" },
+{ ar: "نصف بطة مشوية بالفرن",      en: "Half Roasted Duck",         price: "100 درهم" },
+{ ar: "كتف ضأني بالفرن",           en: "Baked Lamb Shoulder",       price: "200 درهم" },
 ]},
-{ section: “grills”,  title: “المشويات”,            titleEn: “Grills”,           pool: “grills”,  items: [
-{ ar: “كباب”,              en: “Kebab”,                  price: “59 درهم”,  variants: [{ l: “نص كيلو”, v: “87.5 درهم” }, { l: “كيلو”, v: “175 درهم” }] },
-{ ar: “كفتة”,              en: “Kofta”,                  price: “55 درهم”,  variants: [{ l: “نص كيلو”, v: “80 درهم”   }, { l: “كيلو”, v: “160 درهم” }] },
-{ ar: “ريش ضاني مشوية”,    en: “Grilled Lamb Chops”,     price: “60 درهم”,  variants: [{ l: “نص كيلو”, v: “92.5 درهم” }, { l: “كيلو”, v: “185 درهم” }] },
-{ ar: “طرب”,               en: “Tarab”,                  price: “55 درهم”,  variants: [{ l: “نص كيلو”, v: “82.5 درهم” }, { l: “كيلو”, v: “165 درهم” }] },
-{ ar: “شيش طاووق”,         en: “Shish Tawook”,           price: “50 درهم”,  variants: [{ l: “نص كيلو”, v: “62.5 درهم” }, { l: “كيلو”, v: “125 درهم” }] },
-{ ar: “مشاوي مشكلة النيل”, en: “Nile Mixed Grills”,      price: “59 درهم”,  variants: [{ l: “نص كيلو”, v: “87.5 درهم” }, { l: “كيلو”, v: “175 درهم” }] },
-{ ar: “مشاوي مشكلة لحوم”,  en: “Mixed Meat Grills”,      price: “60 درهم”,  variants: [{ l: “نص كيلو”, v: “90 درهم”   }, { l: “كيلو”, v: “180 درهم” }] },
-{ ar: “كبدة مشوية”,        en: “Grilled Liver”,          price: “40 درهم” },
-{ ar: “سجق مشوي”,          en: “Grilled Sausage”,        price: “45 درهم” },
-{ ar: “حواوشي”,            en: “Hawawshi”,               price: “22 درهم” },
-{ ar: “صدور دجاج مشوية”,   en: “Grilled Chicken Breast”, price: “40 درهم” },
-{ ar: “موزة مشوية”,        en: “Grilled Lamb Shank”,     price: “60 درهم” },
-{ ar: “نص فرخة مشوية”,     en: “Half Grilled Chicken”,   price: “35 درهم” },
+{ section: "grills",  title: "المشويات",            titleEn: "Grills",           pool: "grills",  items: [
+{ ar: "كباب",              en: "Kebab",                  price: "59 درهم",  variants: [{ l: "نص كيلو", v: "87.5 درهم" }, { l: "كيلو", v: "175 درهم" }] },
+{ ar: "كفتة",              en: "Kofta",                  price: "55 درهم",  variants: [{ l: "نص كيلو", v: "80 درهم"   }, { l: "كيلو", v: "160 درهم" }] },
+{ ar: "ريش ضاني مشوية",    en: "Grilled Lamb Chops",     price: "60 درهم",  variants: [{ l: "نص كيلو", v: "92.5 درهم" }, { l: "كيلو", v: "185 درهم" }] },
+{ ar: "طرب",               en: "Tarab",                  price: "55 درهم",  variants: [{ l: "نص كيلو", v: "82.5 درهم" }, { l: "كيلو", v: "165 درهم" }] },
+{ ar: "شيش طاووق",         en: "Shish Tawook",           price: "50 درهم",  variants: [{ l: "نص كيلو", v: "62.5 درهم" }, { l: "كيلو", v: "125 درهم" }] },
+{ ar: "مشاوي مشكلة النيل", en: "Nile Mixed Grills",      price: "59 درهم",  variants: [{ l: "نص كيلو", v: "87.5 درهم" }, { l: "كيلو", v: "175 درهم" }] },
+{ ar: "مشاوي مشكلة لحوم",  en: "Mixed Meat Grills",      price: "60 درهم",  variants: [{ l: "نص كيلو", v: "90 درهم"   }, { l: "كيلو", v: "180 درهم" }] },
+{ ar: "كبدة مشوية",        en: "Grilled Liver",          price: "40 درهم" },
+{ ar: "سجق مشوي",          en: "Grilled Sausage",        price: "45 درهم" },
+{ ar: "حواوشي",            en: "Hawawshi",               price: "22 درهم" },
+{ ar: "صدور دجاج مشوية",   en: "Grilled Chicken Breast", price: "40 درهم" },
+{ ar: "موزة مشوية",        en: "Grilled Lamb Shank",     price: "60 درهم" },
+{ ar: "نص فرخة مشوية",     en: "Half Grilled Chicken",   price: "35 درهم" },
 ]},
-{ section: “tageen”,  title: “طواجن وخضار”,         titleEn: “Tagens”,           pool: “tageen”,  items: [
-{ ar: “ملوخية سادة”,               en: “Plain Molokhia”,         price: “38 درهم” },
-{ ar: “ملوخية مع دجاج مقلي”,        en: “Molokhia Fried Chicken”, price: “49 درهم” },
-{ ar: “ملوخية مع مكعبات لحم”,       en: “Molokhia Fried Meat”,    price: “54 درهم” },
-{ ar: “طاجن مسقعة باللحم المفروم”,  en: “Moussaka Minced Meat”,   price: “40 درهم” },
-{ ar: “طاجن بطاطس سادة”,            en: “Plain Potato Tagen”,     price: “35 درهم” },
-{ ar: “طاجن بطاطس بالدجاج”,         en: “Potato Tagen Chicken”,   price: “45 درهم” },
-{ ar: “طاجن بطاطس باللحم”,          en: “Potato Tagen Meat”,      price: “45 درهم” },
-{ ar: “ورقة لحمة”,                  en: “War’et Lahma”,           price: “50 درهم” },
-{ ar: “طاجن بامية سادة”,            en: “Plain Okra Tagen”,       price: “35 درهم” },
-{ ar: “طاجن بامية باللحم”,          en: “Okra Tagen Meat”,        price: “45 درهم” },
-{ ar: “طاجن لحم بالبصل”,            en: “Meat Tagen Onion”,       price: “45 درهم” },
-{ ar: “عكاوي بالبصل”,               en: “Akawi Onion”,            price: “46 درهم” },
-{ ar: “أرز معمر سادة”,              en: “Plain Maamar Rice”,      price: “30 درهم” },
-{ ar: “أرز معمر باللحم”,            en: “Maamar Rice Meat”,       price: “50 درهم” },
-{ ar: “ورق عنب بالكوارع”,           en: “Grape Leaves Trotters”,  price: “50 درهم” },
+{ section: "tageen",  title: "طواجن وخضار",         titleEn: "Tagens",           pool: "tageen",  items: [
+{ ar: "ملوخية سادة",               en: "Plain Molokhia",         price: "38 درهم" },
+{ ar: "ملوخية مع دجاج مقلي",        en: "Molokhia Fried Chicken", price: "49 درهم" },
+{ ar: "ملوخية مع مكعبات لحم",       en: "Molokhia Fried Meat",    price: "54 درهم" },
+{ ar: "طاجن مسقعة باللحم المفروم",  en: "Moussaka Minced Meat",   price: "40 درهم" },
+{ ar: "طاجن بطاطس سادة",            en: "Plain Potato Tagen",     price: "35 درهم" },
+{ ar: "طاجن بطاطس بالدجاج",         en: "Potato Tagen Chicken",   price: "45 درهم" },
+{ ar: "طاجن بطاطس باللحم",          en: "Potato Tagen Meat",      price: "45 درهم" },
+{ ar: "ورقة لحمة",                  en: "War'et Lahma",           price: "50 درهم" },
+{ ar: "طاجن بامية سادة",            en: "Plain Okra Tagen",       price: "35 درهم" },
+{ ar: "طاجن بامية باللحم",          en: "Okra Tagen Meat",        price: "45 درهم" },
+{ ar: "طاجن لحم بالبصل",            en: "Meat Tagen Onion",       price: "45 درهم" },
+{ ar: "عكاوي بالبصل",               en: "Akawi Onion",            price: "46 درهم" },
+{ ar: "أرز معمر سادة",              en: "Plain Maamar Rice",      price: "30 درهم" },
+{ ar: "أرز معمر باللحم",            en: "Maamar Rice Meat",       price: "50 درهم" },
+{ ar: "ورق عنب بالكوارع",           en: "Grape Leaves Trotters",  price: "50 درهم" },
 ]},
-{ section: “feteer”,  title: “الفطير المصري”,       titleEn: “Egyptian Feteer”,  pool: “feteer”,  items: [
-{ ar: “فطيرة مشلتت سادة”,   en: “Plain Feteer Meshaltet”,  price: “69 درهم” },
-{ ar: “فطيرة مكس جبن”,      en: “Mixed Cheese Feteer”,     price: “49 درهم” },
-{ ar: “فطيرة مكس لحوم”,     en: “Mixed Meat Feteer”,       price: “59 درهم” },
-{ ar: “فطيرة خضار مشكلة”,   en: “Mixed Vegetable Feteer”,  price: “49 درهم” },
-{ ar: “فطيرة حلو النيل”,    en: “Nile Sweet Feteer”,       price: “55 درهم” },
+{ section: "feteer",  title: "الفطير المصري",       titleEn: "Egyptian Feteer",  pool: "feteer",  items: [
+{ ar: "فطيرة مشلتت سادة",   en: "Plain Feteer Meshaltet",  price: "69 درهم" },
+{ ar: "فطيرة مكس جبن",      en: "Mixed Cheese Feteer",     price: "49 درهم" },
+{ ar: "فطيرة مكس لحوم",     en: "Mixed Meat Feteer",       price: "59 درهم" },
+{ ar: "فطيرة خضار مشكلة",   en: "Mixed Vegetable Feteer",  price: "49 درهم" },
+{ ar: "فطيرة حلو النيل",    en: "Nile Sweet Feteer",       price: "55 درهم" },
 ]},
-{ section: “sides”,   title: “أطباق جانبية”,        titleEn: “Sides”,            pool: “sides”,   items: [
-{ ar: “أرز بالشعيرية”, en: “Vermicelli Rice”, price: “15 درهم” },
-{ ar: “أرز أبيض”,      en: “White Rice”,      price: “15 درهم” },
-{ ar: “رز بالخلطة”,    en: “Mixed Rice”,      price: “18 درهم” },
+{ section: "sides",   title: "أطباق جانبية",        titleEn: "Sides",            pool: "sides",   items: [
+{ ar: "أرز بالشعيرية", en: "Vermicelli Rice", price: "15 درهم" },
+{ ar: "أرز أبيض",      en: "White Rice",      price: "15 درهم" },
+{ ar: "رز بالخلطة",    en: "Mixed Rice",      price: "18 درهم" },
 ]},
 ];
 
 const INIT_REVIEWS = [
-{ name: “أحمد محمد”,     rating: 5, text: “أفضل لحمة في دبي! الجودة ممتازة والتوصيل سريع. ما شاء الله على المكان.”, date: “قبل يومين”,   avatar: “أ” },
-{ name: “سارة الأنصاري”, rating: 5, text: “الأكل زي بيتنا في مصر 😭❤️ المشاوي رائعة وحجم الطبق كبير بالسعر ده.”, date: “قبل أسبوع”,   avatar: “س” },
-{ name: “محمد خالد”,     rating: 5, text: “الملحمة ممتازة، اللحمة طازة والتقطيع احترافي. هنطلب تاني إن شاء الله”,  date: “قبل أسبوعين”, avatar: “م” },
-{ name: “نور الدين”,     rating: 4, text: “المطعم جميل والطعام لذيذ. الخدمة سريعة. أنصح بالفتة والمشاوي!”,         date: “قبل شهر”,     avatar: “ن” },
-{ name: “ريم العلي”,     rating: 5, text: “طلبت حمام محشي وكان خرافي! أفضل حاجة أكلتها في دبي من بعيد 🔥”,         date: “قبل شهر”,     avatar: “ر” },
+{ name: "أحمد محمد",     rating: 5, text: "أفضل لحمة في دبي! الجودة ممتازة والتوصيل سريع. ما شاء الله على المكان.", date: "قبل يومين",   avatar: "أ" },
+{ name: "سارة الأنصاري", rating: 5, text: "الأكل زي بيتنا في مصر 😭❤️ المشاوي رائعة وحجم الطبق كبير بالسعر ده.", date: "قبل أسبوع",   avatar: "س" },
+{ name: "محمد خالد",     rating: 5, text: "الملحمة ممتازة، اللحمة طازة والتقطيع احترافي. هنطلب تاني إن شاء الله",  date: "قبل أسبوعين", avatar: "م" },
+{ name: "نور الدين",     rating: 4, text: "المطعم جميل والطعام لذيذ. الخدمة سريعة. أنصح بالفتة والمشاوي!",         date: "قبل شهر",     avatar: "ن" },
+{ name: "ريم العلي",     rating: 5, text: "طلبت حمام محشي وكان خرافي! أفضل حاجة أكلتها في دبي من بعيد 🔥",         date: "قبل شهر",     avatar: "ر" },
 ];
 
 // ─── DATA BUILD ───────────────────────────────────────────────────────
@@ -378,10 +378,10 @@ available: true,
 return { cats, items };
 }
 
-const butcherBase    = buildData(rawButcher,    “butcher”);
-const restaurantBase = buildData(rawRestaurant, “restaurant”);
-const BASE_ITEMS = […butcherBase.items, …restaurantBase.items];
-const ALL_CATS   = […butcherBase.cats,  …restaurantBase.cats];
+const butcherBase    = buildData(rawButcher,    "butcher");
+const restaurantBase = buildData(rawRestaurant, "restaurant");
+const BASE_ITEMS = [...butcherBase.items, ...restaurantBase.items];
+const ALL_CATS   = [...butcherBase.cats,  ...restaurantBase.cats];
 
 const INIT_ADMIN = BASE_ITEMS.reduce((acc, it) => {
 acc[it.id] = { available: true, price: it.price, priceStr: it.priceStr, img: it.img };
@@ -400,7 +400,7 @@ const IconMinus  = ({ size = 16 }) => <svg width={size} height={size} viewBox="0
 const IconBack   = () => <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>;
 const IconCheck  = () => <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
 const IconWa     = ({ size = 20 }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.112 1.523 5.837L.057 23.882l6.19-1.443A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.787 9.787 0 01-5.002-1.375l-.36-.213-3.714.865.93-3.617-.234-.373A9.786 9.786 0 012.182 12C2.182 6.565 6.565 2.182 12 2.182S21.818 6.565 21.818 12 17.435 21.818 12 21.818z"/></svg>;
-const IconStar   = ({ filled, size = 14 }) => <svg width={size} height={size} viewBox=“0 0 24 24” fill={filled ? “#C9A227” : “none”} stroke=”#C9A227” strokeWidth=“1.5”><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
+const IconStar   = ({ filled, size = 14 }) => <svg width={size} height={size} viewBox="0 0 24 24" fill={filled ? "#C9A227" : "none"} stroke="#C9A227" strokeWidth="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>;
 const IconAdmin  = ({ size = 22 }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>;
 const IconEdit   = ({ size = 16 }) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>;
 
@@ -431,14 +431,14 @@ const IconTikTok = () => (
 
 const LogoSVG = ({ size = 90 }) => (
 <img
-src=“https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png”
-alt=“Al Nile Gourmet Logo”
+src="https://i.ibb.co/B2MQC3ff/Gemini-Generated-Image-hjym2mhjym2mhjym.png"
+alt="Al Nile Gourmet Logo"
 style={{
 width: size,
 height: size,
-objectFit: “contain”,
-borderRadius: “50%”,
-display: “block”
+objectFit: "contain",
+borderRadius: "50%",
+display: "block"
 }}
 />
 );
@@ -448,7 +448,7 @@ function useToast() {
 const [toast, setToast] = useState(null);
 const timerRef = useRef(null);
 
-const show = useCallback((msg, type = “ok”) => {
+const show = useCallback((msg, type = "ok") => {
 if (timerRef.current) clearTimeout(timerRef.current);
 setToast({ msg, type, key: Date.now() });
 timerRef.current = setTimeout(() => setToast(null), 2500);
@@ -477,7 +477,7 @@ alt={alt}
 style={style}
 onClick={onClick}
 onError={() => setErr(true)}
-loading=“lazy”
+loading="lazy"
 />
 );
 }
@@ -502,9 +502,9 @@ return (
 
 function FoodCard({ item, onAdd, onView, idx }) {
 return (
-<div className=“fc” style={{ animationDelay: `${idx * 0.04}s` }}>
-<div className=“fc-img” onClick={onView} style={{ cursor: “pointer”, position: “relative” }}>
-<SafeImg src={item.img} alt={item.name} style={{ height: “100%”, width: “100%”, objectFit: “cover” }} />
+<div className="fc" style={{ animationDelay: `${idx * 0.04}s` }}>
+<div className="fc-img" onClick={onView} style={{ cursor: "pointer", position: "relative" }}>
+<SafeImg src={item.img} alt={item.name} style={{ height: "100%", width: "100%", objectFit: "cover" }} />
 {!item.available && <div className="unavail-badge">غير متاح</div>}
 </div>
 <div className="fc-body">
@@ -512,7 +512,7 @@ return (
 <p className="fc-en">{item.nameEn}</p>
 <div className="fc-foot">
 <span className="fc-price">{item.price} <small>د.إ</small></span>
-<button className=“btn-add” disabled={!item.available} onClick={onAdd} aria-label={`أضف ${item.name}`}>
+<button className="btn-add" disabled={!item.available} onClick={onAdd} aria-label={`أضف ${item.name}`}>
 <IconPlus size={13} /> أضف
 </button>
 </div>
@@ -525,8 +525,8 @@ function WideCard({ item, onAdd, onView }) {
 return (
 <div className="fc-wide">
 <div className="fc-wide-inner">
-<div className=“fc-wide-img” onClick={onView} style={{ cursor: “pointer”, position: “relative” }}>
-<SafeImg src={item.img} alt={item.name} style={{ height: “100%”, width: “100%”, objectFit: “cover” }} />
+<div className="fc-wide-img" onClick={onView} style={{ cursor: "pointer", position: "relative" }}>
+<SafeImg src={item.img} alt={item.name} style={{ height: "100%", width: "100%", objectFit: "cover" }} />
 {!item.available && <div className="unavail-badge">غير متاح</div>}
 </div>
 <div className="fc-wide-body">
@@ -535,14 +535,14 @@ return (
 <div className="variants">
 <div className="vrow">
 <span className="vlbl">أساسي</span>
-<button className=“vbtn” disabled={!item.available} onClick={() => onAdd(item.price, null)}>
+<button className="vbtn" disabled={!item.available} onClick={() => onAdd(item.price, null)}>
 أضف ({item.priceStr})
 </button>
 </div>
 {item.variants?.map((v, i) => (
 <div key={i} className="vrow">
 <span className="vlbl">{v.l}</span>
-<button className=“vbtn” disabled={!item.available} onClick={() => onAdd(parsePrice(v.v), v.l)}>
+<button className="vbtn" disabled={!item.available} onClick={() => onAdd(parsePrice(v.v), v.l)}>
 أضف ({v.v})
 </button>
 </div>
@@ -569,10 +569,10 @@ const popular = allItems.filter(it => it.type === shopType && it.available).slic
 return (
 <div>
 <div className="hero">
-<SafeImg src={I[42]} alt=“النيل جورمية” style={{ height: “100%”, width: “100%”, objectFit: “cover” }} />
+<SafeImg src={I[42]} alt="النيل جورمية" style={{ height: "100%", width: "100%", objectFit: "cover" }} />
 <div className="hero-ov" />
 <div className="hero-cnt">
-<div className=“logo-ring” onClick={handleSecretTap} style={{ cursor: “default” }}>
+<div className="logo-ring" onClick={handleSecretTap} style={{ cursor: "default" }}>
 <LogoSVG size={88} />
 </div>
 <h1 className="hero-name">النيل جورمية</h1>
@@ -592,17 +592,17 @@ return (
 <div className="srch-box">
 <IconSearch />
 <input
-placeholder=“ابحث عن وجبتك أو قطعتك…”
+placeholder="ابحث عن وجبتك أو قطعتك…"
 value={search}
 onChange={e => setSearch(e.target.value)}
-onFocus={() => go(“menu”)}
-aria-label=“بحث”
+onFocus={() => go("menu")}
+aria-label="بحث"
 />
-{search && <button className=“srch-clear” onClick={() => setSearch(””)}>×</button>}
+{search && <button className="srch-clear" onClick={() => setSearch("")}>×</button>}
 </div>
 </div>
 <div className="type-tabs">
-{[[“butcher”,“🥩”,“الملحمة”],[“restaurant”,“🍽️”,“المطعم”]].map(([t,ic,l]) => (
+{[["butcher","🥩","الملحمة"],["restaurant","🍽️","المطعم"]].map(([t,ic,l]) => (
 <button key={t} className={`ttab ${shopType===t?"on":""}`} onClick={() => switchShopType(t)}>
 <span style={{ fontSize: 18 }}>{ic}</span>{l}
 </button>
@@ -611,17 +611,17 @@ aria-label=“بحث”
 <div className="cscr">
 {cats.map(c => (
 <button key={c.id} className={`cc ${activeCat===c.id?"on":""}`}
-onClick={() => { setActiveCat(c.id); go(“menu”); }}>
-{c.name.split(” “)[0]}
+onClick={() => { setActiveCat(c.id); go("menu"); }}>
+{c.name.split(" ")[0]}
 </button>
 ))}
 </div>
-<div className=“wa-banner”
-onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً، أريد الطلب من النيل جورمية 🌿")}`, “_blank”)}
-role=“button” aria-label=“اطلب عبر واتساب”>
+<div className="wa-banner"
+onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً، أريد الطلب من النيل جورمية 🌿")}`, "_blank")}
+role="button" aria-label="اطلب عبر واتساب">
 <IconWa size={26} />
 <div className="wa-txt"><h4>اطلب عبر واتساب</h4><p>تواصل معنا مباشرة الآن</p></div>
-<span style={{ marginRight: “auto”, color: “rgba(255,255,255,.6)”, fontSize: 20 }}>›</span>
+<span style={{ marginRight: "auto", color: "rgba(255,255,255,.6)", fontSize: 20 }}>›</span>
 </div>
 <div className="platforms">
 <p className="plat-title">اطلب عبر تطبيقات التوصيل</p>
@@ -633,7 +633,7 @@ role=“button” aria-label=“اطلب عبر واتساب”>
 </div>
 <div className="sec-hd">
 <h2 className="sec-title">🔥 الأكثر طلباً</h2>
-<button className=“see-all” onClick={() => go(“menu”)}>عرض الكل ›</button>
+<button className="see-all" onClick={() => go("menu")}>عرض الكل ›</button>
 </div>
 <div className="grid">
 {popular.map((item, i) => (
@@ -644,9 +644,9 @@ role=“button” aria-label=“اطلب عبر واتساب”>
 <div><h3>توصيل مجاني</h3><p>على الطلبات فوق ١٥٠ درهم</p></div>
 <span style={{ fontSize: 34 }}>🚀</span>
 </div>
-<div className=“sec-hd” style={{ paddingTop: 6 }}>
+<div className="sec-hd" style={{ paddingTop: 6 }}>
 <h2 className="sec-title">⭐ آراء العملاء</h2>
-<button className=“see-all” onClick={() => go(“about”)}>عرض الكل ›</button>
+<button className="see-all" onClick={() => go("about")}>عرض الكل ›</button>
 </div>
 {reviews.slice(0, 2).map((r, i) => <ReviewCard key={i} review={r} />)}
 <div style={{ height: 20 }} />
@@ -659,47 +659,47 @@ return (
 <div>
 <div className="sth">
 <h1 className="sth-title">القائمة</h1>
-<span style={{ fontSize: 12, color: “var(–g)”, fontWeight: 800, background: “var(–sf1)”, padding: “4px 10px”, borderRadius: 20, border: “1px solid var(–bd)” }}>
+<span style={{ fontSize: 12, color: "var(--g)", fontWeight: 800, background: "var(--sf1)", padding: "4px 10px", borderRadius: 20, border: "1px solid var(--bd)" }}>
 {items.length} عنصر
 </span>
 </div>
-<div style={{ padding: “0 15px” }}>
-<div className=“type-tabs” style={{ margin: 0, padding: 0 }}>
-{[[“butcher”,“🥩”,“الملحمة”],[“restaurant”,“🍽️”,“المطعم”]].map(([t,ic,l]) => (
+<div style={{ padding: "0 15px" }}>
+<div className="type-tabs" style={{ margin: 0, padding: 0 }}>
+{[["butcher","🥩","الملحمة"],["restaurant","🍽️","المطعم"]].map(([t,ic,l]) => (
 <button key={t} className={`ttab ${shopType===t?"on":""}`} onClick={() => switchShopType(t)}>
 <span style={{ fontSize: 16 }}>{ic}</span>{l}
 </button>
 ))}
 </div>
 </div>
-<div className=“cscr” style={{ paddingTop: 12 }}>
-<button className={`cc ${activeCat==="all"?"on":""}`} onClick={() => setActiveCat(“all”)}>الكل</button>
+<div className="cscr" style={{ paddingTop: 12 }}>
+<button className={`cc ${activeCat==="all"?"on":""}`} onClick={() => setActiveCat("all")}>الكل</button>
 {cats.map(c => (
 <button key={c.id} className={`cc ${activeCat===c.id?"on":""}`} onClick={() => setActiveCat(c.id)}>{c.name}</button>
 ))}
 </div>
-<div className=“srch” style={{ paddingTop: 0 }}>
+<div className="srch" style={{ paddingTop: 0 }}>
 <div className="srch-box">
 <IconSearch />
-<input placeholder=“ابحث في القائمة…” value={search} onChange={e => setSearch(e.target.value)} aria-label=“بحث” />
-{search && <button className=“srch-clear” onClick={() => setSearch(””)}>×</button>}
+<input placeholder="ابحث في القائمة…" value={search} onChange={e => setSearch(e.target.value)} aria-label="بحث" />
+{search && <button className="srch-clear" onClick={() => setSearch("")}>×</button>}
 </div>
 </div>
 <div className="rcount">
 <span>{items.length} عنصر</span>
-<span className="rccat">{activeCat === “all” ? “الكل” : cats.find(c => c.id === activeCat)?.name || “”}</span>
+<span className="rccat">{activeCat === "all" ? "الكل" : cats.find(c => c.id === activeCat)?.name || ""}</span>
 </div>
-<div className=“grid” style={{ paddingBottom: 24 }}>
+<div className="grid" style={{ paddingBottom: 24 }}>
 {items.map((item, i) =>
 item.variants
 ? <WideCard key={item.id} item={item} onAdd={(p, lbl) => addToCart(item, p, lbl)} onView={() => openDetail(item)} />
 : <FoodCard key={item.id} item={item} onAdd={() => addToCart(item)} onView={() => openDetail(item)} idx={i} />
 )}
 {items.length === 0 && (
-<div style={{ gridColumn: “span 2”, textAlign: “center”, padding: “40px 0”, color: “var(–t3)” }}>
+<div style={{ gridColumn: "span 2", textAlign: "center", padding: "40px 0", color: "var(--t3)" }}>
 <div style={{ fontSize: 42, marginBottom: 12 }}>🔍</div>
 <p>لا توجد نتائج مطابقة</p>
-{search && <button onClick={() => setSearch(””)} style={{ marginTop: 12, color: “var(–g)”, fontWeight: 800, fontSize: 13 }}>مسح البحث</button>}
+{search && <button onClick={() => setSearch("")} style={{ marginTop: 12, color: "var(--g)", fontWeight: 800, fontSize: 13 }}>مسح البحث</button>}
 </div>
 )}
 </div>
@@ -714,11 +714,11 @@ const cat = allCats.find(c => c.id === it.cid);
 return (
 <div>
 <div className="det-hero">
-<SafeImg src={it.img} alt={it.name} style={{ height: “100%”, width: “100%”, objectFit: “cover” }} />
+<SafeImg src={it.img} alt={it.name} style={{ height: "100%", width: "100%", objectFit: "cover" }} />
 <div className="det-ov" />
-<button className=“det-back” onClick={() => go(prevPage)} aria-label=“رجوع”><IconBack /></button>
+<button className="det-back" onClick={() => go(prevPage)} aria-label="رجوع"><IconBack /></button>
 {!it.available && (
-<div style={{ position: “absolute”, top: 14, left: 14, background: “rgba(239,68,68,.9)”, color: “#fff”, fontSize: 11, fontWeight: 900, padding: “5px 11px”, borderRadius: 9 }}>
+<div style={{ position: "absolute", top: 14, left: 14, background: "rgba(239,68,68,.9)", color: "#fff", fontSize: 11, fontWeight: 900, padding: "5px 11px", borderRadius: 9 }}>
 غير متاح
 </div>
 )}
@@ -726,7 +726,7 @@ return (
 <div className="det-cnt">
 <div className="det-top">
 <div>
-<span className="det-cat">{cat?.name || “”}</span>
+<span className="det-cat">{cat?.name || ""}</span>
 <h1 className="det-name">{it.name}</h1>
 </div>
 <div className="det-price">{it.price}<small> د.إ</small></div>
@@ -738,13 +738,13 @@ return (
 <div className="var-row">
 <span className="var-lbl">الأساسي</span>
 <span className="var-price">{it.priceStr}</span>
-<button className=“var-addbtn” onClick={() => { addToCart(it); go(prevPage); }}>+ أضف</button>
+<button className="var-addbtn" onClick={() => { addToCart(it); go(prevPage); }}>+ أضف</button>
 </div>
 {it.variants.map((v, i) => (
 <div key={i} className="var-row">
 <span className="var-lbl">{v.l}</span>
 <span className="var-price">{v.v}</span>
-<button className=“var-addbtn” onClick={() => { addToCart(it, parsePrice(v.v), v.l); go(prevPage); }}>+ أضف</button>
+<button className="var-addbtn" onClick={() => { addToCart(it, parsePrice(v.v), v.l); go(prevPage); }}>+ أضف</button>
 </div>
 ))}
 </div>
@@ -753,23 +753,23 @@ return (
 <div className="qty-row">
 <span style={{ fontSize: 14.5, fontWeight: 800 }}>الكمية</span>
 <div className="qty-ctrl">
-<button className=“qbtn” onClick={() => setDetailQty(q => Math.max(1, q - 1))} aria-label=“تقليل”><IconMinus /></button>
+<button className="qbtn" onClick={() => setDetailQty(q => Math.max(1, q - 1))} aria-label="تقليل"><IconMinus /></button>
 <span className="qval">{detailQty}</span>
-<button className=“qbtn” onClick={() => setDetailQty(q => q + 1)} aria-label=“زيادة”><IconPlus /></button>
+<button className="qbtn" onClick={() => setDetailQty(q => q + 1)} aria-label="زيادة"><IconPlus /></button>
 </div>
 </div>
-<button className=“btn-addlg” disabled={!it.available}
+<button className="btn-addlg" disabled={!it.available}
 onClick={() => { for (let i = 0; i < detailQty; i++) addToCart(it); go(prevPage); }}>
 <IconCart size={20} />
-{it.available ? `أضف للسلة — ${(it.price * detailQty).toFixed(0)} د.إ` : “غير متاح حالياً”}
+{it.available ? `أضف للسلة — ${(it.price * detailQty).toFixed(0)} د.إ` : "غير متاح حالياً"}
 </button>
 </>
 )}
 <h3 style={{ fontSize: 15.5, fontWeight: 900, marginBottom: 11 }}>منتجات مشابهة</h3>
-<div className=“grid” style={{ padding: 0 }}>
+<div className="grid" style={{ padding: 0 }}>
 {allItems.filter(r => r.cid === it.cid && r.id !== it.id).slice(0, 4).map((r, i) => (
 <FoodCard key={r.id} item={r} onAdd={() => addToCart(r)}
-onView={() => { setDetailItem(r); setDetailQty(1); scrollRef.current?.scrollTo({ top: 0, behavior: “instant” }); }}
+onView={() => { setDetailItem(r); setDetailQty(1); scrollRef.current?.scrollTo({ top: 0, behavior: "instant" }); }}
 idx={i} />
 ))}
 </div>
@@ -789,7 +789,7 @@ if (cart.length === 0) return (
 <div className="empty-ico">🛒</div>
 <h2>السلة فارغة</h2>
 <p>أضف وجباتك أو قطعتك المفضلة</p>
-<button className=“btn-pri” onClick={() => go(“menu”)}>تصفح القائمة</button>
+<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
 </div>
 </div>
 );
@@ -797,26 +797,26 @@ return (
 <div>
 <div className="sth">
 <h1 className="sth-title">سلة الطلبات</h1>
-<span style={{ background: “var(–sf1)”, border: “1px solid var(–bd)”, borderRadius: 20, padding: “4px 10px”, fontSize: 12, fontWeight: 800, color: “var(–g)” }}>
+<span style={{ background: "var(--sf1)", border: "1px solid var(--bd)", borderRadius: 20, padding: "4px 10px", fontSize: 12, fontWeight: 800, color: "var(--g)" }}>
 {cart.length} عنصر
 </span>
 </div>
 <div className="clist">
 {cart.map(c => (
 <div key={c.id} className="ci">
-<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 68, height: 68, borderRadius: 11, objectFit: “cover”, flexShrink: 0 }} />
+<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 68, height: 68, borderRadius: 11, objectFit: "cover", flexShrink: 0 }} />
 <div className="ci-info">
 <p className="ci-name">{c.item.name}</p>
 {c.varLabel && <p className="ci-sub">{c.varLabel}</p>}
 <p className="ci-p">{c.price} د.إ / الوحدة</p>
 <div className="qty-sm">
-<button className=“qbsm” onClick={() => updateQty(c.id, -1)} aria-label=“تقليل”><IconMinus size={12} /></button>
-<span style={{ fontSize: 13, fontWeight: 900, minWidth: 18, textAlign: “center” }}>{c.qty}</span>
-<button className=“qbsm” onClick={() => updateQty(c.id, 1)} aria-label=“زيادة”><IconPlus size={12} /></button>
+<button className="qbsm" onClick={() => updateQty(c.id, -1)} aria-label="تقليل"><IconMinus size={12} /></button>
+<span style={{ fontSize: 13, fontWeight: 900, minWidth: 18, textAlign: "center" }}>{c.qty}</span>
+<button className="qbsm" onClick={() => updateQty(c.id, 1)} aria-label="زيادة"><IconPlus size={12} /></button>
 </div>
 </div>
 <div className="ci-r">
-<button className=“rmbtn” onClick={() => setCart(prev => prev.filter(x => x.id !== c.id))} aria-label=“إزالة”>🗑</button>
+<button className="rmbtn" onClick={() => setCart(prev => prev.filter(x => x.id !== c.id))} aria-label="إزالة">🗑</button>
 <span className="ci-tot">{(c.price * c.qty).toFixed(0)} د.إ</span>
 </div>
 </div>
@@ -826,14 +826,14 @@ return (
 <div className="srow"><span>المجموع</span><span>{cartTotal.toFixed(0)} د.إ</span></div>
 <div className="srow">
 <span>التوصيل</span>
-<span className={del === 0 ? “free” : “”}>{del === 0 ? “مجاناً 🎉” : `${del} د.إ`}</span>
+<span className={del === 0 ? "free" : ""}>{del === 0 ? "مجاناً 🎉" : `${del} د.إ`}</span>
 </div>
 {del > 0 && <p className="hint">أضف {(150 - cartTotal).toFixed(0)} د.إ للتوصيل المجاني</p>}
 <div className="sdiv" />
 <div className="srow stotal"><span>الإجمالي</span><span>{grand.toFixed(0)} د.إ</span></div>
 </div>
 <div className="chk-bar">
-<button className=“btn-chk” onClick={() => setCheckoutOpen(true)}>
+<button className="btn-chk" onClick={() => setCheckoutOpen(true)}>
 🛍 إتمام الطلب — {grand.toFixed(0)} د.إ
 </button>
 </div>
@@ -844,10 +844,10 @@ return (
 
 function OrdersScreen({ orders, go, setTrackId }) {
 const statMap = {
-confirmed: { l: “تم التأكيد”,    bg: “rgba(34,197,94,.12)”,  c: “#22C55E” },
-preparing: { l: “قيد التحضير”,   bg: “rgba(99,102,241,.12)”, c: “#818CF8” },
-ready:     { l: “جاهز للتوصيل”, bg: “rgba(14,165,233,.12)”, c: “#38BDF8” },
-delivered: { l: “تم التوصيل”,    bg: “rgba(34,197,94,.12)”,  c: “#22C55E” },
+confirmed: { l: "تم التأكيد",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
+preparing: { l: "قيد التحضير",   bg: "rgba(99,102,241,.12)", c: "#818CF8" },
+ready:     { l: "جاهز للتوصيل", bg: "rgba(14,165,233,.12)", c: "#38BDF8" },
+delivered: { l: "تم التوصيل",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
 };
 if (orders.length === 0) return (
 <div>
@@ -856,7 +856,7 @@ if (orders.length === 0) return (
 <div className="empty-ico">📋</div>
 <h2>لا توجد طلبات</h2>
 <p>ابدأ طلبك الأول الآن</p>
-<button className=“btn-pri” onClick={() => go(“menu”)}>تصفح القائمة</button>
+<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
 </div>
 </div>
 );
@@ -868,17 +868,17 @@ return (
 const st = statMap[o.status] || statMap.confirmed;
 const d  = new Date(o.date);
 return (
-<div key={o.id} className=“ocard” onClick={() => { setTrackId(o.id); go(“track”); }}>
+<div key={o.id} className="ocard" onClick={() => { setTrackId(o.id); go("track"); }}>
 <div className="ocard-top">
 <div>
 <p className="oid">{o.id}</p>
-<p className="odate">{d.toLocaleDateString(“ar-AE”)} — {d.toLocaleTimeString(“ar-AE”, { hour: “2-digit”, minute: “2-digit” })}</p>
+<p className="odate">{d.toLocaleDateString("ar-AE")} — {d.toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}</p>
 </div>
-<div className=“ostatus” style={{ background: st.bg, color: st.c }}>{st.l}</div>
+<div className="ostatus" style={{ background: st.bg, color: st.c }}>{st.l}</div>
 </div>
 <div className="thumbrow">
 {o.items.slice(0, 3).map((c, i) => (
-<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: “cover”, border: “2px solid var(–bdl)” }} />
+<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
 ))}
 {o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
 </div>
@@ -902,37 +902,37 @@ if (!order) return (
 <div className="empty-pg">
 <div className="empty-ico">🔍</div>
 <h2>الطلب غير موجود</h2>
-<button className=“btn-pri” onClick={() => go(“orders”)}>طلباتي</button>
+<button className="btn-pri" onClick={() => go("orders")}>طلباتي</button>
 </div>
 );
 const STEPS = [
-{ k: “pending”,   l: “تم استلام الطلب”, ic: “📱” },
-{ k: “confirmed”, l: “تم تأكيد الطلب”,  ic: “✅” },
-{ k: “preparing”, l: “قيد التحضير”,      ic: “👨‍🍳” },
-{ k: “ready”,     l: “خرج للتوصيل”,      ic: “🛵” },
-{ k: “delivered”, l: “تم التوصيل”,        ic: “🎉” },
+{ k: "pending",   l: "تم استلام الطلب", ic: "📱" },
+{ k: "confirmed", l: "تم تأكيد الطلب",  ic: "✅" },
+{ k: "preparing", l: "قيد التحضير",      ic: "👨‍🍳" },
+{ k: "ready",     l: "خرج للتوصيل",      ic: "🛵" },
+{ k: "delivered", l: "تم التوصيل",        ic: "🎉" },
 ];
 const si = STEPS.findIndex(s => s.k === order.status);
 return (
 <div>
 <div className="sth">
-<button style={{ display: “flex”, alignItems: “center”, color: “var(–t1)” }} onClick={() => go(“orders”)} aria-label=“رجوع”><IconBack /></button>
+<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
 <h1 className="sth-title">تتبع الطلب</h1>
 <div style={{ width: 28 }} />
 </div>
 <div className="mapph">
-<div style={{ textAlign: “center”, zIndex: 1 }}>
+<div style={{ textAlign: "center", zIndex: 1 }}>
 <div className="mappin">📍</div>
-<p style={{ fontSize: 12.5, color: “var(–t3)”, marginTop: 7 }}>دبي - أرجان</p>
+<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
 </div>
 </div>
 <div className="tcard">
 <div className="thd">
 <div>
 <p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
-<p style={{ fontSize: 11.5, color: “var(–t3)”, marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
+<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
 </div>
-<p style={{ fontSize: 17.5, fontWeight: 900, color: “var(–g)” }}>{order.total} د.إ</p>
+<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
 </div>
 <div className="steps">
 {STEPS.map((s, i) => {
@@ -940,7 +940,7 @@ const done = i <= si, curr = i === si;
 return (
 <div key={s.k} className={`step ${done?"done":""} ${curr?"curr":""}`}>
 <div className="step-ic">
-<div className="sdot">{done ? s.ic : “○”}</div>
+<div className="sdot">{done ? s.ic : "○"}</div>
 {i < STEPS.length - 1 && <div className={`sline ${i < si ? "done" : ""}`} />}
 </div>
 <p className="slbl">{s.l}</p>
@@ -952,13 +952,13 @@ return (
 <div className="titems">
 {order.items.map((c, i) => (
 <div key={i} className="titem">
-<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: “cover” }} />
+<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
 <span>{c.item.name}</span>
-<span style={{ marginRight: “auto”, color: “var(–t3)” }}>×{c.qty}</span>
+<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
 </div>
 ))}
 </div>
-<a href={`tel:+${WA_NUMBER}`} className=“btn-call”>📞 اتصل بالمطعم</a>
+<a href={`tel:+${WA_NUMBER}`} className="btn-call">📞 اتصل بالمطعم</a>
 </div>
 <div style={{ height: 20 }} />
 </div>
@@ -972,27 +972,27 @@ return (
 <div className="info-section">
 <div className="info-row">
 <div className="info-ico">📍</div>
-<div className="info-text"><div className="info-label">العنوان</div><div className=“info-val” style={{ fontSize: 12 }}>{ADDRESS}</div></div>
+<div className="info-text"><div className="info-label">العنوان</div><div className="info-val" style={{ fontSize: 12 }}>{ADDRESS}</div></div>
 </div>
-<div className=“info-row clickable” style={{ cursor: “pointer” }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
+<div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
 <div className="info-ico">📞</div>
 <div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: “var(–g)” }}>›</span>
+<span style={{ color: "var(--g)" }}>›</span>
 </div>
-<div className=“info-row clickable” style={{ cursor: “pointer” }}
-onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, “_blank”)}>
+<div className="info-row clickable" style={{ cursor: "pointer" }}
+onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
 <div className="info-ico"><IconWa size={20} /></div>
 <div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
-<span style={{ color: “var(–wa)” }}>›</span>
+<span style={{ color: "var(--wa)" }}>›</span>
 </div>
 <div className="info-row">
 <div className="info-ico">🕐</div>
 <div className="info-text"><div className="info-label">ساعات العمل</div><div className="info-val">يومياً ١١ ص – ١١ م</div></div>
 </div>
 </div>
-<div className=“info-section” style={{ margin: “10px 15px 14px” }}>
-<div style={{ padding: “12px 15px 8px”, borderBottom: “1px solid var(–bdl)” }}>
-<p style={{ fontSize: 13, fontWeight: 800, color: “var(–t2)” }}>تابعنا على السوشيال ميديا</p>
+<div className="info-section" style={{ margin: "10px 15px 14px" }}>
+<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
+<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
 </div>
 <div className="social-row">
 <a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
@@ -1010,55 +1010,238 @@ onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent
 </div>
 <div className="sec-hd">
 <h2 className="sec-title">⭐ آراء العملاء</h2>
-<div style={{ display: “flex”, alignItems: “center”, gap: 4 }}>
+<div style={{ display: "flex", alignItems: "center", gap: 4 }}>
 {[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
-<span style={{ fontSize: 12, fontWeight: 800, color: “var(–g)”, marginRight: 4 }}>4.9</span>
+<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
+</div>
+</div>
+{reviews.map((r, i)<div className="chk-bar">
+<button className="btn-chk" onClick={() => setCheckoutOpen(true)}>
+🛍 إتمام الطلب — {grand.toFixed(0)} د.إ
+</button>
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function OrdersScreen({ orders, go, setTrackId }) {
+const statMap = {
+confirmed: { l: "تم التأكيد",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
+preparing: { l: "قيد التحضير",   bg: "rgba(99,102,241,.12)", c: "#818CF8" },
+ready:     { l: "جاهز للتوصيل", bg: "rgba(14,165,233,.12)", c: "#38BDF8" },
+delivered: { l: "تم التوصيل",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
+};
+if (orders.length === 0) return (
+<div>
+<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
+<div className="empty-pg">
+<div className="empty-ico">📋</div>
+<h2>لا توجد طلبات</h2>
+<p>ابدأ طلبك الأول الآن</p>
+<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
+</div>
+</div>
+);
+return (
+<div>
+<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
+<div className="olist">
+{orders.map(o => {
+const st = statMap[o.status] || statMap.confirmed;
+const d  = new Date(o.date);
+return (
+<div key={o.id} className="ocard" onClick={() => { setTrackId(o.id); go("track"); }}>
+<div className="ocard-top">
+<div>
+<p className="oid">{o.id}</p>
+<p className="odate">{d.toLocaleDateString("ar-AE")} — {d.toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}</p>
+</div>
+<div className="ostatus" style={{ background: st.bg, color: st.c }}>{st.l}</div>
+</div>
+<div className="thumbrow">
+{o.items.slice(0, 3).map((c, i) => (
+<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
+))}
+{o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
+</div>
+<div className="ofoot">
+<span>{o.items.length} عنصر</span>
+<span className="ototl">{o.total} د.إ</span>
+<span>›</span>
+</div>
+</div>
+);
+})}
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function TrackScreen({ orders, trackId, go }) {
+const order = orders.find(o => o.id === trackId);
+if (!order) return (
+<div className="empty-pg">
+<div className="empty-ico">🔍</div>
+<h2>الطلب غير موجود</h2>
+<button className="btn-pri" onClick={() => go("orders")}>طلباتي</button>
+</div>
+);
+const STEPS = [
+{ k: "pending",   l: "تم استلام الطلب", ic: "📱" },
+{ k: "confirmed", l: "تم تأكيد الطلب",  ic: "✅" },
+{ k: "preparing", l: "قيد التحضير",      ic: "👨‍🍳" },
+{ k: "ready",     l: "خرج للتوصيل",      ic: "🛵" },
+{ k: "delivered", l: "تم التوصيل",        ic: "🎉" },
+];
+const si = STEPS.findIndex(s => s.k === order.status);
+return (
+<div>
+<div className="sth">
+<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
+<h1 className="sth-title">تتبع الطلب</h1>
+<div style={{ width: 28 }} />
+</div>
+<div className="mapph">
+<div style={{ textAlign: "center", zIndex: 1 }}>
+<div className="mappin">📍</div>
+<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
+</div>
+</div>
+<div className="tcard">
+<div className="thd">
+<div>
+<p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
+<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
+</div>
+<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
+</div>
+<div className="steps">
+{STEPS.map((s, i) => {
+const done = i <= si, curr = i === si;
+return (
+<div key={s.k} className={`step ${done?"done":""} ${curr?"curr":""}`}>
+<div className="step-ic">
+<div className="sdot">{done ? s.ic : "○"}</div>
+{i < STEPS.length - 1 && <div className={`sline ${i < si ? "done" : ""}`} />}
+</div>
+<p className="slbl">{s.l}</p>
+</div>
+);
+})}
+</div>
+<div className="taddr">📍 <span>{order.addr}</span></div>
+<div className="titems">
+{order.items.map((c, i) => (
+<div key={i} className="titem">
+<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
+<span>{c.item.name}</span>
+<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
+</div>
+))}
+</div>
+<a href={`tel:+${WA_NUMBER}`} className="btn-call">📞 اتصل بالمطعم</a>
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function AboutScreen({ reviews, setReviews, showReviewForm, setShowReviewForm, newReview, setNewReview, showToast, isAdmin, setShowAdminLogin, go }) {
+return (
+<div>
+<div className="sth"><h1 className="sth-title">عن المطعم</h1></div>
+<div className="info-section">
+<div className="info-row">
+<div className="info-ico">📍</div>
+<div className="info-text"><div className="info-label">العنوان</div><div className="info-val" style={{ fontSize: 12 }}>{ADDRESS}</div></div>
+</div>
+<div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
+<div className="info-ico">📞</div>
+<div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
+<span style={{ color: "var(--g)" }}>›</span>
+</div>
+<div className="info-row clickable" style={{ cursor: "pointer" }}
+onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
+<div className="info-ico"><IconWa size={20} /></div>
+<div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
+<span style={{ color: "var(--wa)" }}>›</span>
+</div>
+<div className="info-row">
+<div className="info-ico">🕐</div>
+<div className="info-text"><div className="info-label">ساعات العمل</div><div className="info-val">يومياً ١١ ص – ١١ م</div></div>
+</div>
+</div>
+<div className="info-section" style={{ margin: "10px 15px 14px" }}>
+<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
+<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
+</div>
+<div className="social-row">
+<a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
+<a className="soc-btn" href={SOCIAL.instagram} target="_blank" rel="noreferrer"><IconInstagram />انستاجرام</a>
+<a className="soc-btn" href={SOCIAL.tiktok}    target="_blank" rel="noreferrer"><IconTikTok />تيك توك</a>
+</div>
+</div>
+<div className="platforms">
+<p className="plat-title">اطلب عبر تطبيقات التوصيل</p>
+<div className="plat-row">
+<a className="plat-btn" href={SOCIAL.talabat}   target="_blank" rel="noreferrer">🛵 طلبات</a>
+<a className="plat-btn" href={SOCIAL.deliveroo} target="_blank" rel="noreferrer">🚲 ديليفرو</a>
+<a className="plat-btn" href={SOCIAL.noon}      target="_blank" rel="noreferrer">🟡 نون فود</a>
+</div>
+</div>
+<div className="sec-hd">
+<h2 className="sec-title">⭐ آراء العملاء</h2>
+<div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+{[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
+<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
 </div>
 </div>
 {reviews.map((r, i) => <ReviewCard key={i} review={r} />)}
 {!showReviewForm ? (
-<button className=“add-review-btn” onClick={() => setShowReviewForm(true)}>+ أضف تقييمك</button>
+<button className="add-review-btn" onClick={() => setShowReviewForm(true)}>+ أضف تقييمك</button>
 ) : (
 <div className="review-form">
 <p style={{ fontSize: 14, fontWeight: 900, marginBottom: 12 }}>أضف تقييمك 🌟</p>
 <div className="star-select">
 {[1,2,3,4,5].map(s => (
-<button key={s} className=“star-btn” onClick={() => setNewReview(r => ({ …r, rating: s }))}>
-{s <= newReview.rating ? “⭐” : “☆”}
+<button key={s} className="star-btn" onClick={() => setNewReview(r => ({ ...r, rating: s }))}>
+{s <= newReview.rating ? "⭐" : "☆"}
 </button>
 ))}
 </div>
-<input className=“form-input” placeholder=“اسمك” value={newReview.name}
-onChange={e => setNewReview(r => ({ …r, name: e.target.value }))}
-style={{ marginBottom: 10, display: “block”, width: “100%” }} />
-<textarea className=“form-input” style={{ resize: “none”, height: 80, display: “block”, marginBottom: 12, width: “100%” }}
-placeholder=“شاركنا تجربتك…” value={newReview.text}
-onChange={e => setNewReview(r => ({ …r, text: e.target.value }))} />
-<button className=“btn-save” onClick={() => {
-if (!newReview.name.trim() || !newReview.text.trim()) { showToast(“أكمل البيانات”, “err”); return; }
-setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: “الآن”, avatar: newReview.name[0] }, …prev]);
-setNewReview({ name: “”, text: “”, rating: 5 });
+<input className="form-input" placeholder="اسمك" value={newReview.name}
+onChange={e => setNewReview(r => ({ ...r, name: e.target.value }))}
+style={{ marginBottom: 10, display: "block", width: "100%" }} />
+<textarea className="form-input" style={{ resize: "none", height: 80, display: "block", marginBottom: 12, width: "100%" }}
+placeholder="شاركنا تجربتك…" value={newReview.text}
+onChange={e => setNewReview(r => ({ ...r, text: e.target.value }))} />
+<button className="btn-save" onClick={() => {
+if (!newReview.name.trim() || !newReview.text.trim()) { showToast("أكمل البيانات", "err"); return; }
+setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: "الآن", avatar: newReview.name[0] }, ...prev]);
+setNewReview({ name: "", text: "", rating: 5 });
 setShowReviewForm(false);
-showToast(“✓ شكراً على تقييمك!”);
+showToast("✓ شكراً على تقييمك!");
 }}>إرسال التقييم</button>
-<button className=“btn-cancel” onClick={() => setShowReviewForm(false)}>إلغاء</button>
+<button className="btn-cancel" onClick={() => setShowReviewForm(false)}>إلغاء</button>
 </div>
 )}
 {!isAdmin && (
-<button className=“admin-access-btn” onClick={() => setShowAdminLogin(true)}>
+<button className="admin-access-btn" onClick={() => setShowAdminLogin(true)}>
 <span style={{ fontSize: 18 }}>⚙️</span>
 <div>
-<div style={{ fontSize: 13, fontWeight: 900, color: “var(–t2)” }}>لوحة تحكم المطعم</div>
-<div style={{ fontSize: 11, color: “var(–t3)”, marginTop: 2 }}>للمسؤولين فقط</div>
+<div style={{ fontSize: 13, fontWeight: 900, color: "var(--t2)" }}>لوحة تحكم المطعم</div>
+<div style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>للمسؤولين فقط</div>
 </div>
-<span style={{ marginRight: “auto”, color: “var(–t3)” }}>›</span>
+<span style={{ marginRight: "auto", color: "var(--t3)" }}>›</span>
 </button>
 )}
 {isAdmin && (
-<button className=“admin-access-btn” onClick={() => go(“admin”)} style={{ borderColor: “rgba(201,162,39,.4)”, color: “var(–g)” }}>
+<button className="admin-access-btn" onClick={() => go("admin")} style={{ borderColor: "rgba(201,162,39,.4)", color: "var(--g)" }}>
 <span style={{ fontSize: 18 }}>⚙️</span>
 <div style={{ fontSize: 13, fontWeight: 900 }}>فتح لوحة التحكم</div>
-<span style={{ marginRight: “auto” }}>›</span>
+<span style={{ marginRight: "auto" }}>›</span>
 </button>
 )}
 <div style={{ height: 20 }} />
@@ -1077,12 +1260,261 @@ return (
 <p className="admin-title">⚙️ لوحة التحكم</p>
 <p className="admin-subtitle">إدارة المنتجات والأسعار والصور</p>
 </div>
-<button className=“admin-logout-btn” onClick={() => { setIsAdmin(false); go(“home”); }}>خروج 🔓</button>
+<button className="admin-logout-btn" onClick={() => { setIsAdmin(false); go("home"); }}>خروج 🔓</button>
 </div>
 <div className="admin-stats">
 <div className="astat"><div className="astat-val">{allItems.length}</div><div className="astat-label">منتج</div></div>
-<div className="astat"><div className=“astat-val” style={{ color: “var(–grn)” }}>{availCount}</div><div className="astat-label">متاح</div></div>
-<div className="astat"><div className=“astat-val” style={{ color: “var(–red)” }}>{unavailCount}</div><div className="astat-label">غير متاح</div></div>
+<div className="astat"><div className="astat-val" style={{ color: "var(--grn)" }}>{availCount}</div><div className="astat-label<div className="chk-bar">
+<button className="btn-chk" onClick={() => setCheckoutOpen(true)}>
+🛍 إتمام الطلب — {grand.toFixed(0)} د.إ
+</button>
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function OrdersScreen({ orders, go, setTrackId }) {
+const statMap = {
+confirmed: { l: "تم التأكيد",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
+preparing: { l: "قيد التحضير",   bg: "rgba(99,102,241,.12)", c: "#818CF8" },
+ready:     { l: "جاهز للتوصيل", bg: "rgba(14,165,233,.12)", c: "#38BDF8" },
+delivered: { l: "تم التوصيل",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
+};
+if (orders.length === 0) return (
+<div>
+<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
+<div className="empty-pg">
+<div className="empty-ico">📋</div>
+<h2>لا توجد طلبات</h2>
+<p>ابدأ طلبك الأول الآن</p>
+<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
+</div>
+</div>
+);
+return (
+<div>
+<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
+<div className="olist">
+{orders.map(o => {
+const st = statMap[o.status] || statMap.confirmed;
+const d  = new Date(o.date);
+return (
+<div key={o.id} className="ocard" onClick={() => { setTrackId(o.id); go("track"); }}>
+<div className="ocard-top">
+<div>
+<p className="oid">{o.id}</p>
+<p className="odate">{d.toLocaleDateString("ar-AE")} — {d.toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}</p>
+</div>
+<div className="ostatus" style={{ background: st.bg, color: st.c }}>{st.l}</div>
+</div>
+<div className="thumbrow">
+{o.items.slice(0, 3).map((c, i) => (
+<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
+))}
+{o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
+</div>
+<div className="ofoot">
+<span>{o.items.length} عنصر</span>
+<span className="ototl">{o.total} د.إ</span>
+<span>›</span>
+</div>
+</div>
+);
+})}
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function TrackScreen({ orders, trackId, go }) {
+const order = orders.find(o => o.id === trackId);
+if (!order) return (
+<div className="empty-pg">
+<div className="empty-ico">🔍</div>
+<h2>الطلب غير موجود</h2>
+<button className="btn-pri" onClick={() => go("orders")}>طلباتي</button>
+</div>
+);
+const STEPS = [
+{ k: "pending",   l: "تم استلام الطلب", ic: "📱" },
+{ k: "confirmed", l: "تم تأكيد الطلب",  ic: "✅" },
+{ k: "preparing", l: "قيد التحضير",      ic: "👨‍🍳" },
+{ k: "ready",     l: "خرج للتوصيل",      ic: "🛵" },
+{ k: "delivered", l: "تم التوصيل",        ic: "🎉" },
+];
+const si = STEPS.findIndex(s => s.k === order.status);
+return (
+<div>
+<div className="sth">
+<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
+<h1 className="sth-title">تتبع الطلب</h1>
+<div style={{ width: 28 }} />
+</div>
+<div className="mapph">
+<div style={{ textAlign: "center", zIndex: 1 }}>
+<div className="mappin">📍</div>
+<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
+</div>
+</div>
+<div className="tcard">
+<div className="thd">
+<div>
+<p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
+<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
+</div>
+<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
+</div>
+<div className="steps">
+{STEPS.map((s, i) => {
+const done = i <= si, curr = i === si;
+return (
+<div key={s.k} className={`step ${done?"done":""} ${curr?"curr":""}`}>
+<div className="step-ic">
+<div className="sdot">{done ? s.ic : "○"}</div>
+{i < STEPS.length - 1 && <div className={`sline ${i < si ? "done" : ""}`} />}
+</div>
+<p className="slbl">{s.l}</p>
+</div>
+);
+})}
+</div>
+<div className="taddr">📍 <span>{order.addr}</span></div>
+<div className="titems">
+{order.items.map((c, i) => (
+<div key={i} className="titem">
+<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
+<span>{c.item.name}</span>
+<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
+</div>
+))}
+</div>
+<a href={`tel:+${WA_NUMBER}`} className="btn-call">📞 اتصل بالمطعم</a>
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function AboutScreen({ reviews, setReviews, showReviewForm, setShowReviewForm, newReview, setNewReview, showToast, isAdmin, setShowAdminLogin, go }) {
+return (
+<div>
+<div className="sth"><h1 className="sth-title">عن المطعم</h1></div>
+<div className="info-section">
+<div className="info-row">
+<div className="info-ico">📍</div>
+<div className="info-text"><div className="info-label">العنوان</div><div className="info-val" style={{ fontSize: 12 }}>{ADDRESS}</div></div>
+</div>
+<div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
+<div className="info-ico">📞</div>
+<div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
+<span style={{ color: "var(--g)" }}>›</span>
+</div>
+<div className="info-row clickable" style={{ cursor: "pointer" }}
+onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
+<div className="info-ico"><IconWa size={20} /></div>
+<div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
+<span style={{ color: "var(--wa)" }}>›</span>
+</div>
+<div className="info-row">
+<div className="info-ico">🕐</div>
+<div className="info-text"><div className="info-label">ساعات العمل</div><div className="info-val">يومياً ١١ ص – ١١ م</div></div>
+</div>
+</div>
+<div className="info-section" style={{ margin: "10px 15px 14px" }}>
+<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
+<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
+</div>
+<div className="social-row">
+<a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
+<a className="soc-btn" href={SOCIAL.instagram} target="_blank" rel="noreferrer"><IconInstagram />انستاجرام</a>
+<a className="soc-btn" href={SOCIAL.tiktok}    target="_blank" rel="noreferrer"><IconTikTok />تيك توك</a>
+</div>
+</div>
+<div className="platforms">
+<p className="plat-title">اطلب عبر تطبيقات التوصيل</p>
+<div className="plat-row">
+<a className="plat-btn" href={SOCIAL.talabat}   target="_blank" rel="noreferrer">🛵 طلبات</a>
+<a className="plat-btn" href={SOCIAL.deliveroo} target="_blank" rel="noreferrer">🚲 ديليفرو</a>
+<a className="plat-btn" href={SOCIAL.noon}      target="_blank" rel="noreferrer">🟡 نون فود</a>
+</div>
+</div>
+<div className="sec-hd">
+<h2 className="sec-title">⭐ آراء العملاء</h2>
+<div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+{[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
+<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
+</div>
+</div>
+{reviews.map((r, i) => <ReviewCard key={i} review={r} />)}
+{!showReviewForm ? (
+<button className="add-review-btn" onClick={() => setShowReviewForm(true)}>+ أضف تقييمك</button>
+) : (
+<div className="review-form">
+<p style={{ fontSize: 14, fontWeight: 900, marginBottom: 12 }}>أضف تقييمك 🌟</p>
+<div className="star-select">
+{[1,2,3,4,5].map(s => (
+<button key={s} className="star-btn" onClick={() => setNewReview(r => ({ ...r, rating: s }))}>
+{s <= newReview.rating ? "⭐" : "☆"}
+</button>
+))}
+</div>
+<input className="form-input" placeholder="اسمك" value={newReview.name}
+onChange={e => setNewReview(r => ({ ...r, name: e.target.value }))}
+style={{ marginBottom: 10, display: "block", width: "100%" }} />
+<textarea className="form-input" style={{ resize: "none", height: 80, display: "block", marginBottom: 12, width: "100%" }}
+placeholder="شاركنا تجربتك…" value={newReview.text}
+onChange={e => setNewReview(r => ({ ...r, text: e.target.value }))} />
+<button className="btn-save" onClick={() => {
+if (!newReview.name.trim() || !newReview.text.trim()) { showToast("أكمل البيانات", "err"); return; }
+setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: "الآن", avatar: newReview.name[0] }, ...prev]);
+setNewReview({ name: "", text: "", rating: 5 });
+setShowReviewForm(false);
+showToast("✓ شكراً على تقييمك!");
+}}>إرسال التقييم</button>
+<button className="btn-cancel" onClick={() => setShowReviewForm(false)}>إلغاء</button>
+</div>
+)}
+{!isAdmin && (
+<button className="admin-access-btn" onClick={() => setShowAdminLogin(true)}>
+<span style={{ fontSize: 18 }}>⚙️</span>
+<div>
+<div style={{ fontSize: 13, fontWeight: 900, color: "var(--t2)" }}>لوحة تحكم المطعم</div>
+<div style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>للمسؤولين فقط</div>
+</div>
+<span style={{ marginRight: "auto", color: "var(--t3)" }}>›</span>
+</button>
+)}
+{isAdmin && (
+<button className="admin-access-btn" onClick={() => go("admin")} style={{ borderColor: "rgba(201,162,39,.4)", color: "var(--g)" }}>
+<span style={{ fontSize: 18 }}>⚙️</span>
+<div style={{ fontSize: 13, fontWeight: 900 }}>فتح لوحة التحكم</div>
+<span style={{ marginRight: "auto" }}>›</span>
+</button>
+)}
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function AdminScreen({ allItems, allCats, adminItems, toggleAvailable, setEditingItem, go, setIsAdmin }) {
+const availCount   = Object.values(adminItems).filter(v => v.available).length;
+const unavailCount = Object.values(adminItems).length - availCount;
+const grouped = allCats.map(cat => ({ cat, items: allItems.filter(it => it.cid === cat.id) })).filter(g => g.items.length > 0);
+return (
+<div>
+<div className="admin-header">
+<div>
+<p className="admin-title">⚙️ لوحة التحكم</p>
+<p className="admin-subtitle">إدارة المنتجات والأسعار والصور</p>
+</div>
+<button className="admin-logout-btn" onClick={() => { setIsAdmin(false); go("home"); }}>خروج 🔓</button>
+</div>
+<div className="admin-stats">
+<div className="astat"><div className="astat-val">{allItems.length}</div><div className="astat-label">منتج</div></div>
+<div className="astat"><div className="astat-val" style={{ color: "var(--grn)" }}>{availCount}</div><div className="astat-label">متاح</div></div>
+<div className="astat"><div className="astat-val" style={{ color: "var(--red)" }}>{unavailCount}</div><div className="astat-label">غير متاح</div></div>
 </div>
 {grouped.map(({ cat, items }) => (
 <div key={cat.id} className="admin-card">
@@ -1092,15 +1524,15 @@ const ov      = adminItems[item.id];
 const isAvail = ov?.available ?? true;
 return (
 <div key={item.id} className="admin-item">
-<SafeImg src={item.img} alt={item.name} style={{ width: 52, height: 52, borderRadius: 10, objectFit: “cover”, flexShrink: 0, opacity: isAvail ? 1 : .45 }} />
+<SafeImg src={item.img} alt={item.name} style={{ width: 52, height: 52, borderRadius: 10, objectFit: "cover", flexShrink: 0, opacity: isAvail ? 1 : .45 }} />
 <div className="admin-item-info">
-<div className=“admin-item-name” style={{ color: isAvail ? “var(–t1)” : “var(–t3)” }}>{item.name}</div>
+<div className="admin-item-name" style={{ color: isAvail ? "var(--t1)" : "var(--t3)" }}>{item.name}</div>
 <div className="admin-item-price">{item.priceStr}</div>
 </div>
 <div className="admin-item-actions">
-<button className=“edit-btn” onClick={() => setEditingItem(item)} aria-label=“تعديل”><IconEdit size={14} /></button>
+<button className="edit-btn" onClick={() => setEditingItem(item)} aria-label="تعديل"><IconEdit size={14} /></button>
 <button className={`tgl ${isAvail?"on":""}`} onClick={() => toggleAvailable(item.id)}
-role=“switch” aria-checked={isAvail} aria-label={isAvail?“إخفاء”:“إظهار”}>
+role="switch" aria-checked={isAvail} aria-label={isAvail?"إخفاء":"إظهار"}>
 <span className="tglth" />
 </button>
 </div>
@@ -1120,19 +1552,19 @@ return (
 <div className="succ-ring"><IconCheck /></div>
 <h2>تم إرسال طلبك! 🎉</h2>
 <p>تم إرسال طلبك على واتساب النيل جورمية وسيتم التواصل معك قريباً</p>
-<button className=“btn-pri” onClick={() => go(“orders”)}>عرض طلباتي</button>
-<button onClick={() => go(“home”)} style={{ color: “var(–g)”, fontWeight: 800, fontSize: 14, marginTop: 4 }}>العودة للرئيسية</button>
+<button className="btn-pri" onClick={() => go("orders")}>عرض طلباتي</button>
+<button onClick={() => go("home")} style={{ color: "var(--g)", fontWeight: 800, fontSize: 14, marginTop: 4 }}>العودة للرئيسية</button>
 </div>
 );
 }
 
 // ─── CHECKOUT SHEET ────────────────────────────────────────────────────
 function CheckoutSheet({ cartTotal, onClose, onConfirm, showToast }) {
-const [addr,  setAddr]  = useState(“دبي - أرجان”);
-const [name,  setName]  = useState(””);
-const [phone, setPhone] = useState(””);
+const [addr,  setAddr]  = useState("دبي - أرجان");
+const [name,  setName]  = useState("");
+const [phone, setPhone] = useState("");
 // FIX: خطأ التحقق من رقم الهاتف
-const [phoneErr, setPhoneErr] = useState(””);
+const [phoneErr, setPhoneErr] = useState("");
 const del   = cartTotal >= 150 ? 0 : 15;
 const grand = cartTotal + del;
 
@@ -1140,46 +1572,391 @@ const handlePhoneChange = (e) => {
 const val = e.target.value;
 setPhone(val);
 if (val && !validatePhone(val)) {
-setPhoneErr(“رقم الهاتف غير صحيح (مثال: 0501234567)”);
+setPhoneErr("رقم الهاتف غير صحيح (مثال: 0501234567)");
 } else {
-setPhoneErr(””);
+setPhoneErr("");
 }
 };
 
 const handleConfirm = () => {
-if (!addr.trim()) { showToast(“أدخل عنوان التوصيل”, “err”); return; }
-if (phone && !validatePhone(phone)) { showToast(“رقم الهاتف غير صحيح”, “err”); return; }
+if (!addr.trim()) { showToast("أدخل عنوان التوصيل", "err"); return; }
+if (phone && !validatePhone(phone)) { showToast("رقم الهاتف غير صحيح", "err"); return; }
 onConfirm(addr, name, phone);
 };
 
 return (
 <div className="shov" onClick={onClose} role="dialog" aria-modal="true">
-<div className=“sh” onClick={e => e.stopPropagation()}>
+<div className="sh" onClick={e => e.stopPropagation()}>
 <div className="shndl" />
 <h3 className="shtitle">تفاصيل الطلب</h3>
 <p className="flbl">👤 اسمك</p>
-<input className=“finp” value={name} onChange={e => setName(e.target.value)} placeholder=“اسمك الكريم…” autoComplete=“name” />
+<input className="finp" value={name} onChange={e => setName(e.target.value)} placeholder="اسمك الكريم…" autoComplete="name" />
 <p className="flbl">📱 رقم الموبايل</p>
 <input
 className={`finp ${phoneErr ? "finp-err" : ""}`}
 value={phone}
 onChange={handlePhoneChange}
-placeholder=”+971501234567”
-type=“tel”
-autoComplete=“tel”
-inputMode=“tel”
+placeholder="+971501234567"
+type="tel"
+autoComplete="tel"
+inputMode="tel"
 />
 {/* FIX: رسالة خطأ رقم الهاتف */}
 {phoneErr && <p className="field-err">{phoneErr}</p>}
-<p className="flbl">📍 عنوان التوصيل <span style={{ color: “var(–red)” }}>*</span></p>
-<textarea className=“fta” rows={3} value={addr} onChange={e => setAddr(e.target.value)} placeholder=“المنطقة، الشارع، رقم المبنى…” />
+<p className="flbl">📍 عنوان التوصيل <span style={{ color: "var(--red)" }}>*</span></p>
+<textarea className="fta" rows={3} value={addr} onChange={e => setAddr(e.target.value)} placeholder="المنطقة، الشارع، رقم المبنى…" />
 <div className="chk-sm">
 <div className="srow"><span>المجموع</span><span>{cartTotal.toFixed(0)} د.إ</span></div>
-<div className="srow"><span>التوصيل</span><span className={del===0?“free”:””}>{del===0?“مجاناً 🎉”:`${del} د.إ`}</span></div>
+<div className="srow"><span>التوصيل</span><span className={del===0?"free":""}>{del===0?"مجاناً 🎉":`${del} د.إ`}</span></div>
+<div className="sdiv" />
+<div className="srow stotal"><span>الإجمالي</span><span>{grand.toFixed(0)}<div className="chk-bar">
+<button className="btn-chk" onClick={() => setCheckoutOpen(true)}>
+🛍 إتمام الطلب — {grand.toFixed(0)} د.إ
+</button>
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function OrdersScreen({ orders, go, setTrackId }) {
+const statMap = {
+confirmed: { l: "تم التأكيد",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
+preparing: { l: "قيد التحضير",   bg: "rgba(99,102,241,.12)", c: "#818CF8" },
+ready:     { l: "جاهز للتوصيل", bg: "rgba(14,165,233,.12)", c: "#38BDF8" },
+delivered: { l: "تم التوصيل",    bg: "rgba(34,197,94,.12)",  c: "#22C55E" },
+};
+if (orders.length === 0) return (
+<div>
+<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
+<div className="empty-pg">
+<div className="empty-ico">📋</div>
+<h2>لا توجد طلبات</h2>
+<p>ابدأ طلبك الأول الآن</p>
+<button className="btn-pri" onClick={() => go("menu")}>تصفح القائمة</button>
+</div>
+</div>
+);
+return (
+<div>
+<div className="sth"><h1 className="sth-title">طلباتي</h1></div>
+<div className="olist">
+{orders.map(o => {
+const st = statMap[o.status] || statMap.confirmed;
+const d  = new Date(o.date);
+return (
+<div key={o.id} className="ocard" onClick={() => { setTrackId(o.id); go("track"); }}>
+<div className="ocard-top">
+<div>
+<p className="oid">{o.id}</p>
+<p className="odate">{d.toLocaleDateString("ar-AE")} — {d.toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}</p>
+</div>
+<div className="ostatus" style={{ background: st.bg, color: st.c }}>{st.l}</div>
+</div>
+<div className="thumbrow">
+{o.items.slice(0, 3).map((c, i) => (
+<SafeImg key={i} src={c.item.img} alt={c.item.name} style={{ width: 42, height: 42, borderRadius: 9, objectFit: "cover", border: "2px solid var(--bdl)" }} />
+))}
+{o.items.length > 3 && <div className="omoreimg">+{o.items.length - 3}</div>}
+</div>
+<div className="ofoot">
+<span>{o.items.length} عنصر</span>
+<span className="ototl">{o.total} د.إ</span>
+<span>›</span>
+</div>
+</div>
+);
+})}
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function TrackScreen({ orders, trackId, go }) {
+const order = orders.find(o => o.id === trackId);
+if (!order) return (
+<div className="empty-pg">
+<div className="empty-ico">🔍</div>
+<h2>الطلب غير موجود</h2>
+<button className="btn-pri" onClick={() => go("orders")}>طلباتي</button>
+</div>
+);
+const STEPS = [
+{ k: "pending",   l: "تم استلام الطلب", ic: "📱" },
+{ k: "confirmed", l: "تم تأكيد الطلب",  ic: "✅" },
+{ k: "preparing", l: "قيد التحضير",      ic: "👨‍🍳" },
+{ k: "ready",     l: "خرج للتوصيل",      ic: "🛵" },
+{ k: "delivered", l: "تم التوصيل",        ic: "🎉" },
+];
+const si = STEPS.findIndex(s => s.k === order.status);
+return (
+<div>
+<div className="sth">
+<button style={{ display: "flex", alignItems: "center", color: "var(--t1)" }} onClick={() => go("orders")} aria-label="رجوع"><IconBack /></button>
+<h1 className="sth-title">تتبع الطلب</h1>
+<div style={{ width: 28 }} />
+</div>
+<div className="mapph">
+<div style={{ textAlign: "center", zIndex: 1 }}>
+<div className="mappin">📍</div>
+<p style={{ fontSize: 12.5, color: "var(--t3)", marginTop: 7 }}>دبي - أرجان</p>
+</div>
+</div>
+<div className="tcard">
+<div className="thd">
+<div>
+<p style={{ fontSize: 13.5, fontWeight: 900 }}>{order.id}</p>
+<p style={{ fontSize: 11.5, color: "var(--t3)", marginTop: 3 }}>⏱ الوقت المتوقع: ٣٠-٤٥ دقيقة</p>
+</div>
+<p style={{ fontSize: 17.5, fontWeight: 900, color: "var(--g)" }}>{order.total} د.إ</p>
+</div>
+<div className="steps">
+{STEPS.map((s, i) => {
+const done = i <= si, curr = i === si;
+return (
+<div key={s.k} className={`step ${done?"done":""} ${curr?"curr":""}`}>
+<div className="step-ic">
+<div className="sdot">{done ? s.ic : "○"}</div>
+{i < STEPS.length - 1 && <div className={`sline ${i < si ? "done" : ""}`} />}
+</div>
+<p className="slbl">{s.l}</p>
+</div>
+);
+})}
+</div>
+<div className="taddr">📍 <span>{order.addr}</span></div>
+<div className="titems">
+{order.items.map((c, i) => (
+<div key={i} className="titem">
+<SafeImg src={c.item.img} alt={c.item.name} style={{ width: 38, height: 38, borderRadius: 7, objectFit: "cover" }} />
+<span>{c.item.name}</span>
+<span style={{ marginRight: "auto", color: "var(--t3)" }}>×{c.qty}</span>
+</div>
+))}
+</div>
+<a href={`tel:+${WA_NUMBER}`} className="btn-call">📞 اتصل بالمطعم</a>
+</div>
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function AboutScreen({ reviews, setReviews, showReviewForm, setShowReviewForm, newReview, setNewReview, showToast, isAdmin, setShowAdminLogin, go }) {
+return (
+<div>
+<div className="sth"><h1 className="sth-title">عن المطعم</h1></div>
+<div className="info-section">
+<div className="info-row">
+<div className="info-ico">📍</div>
+<div className="info-text"><div className="info-label">العنوان</div><div className="info-val" style={{ fontSize: 12 }}>{ADDRESS}</div></div>
+</div>
+<div className="info-row clickable" style={{ cursor: "pointer" }} onClick={() => window.open(`tel:+${WA_NUMBER}`)}>
+<div className="info-ico">📞</div>
+<div className="info-text"><div className="info-label">اتصل بنا</div><div className="info-val">{PHONE_NUMBER}</div></div>
+<span style={{ color: "var(--g)" }}>›</span>
+</div>
+<div className="info-row clickable" style={{ cursor: "pointer" }}
+onClick={() => window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("مرحباً أريد الاستفسار")}`, "_blank")}>
+<div className="info-ico"><IconWa size={20} /></div>
+<div className="info-text"><div className="info-label">واتساب</div><div className="info-val">{PHONE_NUMBER}</div></div>
+<span style={{ color: "var(--wa)" }}>›</span>
+</div>
+<div className="info-row">
+<div className="info-ico">🕐</div>
+<div className="info-text"><div className="info-label">ساعات العمل</div><div className="info-val">يومياً ١١ ص – ١١ م</div></div>
+</div>
+</div>
+<div className="info-section" style={{ margin: "10px 15px 14px" }}>
+<div style={{ padding: "12px 15px 8px", borderBottom: "1px solid var(--bdl)" }}>
+<p style={{ fontSize: 13, fontWeight: 800, color: "var(--t2)" }}>تابعنا على السوشيال ميديا</p>
+</div>
+<div className="social-row">
+<a className="soc-btn" href={SOCIAL.facebook}  target="_blank" rel="noreferrer"><IconFacebook />فيسبوك</a>
+<a className="soc-btn" href={SOCIAL.instagram} target="_blank" rel="noreferrer"><IconInstagram />انستاجرام</a>
+<a className="soc-btn" href={SOCIAL.tiktok}    target="_blank" rel="noreferrer"><IconTikTok />تيك توك</a>
+</div>
+</div>
+<div className="platforms">
+<p className="plat-title">اطلب عبر تطبيقات التوصيل</p>
+<div className="plat-row">
+<a className="plat-btn" href={SOCIAL.talabat}   target="_blank" rel="noreferrer">🛵 طلبات</a>
+<a className="plat-btn" href={SOCIAL.deliveroo} target="_blank" rel="noreferrer">🚲 ديليفرو</a>
+<a className="plat-btn" href={SOCIAL.noon}      target="_blank" rel="noreferrer">🟡 نون فود</a>
+</div>
+</div>
+<div className="sec-hd">
+<h2 className="sec-title">⭐ آراء العملاء</h2>
+<div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+{[1,2,3,4,5].map(s => <IconStar key={s} filled size={13}/>)}
+<span style={{ fontSize: 12, fontWeight: 800, color: "var(--g)", marginRight: 4 }}>4.9</span>
+</div>
+</div>
+{reviews.map((r, i) => <ReviewCard key={i} review={r} />)}
+{!showReviewForm ? (
+<button className="add-review-btn" onClick={() => setShowReviewForm(true)}>+ أضف تقييمك</button>
+) : (
+<div className="review-form">
+<p style={{ fontSize: 14, fontWeight: 900, marginBottom: 12 }}>أضف تقييمك 🌟</p>
+<div className="star-select">
+{[1,2,3,4,5].map(s => (
+<button key={s} className="star-btn" onClick={() => setNewReview(r => ({ ...r, rating: s }))}>
+{s <= newReview.rating ? "⭐" : "☆"}
+</button>
+))}
+</div>
+<input className="form-input" placeholder="اسمك" value={newReview.name}
+onChange={e => setNewReview(r => ({ ...r, name: e.target.value }))}
+style={{ marginBottom: 10, display: "block", width: "100%" }} />
+<textarea className="form-input" style={{ resize: "none", height: 80, display: "block", marginBottom: 12, width: "100%" }}
+placeholder="شاركنا تجربتك…" value={newReview.text}
+onChange={e => setNewReview(r => ({ ...r, text: e.target.value }))} />
+<button className="btn-save" onClick={() => {
+if (!newReview.name.trim() || !newReview.text.trim()) { showToast("أكمل البيانات", "err"); return; }
+setReviews(prev => [{ name: newReview.name.trim(), rating: newReview.rating, text: newReview.text.trim(), date: "الآن", avatar: newReview.name[0] }, ...prev]);
+setNewReview({ name: "", text: "", rating: 5 });
+setShowReviewForm(false);
+showToast("✓ شكراً على تقييمك!");
+}}>إرسال التقييم</button>
+<button className="btn-cancel" onClick={() => setShowReviewForm(false)}>إلغاء</button>
+</div>
+)}
+{!isAdmin && (
+<button className="admin-access-btn" onClick={() => setShowAdminLogin(true)}>
+<span style={{ fontSize: 18 }}>⚙️</span>
+<div>
+<div style={{ fontSize: 13, fontWeight: 900, color: "var(--t2)" }}>لوحة تحكم المطعم</div>
+<div style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>للمسؤولين فقط</div>
+</div>
+<span style={{ marginRight: "auto", color: "var(--t3)" }}>›</span>
+</button>
+)}
+{isAdmin && (
+<button className="admin-access-btn" onClick={() => go("admin")} style={{ borderColor: "rgba(201,162,39,.4)", color: "var(--g)" }}>
+<span style={{ fontSize: 18 }}>⚙️</span>
+<div style={{ fontSize: 13, fontWeight: 900 }}>فتح لوحة التحكم</div>
+<span style={{ marginRight: "auto" }}>›</span>
+</button>
+)}
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function AdminScreen({ allItems, allCats, adminItems, toggleAvailable, setEditingItem, go, setIsAdmin }) {
+const availCount   = Object.values(adminItems).filter(v => v.available).length;
+const unavailCount = Object.values(adminItems).length - availCount;
+const grouped = allCats.map(cat => ({ cat, items: allItems.filter(it => it.cid === cat.id) })).filter(g => g.items.length > 0);
+return (
+<div>
+<div className="admin-header">
+<div>
+<p className="admin-title">⚙️ لوحة التحكم</p>
+<p className="admin-subtitle">إدارة المنتجات والأسعار والصور</p>
+</div>
+<button className="admin-logout-btn" onClick={() => { setIsAdmin(false); go("home"); }}>خروج 🔓</button>
+</div>
+<div className="admin-stats">
+<div className="astat"><div className="astat-val">{allItems.length}</div><div className="astat-label">منتج</div></div>
+<div className="astat"><div className="astat-val" style={{ color: "var(--grn)" }}>{availCount}</div><div className="astat-label">متاح</div></div>
+<div className="astat"><div className="astat-val" style={{ color: "var(--red)" }}>{unavailCount}</div><div className="astat-label">غير متاح</div></div>
+</div>
+{grouped.map(({ cat, items }) => (
+<div key={cat.id} className="admin-card">
+<div className="admin-cat-header"><span className="admin-cat-name">{cat.name} · {cat.nameEn}</span></div>
+{items.map(item => {
+const ov      = adminItems[item.id];
+const isAvail = ov?.available ?? true;
+return (
+<div key={item.id} className="admin-item">
+<SafeImg src={item.img} alt={item.name} style={{ width: 52, height: 52, borderRadius: 10, objectFit: "cover", flexShrink: 0, opacity: isAvail ? 1 : .45 }} />
+<div className="admin-item-info">
+<div className="admin-item-name" style={{ color: isAvail ? "var(--t1)" : "var(--t3)" }}>{item.name}</div>
+<div className="admin-item-price">{item.priceStr}</div>
+</div>
+<div className="admin-item-actions">
+<button className="edit-btn" onClick={() => setEditingItem(item)} aria-label="تعديل"><IconEdit size={14} /></button>
+<button className={`tgl ${isAvail?"on":""}`} onClick={() => toggleAvailable(item.id)}
+role="switch" aria-checked={isAvail} aria-label={isAvail?"إخفاء":"إظهار"}>
+<span className="tglth" />
+</button>
+</div>
+</div>
+);
+})}
+</div>
+))}
+<div style={{ height: 20 }} />
+</div>
+);
+}
+
+function SuccessScreen({ go }) {
+return (
+<div className="succ-pg">
+<div className="succ-ring"><IconCheck /></div>
+<h2>تم إرسال طلبك! 🎉</h2>
+<p>تم إرسال طلبك على واتساب النيل جورمية وسيتم التواصل معك قريباً</p>
+<button className="btn-pri" onClick={() => go("orders")}>عرض طلباتي</button>
+<button onClick={() => go("home")} style={{ color: "var(--g)", fontWeight: 800, fontSize: 14, marginTop: 4 }}>العودة للرئيسية</button>
+</div>
+);
+}
+
+// ─── CHECKOUT SHEET ────────────────────────────────────────────────────
+function CheckoutSheet({ cartTotal, onClose, onConfirm, showToast }) {
+const [addr,  setAddr]  = useState("دبي - أرجان");
+const [name,  setName]  = useState("");
+const [phone, setPhone] = useState("");
+// FIX: خطأ التحقق من رقم الهاتف
+const [phoneErr, setPhoneErr] = useState("");
+const del   = cartTotal >= 150 ? 0 : 15;
+const grand = cartTotal + del;
+
+const handlePhoneChange = (e) => {
+const val = e.target.value;
+setPhone(val);
+if (val && !validatePhone(val)) {
+setPhoneErr("رقم الهاتف غير صحيح (مثال: 0501234567)");
+} else {
+setPhoneErr("");
+}
+};
+
+const handleConfirm = () => {
+if (!addr.trim()) { showToast("أدخل عنوان التوصيل", "err"); return; }
+if (phone && !validatePhone(phone)) { showToast("رقم الهاتف غير صحيح", "err"); return; }
+onConfirm(addr, name, phone);
+};
+
+return (
+<div className="shov" onClick={onClose} role="dialog" aria-modal="true">
+<div className="sh" onClick={e => e.stopPropagation()}>
+<div className="shndl" />
+<h3 className="shtitle">تفاصيل الطلب</h3>
+<p className="flbl">👤 اسمك</p>
+<input className="finp" value={name} onChange={e => setName(e.target.value)} placeholder="اسمك الكريم…" autoComplete="name" />
+<p className="flbl">📱 رقم الموبايل</p>
+<input
+className={`finp ${phoneErr ? "finp-err" : ""}`}
+value={phone}
+onChange={handlePhoneChange}
+placeholder="+971501234567"
+type="tel"
+autoComplete="tel"
+inputMode="tel"
+/>
+{/* FIX: رسالة خطأ رقم الهاتف */}
+{phoneErr && <p className="field-err">{phoneErr}</p>}
+<p className="flbl">📍 عنوان التوصيل <span style={{ color: "var(--red)" }}>*</span></p>
+<textarea className="fta" rows={3} value={addr} onChange={e => setAddr(e.target.value)} placeholder="المنطقة، الشارع، رقم المبنى…" />
+<div className="chk-sm">
+<div className="srow"><span>المجموع</span><span>{cartTotal.toFixed(0)} د.إ</span></div>
+<div className="srow"><span>التوصيل</span><span className={del===0?"free":""}>{del===0?"مجاناً 🎉":`${del} د.إ`}</span></div>
 <div className="sdiv" />
 <div className="srow stotal"><span>الإجمالي</span><span>{grand.toFixed(0)} د.إ</span></div>
 </div>
-<button className=“btn-chk” style={{ marginTop: 14 }} onClick={handleConfirm}>
+<button className="btn-chk" style={{ marginTop: 14 }} onClick={handleConfirm}>
 <IconWa size={18} /> إرسال الطلب على واتساب
 </button>
 </div>
@@ -1193,29 +1970,29 @@ const [priceStr, setPriceStr] = useState(currentData?.priceStr || item.priceStr)
 const [imgUrl,   setImgUrl]   = useState(currentData?.img      || item.img);
 return (
 <div className="edit-modal-ov" onClick={onClose} role="dialog" aria-modal="true">
-<div className=“edit-modal” onClick={e => e.stopPropagation()}>
-<div style={{ display: “flex”, alignItems: “center”, gap: 12, marginBottom: 16 }}>
-<SafeImg src={imgUrl} alt={item.name} style={{ width: 56, height: 56, borderRadius: 11, objectFit: “cover”, border: “1px solid var(–bdl)”, flexShrink: 0 }} />
+<div className="edit-modal" onClick={e => e.stopPropagation()}>
+<div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 16 }}>
+<SafeImg src={imgUrl} alt={item.name} style={{ width: 56, height: 56, borderRadius: 11, objectFit: "cover", border: "1px solid var(--bdl)", flexShrink: 0 }} />
 <div>
 <h3 style={{ fontSize: 15, fontWeight: 900, margin: 0 }}>{item.name}</h3>
-<p style={{ fontSize: 11, color: “var(–t3)”, marginTop: 2 }}>{item.nameEn}</p>
+<p style={{ fontSize: 11, color: "var(--t3)", marginTop: 2 }}>{item.nameEn}</p>
 </div>
 </div>
 <div className="form-group">
 <label className="form-label">السعر (مثال: 60 درهم)</label>
-<input className=“form-input” value={priceStr} onChange={e => setPriceStr(e.target.value)} placeholder=“60 درهم” />
+<input className="form-input" value={priceStr} onChange={e => setPriceStr(e.target.value)} placeholder="60 درهم" />
 </div>
 <div className="form-group">
 <label className="form-label">رابط الصورة (URL)</label>
-<input className=“form-input” value={imgUrl} onChange={e => setImgUrl(e.target.value)} placeholder=“https://…” type=“url” inputMode=“url” />
+<input className="form-input" value={imgUrl} onChange={e => setImgUrl(e.target.value)} placeholder="https://…" type="url" inputMode="url" />
 </div>
 {imgUrl && (
 <div style={{ marginBottom: 14 }}>
 <label className="form-label">معاينة الصورة</label>
-<SafeImg src={imgUrl} alt=“preview” style={{ height: 100, borderRadius: 10, objectFit: “cover”, border: “1px solid var(–bdl)” }} />
+<SafeImg src={imgUrl} alt="preview" style={{ height: 100, borderRadius: 10, objectFit: "cover", border: "1px solid var(--bdl)" }} />
 </div>
 )}
-<button className=“btn-save” onClick={() => onSave(item.id, { priceStr, img: imgUrl })}>حفظ التغييرات</button>
+<button className="btn-save" onClick={() => onSave(item.id, { priceStr, img: imgUrl })}>حفظ التغييرات</button>
 <button className="btn-cancel" onClick={onClose}>إلغاء</button>
 </div>
 </div>
@@ -1224,7 +2001,7 @@ return (
 
 // ─── ADMIN LOGIN MODAL ────────────────────────────────────────────────
 function AdminLoginModal({ onSuccess, onClose }) {
-const [pw,  setPw]  = useState(””);
+const [pw,  setPw]  = useState("");
 const [err, setErr] = useState(false);
 // FIX: إضافة حماية بسيطة ضد brute force — قفل بعد 5 محاولات خاطئة
 const [attempts, setAttempts] = useState(0);
@@ -1252,7 +2029,7 @@ onSuccess();
 const newAttempts = attempts + 1;
 setAttempts(newAttempts);
 setErr(true);
-setPw(””);
+setPw("");
 if (newAttempts >= 5) {
 setLocked(true);
 setLockTimer(30); // قفل 30 ثانية
@@ -1262,7 +2039,7 @@ setLockTimer(30); // قفل 30 ثانية
 
 return (
 <div className="admin-login-ov" onClick={onClose} role="dialog" aria-modal="true">
-<div className=“admin-login-box” onClick={e => e.stopPropagation()}>
+<div className="admin-login-box" onClick={e => e.stopPropagation()}>
 <div className="admin-login-logo">🔐</div>
 <p className="admin-login-title">لوحة التحكم</p>
 <p className="admin-login-sub">أدخل كلمة السر للوصول</p>
@@ -1270,10 +2047,10 @@ return (
 <p className="admin-login-err">🔒 تم قفل الدخول — حاول بعد {lockTimer} ثانية</p>
 ) : (
 <>
-<input className=“admin-login-inp” type=“password” placeholder=”••••••••”
+<input className="admin-login-inp" type="password" placeholder="••••••••"
 value={pw} onChange={e => { setPw(e.target.value); setErr(false); }}
-onKeyDown={e => e.key === “Enter” && handleLogin()}
-autoFocus autoComplete=“current-password” />
+onKeyDown={e => e.key === "Enter" && handleLogin()}
+autoFocus autoComplete="current-password" />
 {err && <p className="admin-login-err">❌ كلمة السر غير صحيحة {attempts >= 3 && `(${5 - attempts} محاولات متبقية)`}</p>}
 <button className="admin-login-btn" onClick={handleLogin}>دخول ←</button>
 </>
@@ -1286,17 +2063,17 @@ autoFocus autoComplete=“current-password” />
 
 // ─── MAIN APP ─────────────────────────────────────────────────────────
 export default function App() {
-const [page,           setPage]           = useState(“home”);
-const [prevPage,       setPrevPage]       = useState(“home”);
+const [page,           setPage]           = useState("home");
+const [prevPage,       setPrevPage]       = useState("home");
 
 // FIX: الموقع يبدأ بالمطعم وليس الملحمة
-const [shopType,       setShopType]       = useState(“restaurant”);
-const [activeCat,      setActiveCat]      = useState(“all”);
-const [search,         setSearch]         = useState(””);
+const [shopType,       setShopType]       = useState("restaurant");
+const [activeCat,      setActiveCat]      = useState("all");
+const [search,         setSearch]         = useState("");
 
 // FIX: السلة والطلبات محفوظة في localStorage
-const [cart,           setCart]           = useState(() => loadFromStorage(“nile_cart”, []));
-const [orders,         setOrders]         = useState(() => loadFromStorage(“nile_orders”, []));
+const [cart,           setCart]           = useState(() => loadFromStorage("nile_cart", []));
+const [orders,         setOrders]         = useState(() => loadFromStorage("nile_orders", []));
 
 const [detailItem,     setDetailItem]     = useState(null);
 const [detailQty,      setDetailQty]      = useState(1);
@@ -1305,31 +2082,31 @@ const [checkoutOpen,   setCheckoutOpen]   = useState(false);
 const [toast,          showToast]         = useToast();
 
 // FIX: تعديلات الأدمن محفوظة في localStorage
-const [adminItems,     setAdminItems]     = useState(() => loadFromStorage(“nile_admin”, INIT_ADMIN));
+const [adminItems,     setAdminItems]     = useState(() => loadFromStorage("nile_admin", INIT_ADMIN));
 const [editingItem,    setEditingItem]    = useState(null);
 const [isAdmin,        setIsAdmin]        = useState(false);
 const [showAdminLogin, setShowAdminLogin] = useState(false);
 
 // FIX: التقييمات محفوظة في localStorage
-const [reviews,        setReviews]        = useState(() => loadFromStorage(“nile_reviews”, INIT_REVIEWS));
+const [reviews,        setReviews]        = useState(() => loadFromStorage("nile_reviews", INIT_REVIEWS));
 const [showReviewForm, setShowReviewForm] = useState(false);
-const [newReview,      setNewReview]      = useState({ name: “”, text: “”, rating: 5 });
+const [newReview,      setNewReview]      = useState({ name: "", text: "", rating: 5 });
 
 const scrollRef     = useRef(null);
 const adminTapRef   = useRef(0);
 const adminTapTimer = useRef(null);
 
 // FIX: حفظ السلة تلقائياً عند التغيير
-useEffect(() => { saveToStorage(“nile_cart”, cart); }, [cart]);
+useEffect(() => { saveToStorage("nile_cart", cart); }, [cart]);
 
 // FIX: حفظ الطلبات تلقائياً عند التغيير
-useEffect(() => { saveToStorage(“nile_orders”, orders); }, [orders]);
+useEffect(() => { saveToStorage("nile_orders", orders); }, [orders]);
 
 // FIX: حفظ تعديلات الأدمن تلقائياً
-useEffect(() => { saveToStorage(“nile_admin”, adminItems); }, [adminItems]);
+useEffect(() => { saveToStorage("nile_admin", adminItems); }, [adminItems]);
 
 // FIX: حفظ التقييمات تلقائياً
-useEffect(() => { saveToStorage(“nile_reviews”, reviews); }, [reviews]);
+useEffect(() => { saveToStorage("nile_reviews", reviews); }, [reviews]);
 
 const handleSecretTap = useCallback(() => {
 adminTapRef.current += 1;
@@ -1341,17 +2118,17 @@ adminTapTimer.current = setTimeout(() => { adminTapRef.current = 0; }, 2000);
 const go = useCallback((p) => {
 setPrevPage(page);
 setPage(p);
-scrollRef.current?.scrollTo({ top: 0, behavior: “instant” });
+scrollRef.current?.scrollTo({ top: 0, behavior: "instant" });
 }, [page]);
 
 const switchShopType = useCallback((t) => {
-setShopType(t); setActiveCat(“all”); setSearch(””);
+setShopType(t); setActiveCat("all"); setSearch("");
 }, []);
 
 const ALL_ITEMS = useMemo(() =>
 BASE_ITEMS.map(it => {
 const ov = adminItems[it.id];
-return ov ? { …it, price: ov.price, priceStr: ov.priceStr, img: ov.img, available: ov.available } : { …it, available: true };
+return ov ? { ...it, price: ov.price, priceStr: ov.priceStr, img: ov.img, available: ov.available } : { ...it, available: true };
 }),
 [adminItems]);
 
@@ -1360,7 +2137,7 @@ const cats = useMemo(() => ALL_CATS.filter(c => c.type === shopType), [shopType]
 const items = useMemo(() =>
 ALL_ITEMS.filter(it => {
 if (it.type !== shopType) return false;
-if (activeCat !== “all” && it.cid !== activeCat) return false;
+if (activeCat !== "all" && it.cid !== activeCat) return false;
 if (search) {
 const q = search.toLowerCase();
 return it.name.includes(search) || it.nameEn.toLowerCase().includes(q);
@@ -1370,19 +2147,19 @@ return true;
 [ALL_ITEMS, shopType, activeCat, search]);
 
 const addToCart = useCallback((item, price, varLabel) => {
-if (!item.available) { showToast(“هذا الصنف غير متاح حالياً”, “err”); return; }
+if (!item.available) { showToast("هذا الصنف غير متاح حالياً", "err"); return; }
 const p   = price ?? item.price;
 const cid = varLabel ? `${item.id}_${varLabel}` : item.id;
 setCart(prev => {
 const ex = prev.find(c => c.id === cid);
-if (ex) return prev.map(c => c.id === cid ? { …c, qty: c.qty + 1 } : c);
-return […prev, { id: cid, item, qty: 1, price: p, varLabel: varLabel ?? null }];
+if (ex) return prev.map(c => c.id === cid ? { ...c, qty: c.qty + 1 } : c);
+return [...prev, { id: cid, item, qty: 1, price: p, varLabel: varLabel ?? null }];
 });
-showToast(“✓ أضيف للسلة”);
+showToast("✓ أضيف للسلة");
 }, [showToast]);
 
 const updateQty = useCallback((cid, delta) => {
-setCart(prev => prev.map(c => c.id === cid ? { …c, qty: Math.max(0, c.qty + delta) } : c).filter(c => c.qty > 0));
+setCart(prev => prev.map(c => c.id === cid ? { ...c, qty: Math.max(0, c.qty + delta) } : c).filter(c => c.qty > 0));
 }, []);
 
 const cartTotal = cart.reduce((s, c) => s + c.price * c.qty, 0);
@@ -1391,7 +2168,7 @@ const cartCount = cart.reduce((s, c) => s + c.qty, 0);
 const sendWhatsAppOrder = useCallback((addr, name, phone) => {
 const del     = cartTotal >= 150 ? 0 : 15;
 const grand   = cartTotal + del;
-const orderId = “ORD-” + Math.random().toString(36).slice(2, 7).toUpperCase();
+const orderId = "ORD-" + Math.random().toString(36).slice(2, 7).toUpperCase();
 let msg = `🌿 *طلب جديد - النيل جورمية*\n━━━━━━━━━━━━━━━━━\n🔢 رقم الطلب: *${orderId}*\n\n`;
 msg += `👤 الاسم: *${name || "عميل"}*\n`;
 if (phone) msg += `📱 الموبايل: *${phone}*\n`;
@@ -1400,35 +2177,35 @@ cart.forEach(c => { msg += `• ${c.item.name}${c.varLabel ? ` (${c.varLabel})` 
 msg += `━━━━━━━━━━━━━━━━━\n💰 المجموع: *${cartTotal.toFixed(0)} د.إ*\n`;
 msg += `🚚 التوصيل: *${del === 0 ? "مجاني 🎉" : del + " د.إ"}*\n✅ الإجمالي: *${grand.toFixed(0)} د.إ*\n`;
 msg += `━━━━━━━━━━━━━━━━━\n⏰ وقت الطلب: ${new Date().toLocaleString("ar-AE")}\n`;
-window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, “_blank”);
-setOrders(prev => [{ id: orderId, items: […cart], total: grand, status: “confirmed”, date: new Date().toISOString(), addr }, …prev]);
+window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank");
+setOrders(prev => [{ id: orderId, items: [...cart], total: grand, status: "confirmed", date: new Date().toISOString(), addr }, ...prev]);
 setCart([]);
 setCheckoutOpen(false);
-go(“success”);
+go("success");
 }, [cart, cartTotal, go]);
 
 const openDetail = useCallback((item) => {
-setDetailItem(item); setDetailQty(1); go(“detail”);
+setDetailItem(item); setDetailQty(1); go("detail");
 }, [go]);
 
 const toggleAvailable = useCallback((id) => {
 setAdminItems(prev => ({
-…prev,
-[id]: { …prev[id], available: !prev[id].available }
+...prev,
+[id]: { ...prev[id], available: !prev[id].available }
 }));
 }, []);
 
 const saveItemEdit = useCallback((id, updates) => {
 setAdminItems(prev => ({
-…prev,
-[id]: { …prev[id], priceStr: updates.priceStr, price: parsePrice(updates.priceStr), img: updates.img }
+...prev,
+[id]: { ...prev[id], priceStr: updates.priceStr, price: parsePrice(updates.priceStr), img: updates.img }
 }));
 setEditingItem(null);
-showToast(“✓ تم الحفظ بنجاح”);
+showToast("✓ تم الحفظ بنجاح");
 }, [showToast]);
 
-const navPages  = [“home”, “menu”, “cart”, “orders”, “about”, “admin”];
-const activeNav = navPages.includes(page) ? page : ([“detail”, “track”, “success”].includes(page) ? prevPage : “home”);
+const navPages  = ["home", "menu", "cart", "orders", "about", "admin"];
+const activeNav = navPages.includes(page) ? page : (["detail", "track", "success"].includes(page) ? prevPage : "home");
 
 const shopProps   = { shopType, switchShopType, activeCat, setActiveCat, search, setSearch };
 const actionProps = { addToCart, openDetail, go };
@@ -1436,21 +2213,20 @@ const actionProps = { addToCart, openDetail, go };
 return (
 <div className="shell" dir="rtl">
 <div className="scr" ref={scrollRef} key={page}>
-{page === “home”    && <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {…shopProps} {…actionProps} />}
-{page === “menu”    && <MenuScreen items={items} cats={cats} {…shopProps} {…actionProps} />}
-{page === “detail”  && <DetailScreen detailItem={detailItem} detailQty={detailQty} setDetailQty={setDetailQty} prevPage={prevPage} allItems={ALL_ITEMS} allCats={ALL_CATS} addToCart={addToCart} go={go} setDetailItem={setDetailItem} scrollRef={scrollRef} />}
-{page === “cart”    && <CartScreen cart={cart} cartTotal={cartTotal} updateQty={updateQty} setCart={setCart} setCheckoutOpen={setCheckoutOpen} go={go} />}
-{page === “orders”  && <OrdersScreen orders={orders} go={go} setTrackId={setTrackId} />}
-{page === “track”   && <TrackScreen orders={orders} trackId={trackId} go={go} />}
-{page === “about”   && <AboutScreen reviews={reviews} setReviews={setReviews} showReviewForm={showReviewForm} setShowReviewForm={setShowReviewForm} newReview={newReview} setNewReview={setNewReview} showToast={showToast} go={go} isAdmin={isAdmin} setShowAdminLogin={setShowAdminLogin} />}
-{page === “admin”   && (isAdmin
+{page === "home"    && <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {...shopProps} {...actionProps} />}
+{page === "menu"    && <MenuScreen items={items} cats={cats} {...shopProps} {...actionProps} />}
+{page === "detail"  && <DetailScreen detailItem={detailItem} detailQty={detailQty} setDetailQty={setDetailQty} prevPage={prevPage} allItems={ALL_ITEMS} allCats={ALL_CATS} addToCart={addToCart} go={go} setDetailItem={setDetailItem} scrollRef={scrollRef} />}
+{page === "cart"    && <CartScreen cart={cart} cartTotal={cartTotal} updateQty={updateQty} setCart={setCart} setCheckoutOpen={setCheckoutOpen} go={go} />}
+{page === "orders"  && <OrdersScreen orders={orders} go={go} setTrackId={setTrackId} />}
+{page === "track"   && <TrackScreen orders={orders} trackId={trackId} go={go} />}
+{page === "about"   && <AboutScreen reviews={reviews} setReviews={setReviews} showReviewForm={showReviewForm} setShowReviewForm={setShowReviewForm} newReview={newReview} setNewReview={setNewReview} showToast={showToast} go={go} isAdmin={isAdmin} setShowAdminLogin={setShowAdminLogin} />}
+{page === "admin"   && (isAdmin
 ? <AdminScreen allItems={ALL_ITEMS} allCats={ALL_CATS} adminItems={adminItems} toggleAvailable={toggleAvailable} setEditingItem={setEditingItem} go={go} setIsAdmin={setIsAdmin} />
-: <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {…shopProps} {…actionProps} />
+: <HomeScreen allItems={ALL_ITEMS} cats={cats} reviews={reviews} handleSecretTap={handleSecretTap} {...shopProps} {...actionProps} />
 )}
-{page === “success” && <SuccessScreen go={go} />}
+{page === "success" && <SuccessScreen go={go} />}
 </div>
 
-```
   <nav className="bnav" aria-label="التنقل الرئيسي">
     {[
       { id: "home",   label: "الرئيسية", Icon: IconHome },
@@ -1482,7 +2258,5 @@ return (
 
   {toast && <div key={toast.key} className={`toast ${toast.type}`} role="alert" aria-live="polite">{toast.msg}</div>}
 </div>
-```
-
 );
 }
